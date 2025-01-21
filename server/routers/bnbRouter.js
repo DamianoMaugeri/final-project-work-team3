@@ -13,6 +13,8 @@ router.get('/', bnbController.index);
 // show
 router.get('/:id([0-9]+)', bnbController.show);
 
+//update
+router.patch('/:id([0-9]+)', bnbController.update);
 
 
 
