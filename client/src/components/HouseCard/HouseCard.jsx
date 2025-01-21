@@ -11,11 +11,6 @@ export default function HouseCard({ content }) {
     // stato per i cambiamenti del  cuoricino
     const [liked, setLiked] = useState(false);
 
-    // funzione toogle per il cuoricino
-    const handleLikeToggle = () => {
-        setLiked(!liked); //se liked è true diventa false e viceversa
-    };
-
 
     // funzione toogle per il cuoricino
     const handleLikeToggle = () => {
