@@ -6,6 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <div className='d-flex viewport'>
+      <App />
+
+    </div>
   </StrictMode>,
 )
