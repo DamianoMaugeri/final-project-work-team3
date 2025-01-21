@@ -5,9 +5,9 @@ import style from "./MainPage.module.css";
 export default function MainPage() {
 
     return (
-        <div className="d-flex">
-            <SearchBar  className={style.searchBar}/>
-            <HouseList className={style.houseList}/>
+        <div>
+            <SearchBar className={style.searchBar} />
+            <HouseList className={style.houseList} />
         </div>
     )
 }
