@@ -50,4 +50,26 @@ function show(req, res) {
 
 
 
-module.exports = { index, show }
+function update(req, res) {
+    const propertyId = req.params.id;
+    const updates = req.body;
+
+    if (!Object.keys(updates).length) {
+        return res.status(400).json({ error: 'No updates provided' });
+    }
+
+    const sql = "UPDATE properties SET ? WHERE id = ?";
+    connection.query(sql, [updates, propertyId], (err, results) => {
+        if (err) return res.status(500).json({ error: 'Database query failed' });
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: 'Property not found' });
+        }
+
+        res.status(200).json({ message: 'Property updated successfully' });
+    });
+}
+
+
+
+module.exports = { index, show, update }
