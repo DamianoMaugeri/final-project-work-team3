@@ -1,5 +1,13 @@
 export default function SearchBar() {
     return (
-        <div>search</div>
+        <div className="container mt-5">
+            <div className="input-group">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Cerca..."
+                />
+            </div>
+        </div>
     )
 }
