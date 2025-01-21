@@ -7,14 +7,17 @@ const bnbController = require('../controllers/bnbController.js')
 
 // rotte 
 
-// index
+// index: mostra tutte le properties
 router.get('/', bnbController.index);
 
-// show
+// show: mostra la singola property
 router.get('/:id([0-9]+)', bnbController.show);
 
-//update
+//update: aggiorna parzialmente properties
 router.patch('/:id([0-9]+)', bnbController.update);
+
+// propertiesByOwner: mostra tutte le proprietà di un owner specifico
+router.get('/owner/:ownerId([0-9]+)', bnbController.propertiesByOwner);
 
 
 
