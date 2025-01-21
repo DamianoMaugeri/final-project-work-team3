@@ -6,8 +6,8 @@ function index(req, res) {
     let sql = "SELECT * FROM properties"
     const params = [];
     if (req.query.city) {
-        sql += " WHERE city= ?"
-        params.push(req.query.city)
+        sql += " WHERE city LIKE ?"
+        params.push(`%${req.query.title}%`)
     }
     sql += " ORDER BY vote DESC"
     connection.query(sql, params, (err, results) => {
