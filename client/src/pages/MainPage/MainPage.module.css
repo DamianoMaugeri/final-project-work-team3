@@ -1,0 +1,17 @@
+.mainpage {
+    overflow: auto;
+}
+
+
+.mainpage::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: grey;
+
+}
+
+.mainpage::-webkit-scrollbar-thumb {
+    width: 3px;
+    border-radius: 999px;
+    background-color: rgb(187, 185, 185);
+}
