@@ -116,5 +116,3 @@ module.exports = { index, show, update, propertiesByOwner, create };
 
 
 
-
-module.exports = { index, show, update, propertiesByOwner }
