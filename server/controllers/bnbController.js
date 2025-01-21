@@ -89,5 +89,32 @@ function propertiesByOwner(req, res) {
 }
 
 
+function create(req, res) {
+    const { number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, email, ownerId, title, city, price, image } = req.body;
+
+    // Controlla che tutti i campi obbligatori siano presenti
+    if (!ownerId || !title || !city || !price || !image) {
+        return res.status(400).json({ error: "All fields are required" });
+    }
+
+    const sql = `
+        INSERT INTO properties (owner_id, name, city, price, image) 
+        VALUES (?, ?, ?, ?, ?)
+    `;
+
+    connection.query(sql, [ownerId, name, city, price, image], (err, results) => {
+        if (err) return res.status(500).json({ error: "Database query failed" });
+
+        res.status(201).json({
+            message: "Property added successfully",
+            propertyId: results.insertId,
+        });
+    });
+}
+
+module.exports = { index, show, update, propertiesByOwner, create };
+
+
+
 
 module.exports = { index, show, update, propertiesByOwner }
