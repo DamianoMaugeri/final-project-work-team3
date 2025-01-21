@@ -12,6 +12,14 @@ function index(req, res) {
     sql += " ORDER BY vote DESC"
     connection.query(sql, params, (err, results) => {
         if (err) return res.status(500).json({ error: "Database query failed" });
+
+        results.forEach(result => {
+
+            const formattedImage = result.image.split(' ').join('_')
+            result.image = `http://localhost:3000/images/${formattedImage}`
+        })
+
+
         res.json(results);
     });
 
