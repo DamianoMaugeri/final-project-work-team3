@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { HeartIcon as OutlineHeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
+import style from './HouseCard.module.css'
 
 
 
@@ -19,12 +20,12 @@ export default function HouseCard({ content }) {
 
     return (
 
-        <div className="card" style={{ width: "18rem", margin: "1rem" }}>
+        <div className="card h-100" >
             {/* immagine */}
             <div className="position-relative">
                 <img
                     src={image}
-                    className="card-img-top w-25"
+                    className={`card-img-top ${style.card_img}`}
                     alt="Placeholder"
                 />
                 {/* Cuoricino */}
