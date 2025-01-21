@@ -20,6 +20,7 @@ export default function HouseList() {
         })
             .then(res => {
                 setHouses(res.data)
+                console.log(res.data)
             }).catch(err => console.error(err))
             .finally(() => {
                 console.log('finally')
@@ -35,23 +36,24 @@ export default function HouseList() {
 
 
 
-
     return (
 
         houses.length > 0 ?
 
-            <div className="container">
+            (<div className="container">
                 <div className="row">
-                    {houses.map((house, i) => {
+                    {houses.map((house, i) => (
                         <div key={i} className="col">
                             <Link to={`/${house.id}`} >
                                 <HouseCard content={house} />
                             </Link>
+
+
                         </div>
-                    })}
+                    ))}
                 </div>
-            </div> :
-            <div>nessun risultato</div>
+            </div>) :
+            (<div>nessun risultato</div>)
 
 
 

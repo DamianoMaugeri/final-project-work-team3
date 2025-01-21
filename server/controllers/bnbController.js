@@ -22,7 +22,19 @@ function index(req, res) {
 
 
 function show(req, res) {
-    console.log(res)
+    const id = req.params.id;
+    const sqlHouse = "SELECT * FROM properties WHERE id = ?";
+    const sqlReviews = "SELECT * FROM reviews AS rev JOIN rents AS r ON rev.rent_id=r.id JOIN users AS u ON r.user_id=u.id WHERE r.property_id= ?";
+    connection.query(sqlHouse, [id], (err, results) => {
+        if (err) return res.status(500).json({ error: "Database query failed" });
+        if (results.length === 0) return res.status(404).json({ errore: "House not found" });
+        const house = results[0];
+        connection.query(sqlReviews, [id], (err, results) => {
+            if (err) return res.status(500).json({ error: "Database query failed" });
+            house.reviews = results;
+            res.json(house);
+        })
+    })
 }
 
 

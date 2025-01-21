@@ -16,6 +16,12 @@ export default function HouseCard({ content }) {
         setLiked(!liked); //se liked è true diventa false e viceversa
     };
 
+
+    // funzione toogle per il cuoricino
+    const handleLikeToggle = () => {
+        setLiked(!liked); //se liked è true diventa false e viceversa
+    };
+
     return (
 
         <div className="card" style={{ width: "18rem", margin: "1rem" }}>
