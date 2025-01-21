@@ -24,7 +24,7 @@ export default function HouseCard({ content }) {
             <div className="position-relative">
                 <img
                     src={image}
-                    className="card-img-top"
+                    className="card-img-top w-25"
                     alt="Placeholder"
                 />
                 {/* Cuoricino */}
