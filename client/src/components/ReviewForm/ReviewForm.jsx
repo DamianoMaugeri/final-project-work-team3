@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 
 const initialFormData = {
     vote: '',
@@ -23,7 +25,7 @@ export default function ReviewForm({ id, onSuccess = () => { } }) {
         )
     };
 
-    function storePartecipante(e) {
+    function storeReview(e) {
         e.preventDefault()
         setIsFormValid(true)
 
@@ -65,7 +67,7 @@ export default function ReviewForm({ id, onSuccess = () => { } }) {
 
 
     return (
-        <form action="">
+        <form onSubmit={storeReview}>
 
             <p>
                 <label htmlFor="email" className="form-label">EMAIL *</label>
