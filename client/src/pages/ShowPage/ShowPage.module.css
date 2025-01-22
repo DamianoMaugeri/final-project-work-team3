@@ -1,0 +1,18 @@
+.showPageContainer {
+    background-color: #10242d;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.showPageContainer::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: grey;
+
+}
+
+.showPageContainer::-webkit-scrollbar-thumb {
+    width: 3px;
+    border-radius: 999px;
+    background-color: rgb(187, 185, 185);
+}
