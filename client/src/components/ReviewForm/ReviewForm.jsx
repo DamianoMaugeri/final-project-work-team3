@@ -25,7 +25,7 @@ export default function ReviewForm({ id, onSuccess = () => { } }) {
         )
     };
 
-    function storePartecipante(e) {
+    function storeReview(e) {
         e.preventDefault()
         setIsFormValid(true)
 
@@ -67,7 +67,7 @@ export default function ReviewForm({ id, onSuccess = () => { } }) {
 
 
     return (
-        <form  className="container mt-4" action="">
+        <form  className="container mt-4" onSubmit={storeReview}>
 
             <p>
                 <label htmlFor="email" className="form-label">EMAIL *</label>
