@@ -12,10 +12,10 @@ export default function ReviewCard({ reviews }) {
                     <div className="card-body" >
                         <div className="row">
                             {reviews.map((review, index) => (
-                                <div key={index} className="col">
-                                    <div className="d-flex justify-content-initial">
-                                        <div className="card-text fs-6 fst-italic"><strong>Check In:</strong> {new Date(review.rent_start).toLocaleDateString()}</div>
-                                        <div className="card-text fs-6 fst-italic"><strong>Check Out: </strong> {new Date(review.rent_end).toLocaleDateString()}</div>
+                                <div  key={index} className="col d-flex flex-column gap-2">
+                                    <div className="d-flex justify-content-initial gap-3">
+                                        <div className="card-text fs-6"><strong>Check In:</strong> {new Date(review.rent_start).toLocaleDateString()}</div>
+                                        <div className="card-text fs-6"><strong>Check Out: </strong> {new Date(review.rent_end).toLocaleDateString()}</div>
                                     </div>
                                     <div className="d-flex justify-content-between">
                                         <div className="card-text fst-italic">{review.text}</div>
