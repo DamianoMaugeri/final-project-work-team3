@@ -15,7 +15,7 @@ function index(req, res) {
 
         results.forEach(result => {
 
-            const formattedImage = result.image.split(' ').join('_')
+            const formattedImage = result.image?.split(' ').join('_')
             result.image = `http://localhost:3000/images/${formattedImage}`
         })
 
@@ -41,7 +41,7 @@ function show(req, res) {
             if (err) return res.status(500).json({ error: "Database query failed" });
             house.reviews = results;
 
-            const formattedImage = house.image.split(' ').join('_')
+            const formattedImage = house.image?.split(' ').join('_')
             house.image = `http://localhost:3000/images/${formattedImage}`
             res.json(house);
         })

@@ -6,7 +6,7 @@ import style from './SideBar.module.css';
 export default function SideBar() {
 
     return (
-        <div className={`${style.sidebar} col-2 d-flex flex-column align-center justify-content-beetween `} >
+        <div className={`${style.sidebar} col-2 d-flex flex-column align-center justify-content-beetween`} >
             <Logo />
             <Nav />
             <Filters />
