@@ -20,13 +20,13 @@ export default function HouseShowCard({ houseEl }) {
                                         <h2 className="card-title mb-4">{title}</h2>
                                         <h5 className="card-text">Dettagli dell'immobile:</h5>
                                         <ul>
-                                            <li className="card-text">Valutazione: </li>
-                                            <li className="card-text" >Indirizzo: {full_address}</li>
-                                            <li className="card-text">Stanze: {number_of_rooms}</li>
-                                            <li className="card-text">Posti letto: {number_of_beds}</li>
-                                            <li className="card-text">Bagni: {number_of_bathrooms}</li>
-                                            <li className="card-text">Dimensione: {size}</li>
-                                            <li className="card-text">Città: {city}</li>
+                                            <li className="card-text"><strong>Valutazione:</strong> </li>
+                                            <li className="card-text" ><strong>Indirizzo:</strong> {full_address}</li>
+                                            <li className="card-text"><strong>Stanze:</strong> {number_of_rooms}</li>
+                                            <li className="card-text"><strong>Posti letto:</strong> {number_of_beds}</li>
+                                            <li className="card-text"><strong>Bagni:</strong> {number_of_bathrooms}</li>
+                                            <li className="card-text"><strong>Dimensione:</strong> {size}</li>
+                                            <li className="card-text"><strong>Città:</strong> {city}</li>
                                         </ul>
                                     </div>
                                 </div>

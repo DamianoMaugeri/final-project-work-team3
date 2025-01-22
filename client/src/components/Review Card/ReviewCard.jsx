@@ -15,13 +15,12 @@ export default function ReviewCard({ reviews }) {
                                 <div key={index} className="col">
                                     <p className="card-text">{review.text}</p>
                                     <div>
-                                        <p className="card-text"><strong>Valutazione:</strong> {review.vote}</p>
-                                        <div>
-                                            <p className="card-text"><strong>Check In:</strong> {new Date(review.rent_start).toLocaleDateString()}</p>
-                                            <p className="card-text"><strong>Check Out: </strong> {new Date(review.rent_end).toLocaleDateString()}</p>
-                                        </div>
+                                        <p className="card-text"><strong>Valutazione:</strong>{review.vote}</p>
+                                        <p className="card-text"><strong>Check In:</strong> {new Date(review.rent_start).toLocaleDateString()}</p>
+                                        <p className="card-text"><strong>Check Out: </strong> {new Date(review.rent_end).toLocaleDateString()}</p>
+                                        <p className="card-text" ><strong>Scritta da: </strong>{review.first_name} {review.last_name}</p>
                                     </div>
-                                    <p className="card-text" ><strong>Scritta da: </strong>{review.first_name} {review.last_name}</p>
+
                                 </div>
                             ))}
                         </div>
