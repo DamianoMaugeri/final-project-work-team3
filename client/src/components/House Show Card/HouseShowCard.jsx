@@ -1,4 +1,4 @@
-
+import style from './HouseShowCard.module.css'
 
 export default function HouseShowCard({ houseEl }) {
 
@@ -12,8 +12,8 @@ export default function HouseShowCard({ houseEl }) {
                     <div className="card">
                         <div className="card-body">
                             <div className="row ">
-                                <div className="col-auto">
-                                    <img src={image} alt={title} className="img-fluid" style={{ maxWidth: '200px' }} />
+                                <div className={`col  ${style.col}`}>
+                                    <img src={image} alt={title} className={style.sizeImg}/>
                                 </div>
                                 <div className="col">
                                     <div>
