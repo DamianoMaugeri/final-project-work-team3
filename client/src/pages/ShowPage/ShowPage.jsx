@@ -1,5 +1,6 @@
 import HouseShowCard from "../../components/House Show Card/HouseShowCard"
 import ReviewCard from "../../components/Review Card/ReviewCard"
+import ReviewForm from "../../components/ReviewForm/ReviewForm"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
@@ -35,17 +36,20 @@ export default function ShowPage() {
         house ?
             <>
                 <div className="d-flex flex-column">
-                {/* detagli casa */}
-                <HouseShowCard houseEl={house} />
+                    {/* detagli casa */}
+                    <HouseShowCard houseEl={house} />
 
-                {/* recensioni box */}
-                <ReviewCard reviews={house.reviews} />
-            </div >
+                    {/* recensioni box */}
+                    <ReviewCard reviews={house.reviews} />
+
+                    {/* form recensioni */}
+                    <ReviewForm />
+                </div >
 
 
 
             </> :
-    <div>nessun risultato</div>
+            <div>nessun risultato</div>
 
     )
 } 

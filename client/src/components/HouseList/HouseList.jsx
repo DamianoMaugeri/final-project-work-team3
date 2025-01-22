@@ -44,7 +44,7 @@ export default function HouseList() {
                 <div className="row d-flex flex-wrap row-gap-5 ">
                     {houses.map((house, i) => (
                         <div key={i} className="col-lg-4 col-md-6 col-xs-12">
-                            <Link to={`/${house.id}`} >
+                            <Link className="text-decoration-none text-dark" to={`/${house.id}`} >
                                 <HouseCard content={house} />
                             </Link>
 
