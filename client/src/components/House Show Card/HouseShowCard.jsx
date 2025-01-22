@@ -9,7 +9,7 @@ export default function HouseShowCard({ houseEl }) {
         houseEl ?
             <>
                 <section className="container mt-4">
-                    <div className="card">
+                    <div className={`card ${style.customCard}`}>
                         <div className="card-body">
                             <div className="row ">
                                 <div className={`col  ${style.col}`}>

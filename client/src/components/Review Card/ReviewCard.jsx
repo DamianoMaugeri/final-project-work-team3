@@ -6,20 +6,24 @@ export default function ReviewCard({ reviews }) {
         reviews ?
             <section className="container mt-4">
                 <div>
-                    <h3 className="card-title mb-2">Recensioni degli affittuari:</h3>
+                    <h3 className="card-title mb-2 text-white">Recensioni degli affittuari:</h3>
                 </div>
                 <div className="card" >
                     <div className="card-body" >
                         <div className="row">
                             {reviews.map((review, index) => (
                                 <div key={index} className="col">
-                                    <p className="card-text">{review.text}</p>
-                                    <div>
-                                        <p className="card-text"><strong>Valutazione:</strong>{review.vote}</p>
-                                        <p className="card-text"><strong>Check In:</strong> {new Date(review.rent_start).toLocaleDateString()}</p>
-                                        <p className="card-text"><strong>Check Out: </strong> {new Date(review.rent_end).toLocaleDateString()}</p>
-                                        <p className="card-text" ><strong>Scritta da: </strong>{review.first_name} {review.last_name}</p>
+                                    <div className="d-flex justify-content-initial">
+                                        <div className="card-text fs-6 fst-italic"><strong>Check In:</strong> {new Date(review.rent_start).toLocaleDateString()}</div>
+                                        <div className="card-text fs-6 fst-italic"><strong>Check Out: </strong> {new Date(review.rent_end).toLocaleDateString()}</div>
                                     </div>
+                                    <div className="d-flex justify-content-between">
+                                        <div className="card-text fst-italic">{review.text}</div>
+                                        <div className="card-text"><strong>Valutazione:</strong>{review.vote}</div>
+                                    </div>
+
+                                    <div className="card-text fst-italic" ><strong>By: </strong>{review.first_name} {review.last_name}</div>
+
 
                                 </div>
                             ))}
