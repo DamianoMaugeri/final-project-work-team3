@@ -70,11 +70,60 @@ function update(req, res) {
     });
 }
 
+function postReview(req, res) {
+    const id = req.params.id;
+    const { text, email, vote } = req.body
+
+    const sqlFirstControlUserEmail = "SELECT r.id FROM users AS u INNER JOIN rents AS r ON u.id=r.user_id WHERE u.email= ? AND r.property_id= ?"
+
+    connection.query(sqlFirstControlUserEmail, [email, id], (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({ error: "Database query failed 0" });
+        }
+        if (results.length === 0) {
+            return res.status(422).json({
+                "error": "The provided email does not match any user with reservations."
+            })
+        }
+        const rentId = results[0].id;
+        const sqlSecondControlReview = "SELECT * FROM reviews WHERE rent_id= ?"
+
+        connection.query(sqlSecondControlReview, [rentId], (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({ error: "Database query failed 1" });
+            }
+
+            if (results.length > 0) {
+                return res.status(409).json({
+                    "error": "You have already submitted a review for this property."
+                })
+            }
+
+            const sqlInsertReview = "INSERT INTO reviews (vote, text, rent_id) VALUES (?, ?, ?)"
+
+            connection.query(sqlInsertReview, [vote, text, rentId], (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({ error: "Database query failed 2" });
+
+                }
+                res.status(201).json({
+                    message: "Review added successfully",
+                    reviewId: results.insertId
+                })
+            })
+        })
+    })
+
+}
 
 
 
 
-module.exports = { index, show, update };
+
+module.exports = { index, show, update, postReview };
 
 
 
