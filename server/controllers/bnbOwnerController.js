@@ -17,24 +17,25 @@ function propertiesByOwner(req, res) {
         const ownerId = results[0].id
 
 
-        connection.query(sql, [ownerId], (err, results) => {
+        connection.query(sql, [ownerId], (err, resultsOwner) => {
             if (err) return res.status(500).json({ error: "Database query failed 1" });
-            if (results.length === 0) return res.status(404).json({ error: "No match found for this owner" });
+            if (resultsOwner.length === 0) return res.status(404).json({ error: "No match found for this owner" });
 
             const owner = results[0]
 
-            connection.query(sqlProperties, [ownerId], (err, results) => {
+            connection.query(sqlProperties, [ownerId], (err, resultsProperties) => {
                 if (err) return res.status(500).json({ error: "Database query failed 2" });
-                if (results.length === 0) return res.status(404).json({ error: "No properties found for this owner" });
+                if (resultsProperties.length === 0) return res.status(404).json({ error: "No properties found for this owner" });
+                console.log(resultsProperties)
 
-                results.forEach(result => {
+                resultsProperties.forEach(result => {
                     const formattedImage = result.image?.split(' ').join('_');
                     result.image = `http://localhost:3000/images/${formattedImage}`;
                 });
-                owner.propertiesOwned = results[0]
+                owner.propertiesOwned = resultsProperties
+                res.json(owner);
             })
 
-            res.json(owner);
         });
 
     })
