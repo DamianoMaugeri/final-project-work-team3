@@ -4,10 +4,11 @@ function propertiesByOwner(req, res) {
 
     const email = req.query.email;
     const sqlAutenticationEmail = "SELECT * FROM owners WHERE email = ?"
-    const sql = "SELECT * FROM properties WHERE owner_id = ?";
+    const sql = "SELECT * FROM owners WHERE id = ?"
+    const sqlProperties = "SELECT * FROM properties WHERE owner_id = ?";
     connection.query(sqlAutenticationEmail, [email], (err, results) => {
         console.log(results)
-        if (err) return res.status(500).json({ error: "Database query failed" })
+        if (err) return res.status(500).json({ error: "Database query failed 0" })
         if (results.length === 0) return res.status(404).json(
             {
                 error: "Email not found",
@@ -17,15 +18,23 @@ function propertiesByOwner(req, res) {
 
 
         connection.query(sql, [ownerId], (err, results) => {
-            if (err) return res.status(500).json({ error: "Database query failed" });
-            if (results.length === 0) return res.status(404).json({ error: "No properties found for this owner" });
+            if (err) return res.status(500).json({ error: "Database query failed 1" });
+            if (results.length === 0) return res.status(404).json({ error: "No match found for this owner" });
 
-            results.forEach(result => {
-                const formattedImage = result.image?.split(' ').join('_');
-                result.image = `http://localhost:3000/images/${formattedImage}`;
-            });
+            const owner = results[0]
 
-            res.json(results);
+            connection.query(sqlProperties, [ownerId], (err, results) => {
+                if (err) return res.status(500).json({ error: "Database query failed 2" });
+                if (results.length === 0) return res.status(404).json({ error: "No properties found for this owner" });
+
+                results.forEach(result => {
+                    const formattedImage = result.image?.split(' ').join('_');
+                    result.image = `http://localhost:3000/images/${formattedImage}`;
+                });
+                owner.propertiesOwned = results[0]
+            })
+
+            res.json(owner);
         });
 
     })
