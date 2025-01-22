@@ -2,17 +2,18 @@ const connection = require("../data/db");
 
 function propertiesByOwner(req, res) {
 
-    const email = req.params.email;
+    const email = req.query.email;
     const sqlAutenticationEmail = "SELECT * FROM owners WHERE email = ?"
     const sql = "SELECT * FROM properties WHERE owner_id = ?";
     connection.query(sqlAutenticationEmail, [email], (err, results) => {
+        console.log(results)
         if (err) return res.status(500).json({ error: "Database query failed" })
         if (results.length === 0) return res.status(404).json(
             {
                 error: "Email not found",
                 message: "No owner found with the provided Email"
             })
-        const ownerId = results.id
+        const ownerId = results[0].id
 
 
         connection.query(sql, [ownerId], (err, results) => {

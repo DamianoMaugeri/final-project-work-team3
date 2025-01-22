@@ -24,7 +24,7 @@ router.post('/:id([0-9]+)/reviews', bnbUserController.postReview);
 // rotte => OWNER
 
 // propertiesByOwner: questa rotta simula un autenticazione tramite sola email e nel caso in cui ci sia corrispondenza con quella di un proprietario restituisce tutte le proprietà appartenenti a quel proprietario
-router.get('/owner/:id([0-9]+)', bnbOwnerController.propertiesByOwner);
+router.get('/owner', bnbOwnerController.propertiesByOwner);
 
 // permette agli owner di creare una nuova proprietà
 router.post('/', bnbOwnerController.create);
