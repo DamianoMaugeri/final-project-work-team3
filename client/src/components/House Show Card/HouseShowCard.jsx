@@ -8,27 +8,32 @@ export default function HouseShowCard({ houseEl }) {
     return (
         houseEl ?
             <>
-                <div>
-                    <div className="w-25">
-                        <img src={image} alt={title} />
+                <section className="container mt-4">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="row ">
+                                <div className="col-auto">
+                                    <img src={image} alt={title} className="img-fluid" style={{ maxWidth: '200px' }} />
+                                </div>
+                                <div className="col">
+                                    <div>
+                                        <h2 className="card-title mb-4">{title}</h2>
+                                        <h5 className="card-text">Dettagli dell'immobile:</h5>
+                                        <ul>
+                                            <li className="card-text">Valutazione: </li>
+                                            <li className="card-text" >Indirizzo: {full_address}</li>
+                                            <li className="card-text">Stanze: {number_of_rooms}</li>
+                                            <li className="card-text">Posti letto: {number_of_beds}</li>
+                                            <li className="card-text">Bagni: {number_of_bathrooms}</li>
+                                            <li className="card-text">Dimensione: {size}</li>
+                                            <li className="card-text">Città: {city}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>vote</div>
-                    <div>
-                        <h3>{title}</h3>
-                    </div>
-                </div>
-
-                <div>
-                    <div>Detagli</div>
-                    <ul>
-                        <li>Full Address: {full_address}</li>
-                        <li># rooms: {number_of_rooms}</li>
-                        <li># beds: {number_of_beds}</li>
-                        <li># bathroom: {number_of_bathrooms}</li>
-                        <li>size: {size}</li>
-                        <li>city: {city}</li>
-                    </ul>
-                </div>
+                </section>
             </> :
             <div>Nessun resultato</div>
     )
