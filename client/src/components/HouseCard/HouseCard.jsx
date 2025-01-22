@@ -14,7 +14,9 @@ export default function HouseCard({ content }) {
 
 
     // funzione toogle per il cuoricino
-    const handleLikeToggle = () => {
+    const handleLikeToggle = (event) => {
+        event.stopPropagation();
+        event.preventDefault()
         setLiked(!liked); //se liked è true diventa false e viceversa
     };
 
