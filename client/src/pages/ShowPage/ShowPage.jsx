@@ -34,16 +34,18 @@ export default function ShowPage() {
     return (
         house ?
             <>
-
+                <div className="d-flex flex-column">
                 {/* detagli casa */}
                 <HouseShowCard houseEl={house} />
 
                 {/* recensioni box */}
-                <ReviewCard />
+                <ReviewCard reviews={house.reviews} />
+            </div >
+
 
 
             </> :
-            <div>nessun risultato</div>
+    <div>nessun risultato</div>
 
     )
 } 
