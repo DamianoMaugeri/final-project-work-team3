@@ -67,7 +67,7 @@ export default function ReviewForm({ id, onSuccess = () => { } }) {
 
 
     return (
-        <form action="">
+        <form  className="container mt-4" action="">
 
             <p>
                 <label htmlFor="email" className="form-label">EMAIL *</label>
