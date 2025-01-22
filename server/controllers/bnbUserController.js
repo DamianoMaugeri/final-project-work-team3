@@ -72,47 +72,9 @@ function update(req, res) {
 
 
 
-function propertiesByOwner(req, res) {
-    const ownerId = req.params.ownerId;
-    const sql = "SELECT * FROM properties WHERE owner_id = ?";
-    connection.query(sql, [ownerId], (err, results) => {
-        if (err) return res.status(500).json({ error: "Database query failed" });
-        if (results.length === 0) return res.status(404).json({ error: "No properties found for this owner" });
-
-        results.forEach(result => {
-            const formattedImage = result.image.split(' ').join('_');
-            result.image = `http://localhost:3000/images/${formattedImage}`;
-        });
-
-        res.json(results);
-    });
-}
 
 
-function create(req, res) {
-    const { number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, email, ownerId, title, city, price, image } = req.body;
-
-    // Controlla che tutti i campi obbligatori siano presenti
-    if (!ownerId || !title || !city || !price || !image) {
-        return res.status(400).json({ error: "All fields are required" });
-    }
-
-    const sql = `
-        INSERT INTO properties (owner_id, name, city, price, image) 
-        VALUES (?, ?, ?, ?, ?)
-    `;
-
-    connection.query(sql, [ownerId, name, city, price, image], (err, results) => {
-        if (err) return res.status(500).json({ error: "Database query failed" });
-
-        res.status(201).json({
-            message: "Property added successfully",
-            propertyId: results.insertId,
-        });
-    });
-}
-
-module.exports = { index, show, update, propertiesByOwner, create };
+module.exports = { index, show, update };
 
 
 
