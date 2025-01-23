@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import GlobalContext from "../../context/GlobalContext"
 import axios from 'axios'
+import style from './OwnersPage.module.css'
 
 const initialFormData = {
     email: ''
@@ -84,9 +85,9 @@ export default function OwnersPage() {
 
 
     return (
-        <form onSubmit={logIn} >
+        <form className={style.customForm} onSubmit={logIn} >
 
-            <p>
+            <p className={style.formGroup}>
                 <label htmlFor="email" className="form-label">INSERISCI LA TUA EMAIL *</label>
                 <input required type="text" className="form-control" placeholder="inserisci l'email" name="email" id="email" value={formData.email} onChange={handleForm} />
 

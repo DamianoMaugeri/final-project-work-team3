@@ -6,6 +6,8 @@
 .customCard {
     background-color: #10242d !important;
     color: white !important;
+    padding: 15px 15px !important;
+    border-radius: 10px !important;
 }
 
 .sizeImg {
