@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom"
 import axios from "axios"
 import style from "./ShowPage.module.css"
 import Loader from "../../components/Loader/Loader"
+import EmailForm from "../../components/emailForm/emailForm"
 
 
 export default function ShowPage() {
@@ -46,6 +47,8 @@ export default function ShowPage() {
 
                     {/* form recensioni */}
                     <ReviewForm />
+
+                    <EmailForm email={house.ownerEmail} />
                 </div >
 
 
