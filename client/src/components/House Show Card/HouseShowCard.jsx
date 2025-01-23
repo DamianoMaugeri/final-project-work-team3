@@ -13,7 +13,7 @@ export default function HouseShowCard({ houseEl }) {
                         <div className="card-body">
                             <div className="row ">
                                 <div className={`col  ${style.col}`}>
-                                    <img src={image} alt={title} className={style.sizeImg}/>
+                                    <img src={image} alt={title} className={style.sizeImg} />
                                 </div>
                                 <div className="col">
                                     <div>
@@ -25,7 +25,7 @@ export default function HouseShowCard({ houseEl }) {
                                             <li className="card-text"><strong>Stanze:</strong> {number_of_rooms}</li>
                                             <li className="card-text"><strong>Posti letto:</strong> {number_of_beds}</li>
                                             <li className="card-text"><strong>Bagni:</strong> {number_of_bathrooms}</li>
-                                            <li className="card-text"><strong>Dimensione:</strong> {size}</li>
+                                            <li className="card-text"><strong>Dimensione:</strong> {size} mq</li>
                                             <li className="card-text"><strong>Città:</strong> {city}</li>
                                         </ul>
                                     </div>
