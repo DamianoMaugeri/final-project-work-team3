@@ -68,7 +68,8 @@ export default function ReviewForm({ id, onSuccess = () => { } }) {
 
 
     return (
-        <section>
+        <section className={style.formContainer}>
+            <div className="text-center fw-bold fs-4 mt-5">Vogliamo sapere la tua opinione!</div>
             <form className={`container mt-4 ${style.customForm}`} onSubmit={storeReview}>
 
                 <p>
@@ -100,9 +101,9 @@ export default function ReviewForm({ id, onSuccess = () => { } }) {
 
 
 
-                <div>
+                <div className="text-white fw-bold">
                     {isFormValid === false && <div>i dati non sono validi</div>}
-                    <button className="submit-button">invia</button>
+                    <button className="submit-button text-white fw-bold">invia</button>
                 </div>
 
             </form>

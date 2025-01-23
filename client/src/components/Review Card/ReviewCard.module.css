@@ -1,11 +1,12 @@
 .customSingleCard {
-    background-color: #f7f3e9;
+    background-color: #10242d;
     border-radius: 10px;
-    padding: 10px 15px !important;
+    padding: 15px 15px !important;
+    color:white
 }
 
 .customCardBody {
-    background-color: #10242d;
+    background-color: #f7f3e9;;
     border-radius: 10px;
     padding: 25px 35px !important;
 }

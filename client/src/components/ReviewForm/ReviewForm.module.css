@@ -1,7 +1,12 @@
+.formContainer {
+    width: 100%;
+    
+}
+
 .customForm {
     background-color: #10242d;
     border-radius: 10px;
-    width: 50rem;
-    padding: 0 20px;
+    width: 40% !important;
+    padding: 0 35px !important;
     margin-bottom: 5rem;
 }
