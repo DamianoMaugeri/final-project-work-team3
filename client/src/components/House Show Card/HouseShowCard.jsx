@@ -15,7 +15,7 @@ export default function HouseShowCard({ houseEl }) {
                                 <div className={`col  ${style.col}`}>
                                     <img src={image} alt={title} className={style.sizeImg} />
                                 </div>
-                                <div className="col">
+                                <div className="col fw-bold fs-4">
                                     <div>
                                         <h2 className="card-title mb-4">{title}</h2>
                                         <h5 className="card-text">Dettagli dell'immobile:</h5>
