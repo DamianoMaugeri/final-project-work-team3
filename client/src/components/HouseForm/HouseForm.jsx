@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+import axios from "axios";
+
 const initialFormData = {
     title: "",
     number_of_rooms: "",
@@ -144,7 +146,7 @@ export default function HouseForm(id, onSuccess = () => { }) {
             </p>
 
             <div>
-                {isFormValid === false && <div>i dati non sono validi</div>}
+                {/* {isFormValid === false && <div>i dati non sono validi</div>} */}
                 <button className="submit-button">invia</button>
             </div>
 
