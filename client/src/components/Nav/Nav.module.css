@@ -10,7 +10,21 @@
 .navlink {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
     align-items: center;
     justify-content: center;
+}
+
+.link {
+    background-color: #10242d;
+    padding: 1rem 1rem;
+    border-radius: 30px;
+    color: white; 
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; 
+}
+
+.link:hover {
+    background-color: #0aca34ad; 
+    color: white; 
+    transform: scale(1.05); 
 }
