@@ -11,7 +11,7 @@ export default function ReviewCard({ reviews }) {
                     <h3 className="card-title mb-2">Recensioni degli affittuari:</h3>
                 </div>
                 <div className="card" >
-                    <div className="card-body" >
+                    <div className={`card-body ${style.customCardBody}`} >
                         <div className="row d-flex flex-column gap-3">
                             {reviews.map((review, index) => (
                                 <div key={index} className={`col d-flex flex-column gap-2 ${style.customSingleCard}`}>
