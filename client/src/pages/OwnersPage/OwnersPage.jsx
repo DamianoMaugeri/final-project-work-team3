@@ -88,7 +88,7 @@ export default function OwnersPage() {
         <form className={style.customForm} onSubmit={logIn} >
 
             <p className={style.formGroup}>
-                <label htmlFor="email" className="form-label">INSERISCI LA TUA EMAIL *</label>
+                <label htmlFor="email" className="form-label  fw-bold">INSERISCI LA TUA EMAIL *</label>
                 <input required type="text" className="form-control" placeholder="inserisci l'email" name="email" id="email" value={formData.email} onChange={handleForm} />
 
             </p>

@@ -2,24 +2,40 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    /* This makes sure the loader is centered vertically */
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
 }
 
 .loader {
     border: 16px solid #f3f3f3;
-    /* Light grey */
     border-top: 16px solid #3498db;
-    /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    animation: spin 0.3s linear infinite;
+    animation: spin 0.1s linear infinite;
 }
 
 @keyframes spin {
     0% {
         transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(90deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    75% {
+        transform: rotate(270deg);
     }
 
     100% {

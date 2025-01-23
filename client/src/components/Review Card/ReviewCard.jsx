@@ -8,7 +8,7 @@ export default function ReviewCard({ reviews }) {
         reviews ?
             <section className="container mt-4">
                 <div>
-                    <h3 className="card-title mb-2">Recensioni degli affittuari:</h3>
+                    <h3 className="card-title mb-2  fw-bold fs-4">Recensioni degli affittuari:</h3>
                 </div>
                 <div className="card" >
                     <div className={`card-body ${style.customCardBody}`} >

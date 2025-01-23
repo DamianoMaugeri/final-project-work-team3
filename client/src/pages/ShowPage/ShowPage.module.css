@@ -1,8 +1,12 @@
 .showPageContainer {
     background-color: #F7F3E9;
     width: 100%;
+    height: 100vh;
+    /* Per assicurarti che occupi tutta l'altezza */
     overflow-y: scroll;
+    position: relative;
 }
+
 
 .showPageContainer::-webkit-scrollbar {
     width: 5px;

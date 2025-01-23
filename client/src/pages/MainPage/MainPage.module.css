@@ -2,8 +2,9 @@
     overflow: auto;
     margin: 0 auto;
     width: 100%;
-    /* debug */
+    height: 100vh;
     background-color: #F7F3E9;
+    position: relative;
 }
 
 
