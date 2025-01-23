@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react"
 import axios from 'axios'
 import HouseCard from "../HouseCard/HouseCard"
 import { Link } from "react-router-dom"
+import Loader from "../Loader/Loader"
 
 export default function HouseList() {
 
@@ -38,7 +39,7 @@ export default function HouseList() {
                     ))}
                 </div>
             </div>) :
-            (<div>nessun risultato</div>)
+            (<Loader />)
 
 
 
