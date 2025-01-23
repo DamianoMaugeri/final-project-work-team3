@@ -1,3 +1,5 @@
+import style from './ReviewCard.module.css';
+
 export default function ReviewCard({ reviews }) {
 
 
@@ -10,9 +12,9 @@ export default function ReviewCard({ reviews }) {
                 </div>
                 <div className="card" >
                     <div className="card-body" >
-                        <div className="row">
+                        <div className="row d-flex flex-column gap-3">
                             {reviews.map((review, index) => (
-                                <div key={index} className="col d-flex flex-column gap-2">
+                                <div key={index} className={`col d-flex flex-column gap-2 ${style.customSingleCard}`}>
                                     <div className="d-flex justify-content-initial gap-3">
                                         <div className="card-text fs-6"><strong>Check In:</strong> {new Date(review.rent_start).toLocaleDateString()}</div>
                                         <div className="card-text fs-6"><strong>Check Out: </strong> {new Date(review.rent_end).toLocaleDateString()}</div>
