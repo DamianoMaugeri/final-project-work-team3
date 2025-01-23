@@ -4,8 +4,8 @@ export default function Nav() {
     return (
         <nav className={`${style.nav}`} >
             <ul className={`p-0 ${style.navlink}`}>
-                <li><NavLink to='/owners'>Area Propietari</NavLink> </li>
-                <li><NavLink to='/'>Tutte la case</NavLink></li>
+                <li><NavLink to='/owners'>Area Proprietari</NavLink> </li>
+                <li><NavLink to='/'>Tutte le case</NavLink></li>
             </ul>
         </ nav>
 

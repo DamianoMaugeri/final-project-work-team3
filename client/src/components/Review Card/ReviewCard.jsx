@@ -12,14 +12,18 @@ export default function ReviewCard({ reviews }) {
                     <div className="card-body" >
                         <div className="row">
                             {reviews.map((review, index) => (
-                                <div key={index} className="col">
-                                    <p className="card-text">{review.text}</p>
-                                    <div>
-                                        <p className="card-text"><strong>Valutazione:</strong>{review.vote}</p>
-                                        <p className="card-text"><strong>Check In:</strong> {new Date(review.rent_start).toLocaleDateString()}</p>
-                                        <p className="card-text"><strong>Check Out: </strong> {new Date(review.rent_end).toLocaleDateString()}</p>
-                                        <p className="card-text" ><strong>Scritta da: </strong>{review.first_name} {review.last_name}</p>
+                                <div key={index} className="col d-flex flex-column gap-2">
+                                    <div className="d-flex justify-content-initial gap-3">
+                                        <div className="card-text fs-6"><strong>Check In:</strong> {new Date(review.rent_start).toLocaleDateString()}</div>
+                                        <div className="card-text fs-6"><strong>Check Out: </strong> {new Date(review.rent_end).toLocaleDateString()}</div>
                                     </div>
+                                    <div className="d-flex justify-content-between">
+                                        <div className="card-text fst-italic">{review.text}</div>
+                                        <div className="card-text"><strong>Valutazione:</strong>{review.vote}</div>
+                                    </div>
+
+                                    <div className="card-text fst-italic" ><strong>By: </strong>{review.first_name} {review.last_name}</div>
+
 
                                 </div>
                             ))}
