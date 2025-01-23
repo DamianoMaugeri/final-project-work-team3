@@ -13,7 +13,8 @@ export default function ShowPage() {
 
     // recuperare l'id del libro dal path della rotta
     const [house, setHouse] = useState(null)
-
+    const [reviewBoolean, setReviewBoolean] = useState("")
+    const [emailBoolean, setEmailBoolean] = useState("")
     const { id } = useParams()
 
 
@@ -41,14 +42,23 @@ export default function ShowPage() {
                 <div className={`d-flex flex-column ${style.showPageContainer}`}>
                     {/* detagli casa */}
                     <HouseShowCard houseEl={house} />
-
                     {/* recensioni box */}
                     <ReviewCard reviews={house.reviews} />
+                    <div className="d-flex justify-content-around mb-5">
+                        <button className={style.btn} onClick={() => {
+                            emailBoolean && setEmailBoolean(!emailBoolean)
+                            setReviewBoolean(!reviewBoolean)
+                        }}>Lascia una recensione</button>
+                        <button className={style.btn} onClick={() => {
+                            reviewBoolean && setReviewBoolean(!reviewBoolean)
+                            setEmailBoolean(!emailBoolean)
+                        }}>Contatta il proprietario</button>
 
+                    </div>
                     {/* form recensioni */}
-                    <ReviewForm />
+                    {!emailBoolean && reviewBoolean && <ReviewForm />}
 
-                    <EmailForm email={house.ownerEmail} />
+                    {!reviewBoolean && emailBoolean && <EmailForm email={house.ownerEmail} />}
                 </div >
 
 

@@ -2,7 +2,6 @@
     background-color: #F7F3E9;
     width: 100%;
     height: 100vh;
-    /* Per assicurarti che occupi tutta l'altezza */
     overflow-y: scroll;
     position: relative;
 }
@@ -19,4 +18,29 @@
     width: 3px;
     border-radius: 999px;
     background-color: rgb(187, 185, 185);
+}
+
+.btn {
+    background-color: #90EE90;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background-color: #76C776;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    background-color: #5DAE5D;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transform: scale(0.98);
 }

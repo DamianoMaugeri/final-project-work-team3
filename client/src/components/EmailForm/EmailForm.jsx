@@ -72,7 +72,7 @@ export default function EmailForm({ email }) {
 
     return (
         <section className={style.formContainer}>
-            <div className="text-center fw-bold fs-4 mt-5">Vogliamo sapere la tua opinione!</div>
+            <div className="text-center fw-bold fs-4 mt-5">Contatta il proprietario per richiedere informazioni:</div>
             <form className={`container mt-4 ${style.customForm}`} onSubmit={sendEmail}>
 
                 <p>
