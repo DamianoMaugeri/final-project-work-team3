@@ -7,26 +7,11 @@ import { Link } from "react-router-dom"
 export default function HouseList() {
 
 
-    const { houses, setHouses, searchedCity } = useContext(GlobalContext)
+    const { houses, setHouses, searchedCity, fetchHouses } = useContext(GlobalContext)
 
 
 
-    function fetchHouses() {
 
-        axios.get('http://localhost:3000/api/boolbnb', {
-            params: {
-                city: searchedCity
-            }
-        })
-            .then(res => {
-                setHouses(res.data)
-                console.log(res.data)
-            }).catch(err => console.error(err))
-            .finally(() => {
-                console.log('finally')
-            })
-
-    }
 
     useEffect(() => {
         fetchHouses()
