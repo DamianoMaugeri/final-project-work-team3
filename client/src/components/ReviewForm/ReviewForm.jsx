@@ -103,7 +103,7 @@ export default function ReviewForm({ id, onSuccess = () => { } }) {
 
                 <div className="text-white fw-bold">
                     {isFormValid === false && <div>i dati non sono validi</div>}
-                    <button className="submit-button text-white fw-bold">invia</button>
+                    <button className={`submit-button text-white fw-bold mb-4 mt-4 ${style.customButton}`}>Invia</button>
                 </div>
 
             </form>
