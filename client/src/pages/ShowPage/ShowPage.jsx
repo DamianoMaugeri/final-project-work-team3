@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import style from "./ShowPage.module.css"
+import Loader from "../../components/Loader/Loader"
 
 
 export default function ShowPage() {
@@ -35,7 +36,7 @@ export default function ShowPage() {
 
     return (
         house ?
-            <>
+            (
                 <div className={`d-flex flex-column ${style.showPageContainer}`}>
                     {/* detagli casa */}
                     <HouseShowCard houseEl={house} />
@@ -49,8 +50,8 @@ export default function ShowPage() {
 
 
 
-            </> :
-            <div>nessun risultato</div>
+            ) :
+            (<Loader />)
 
     )
 } 
