@@ -18,7 +18,7 @@ export default function OwnerShowpage() {
     return (
         owner &&
         <>
-            <section className="container mt-4">
+            <section className={`container m-4 ${style.page}`}>
                 <div className={`card ${style.customCard}`}>
                     <div className="card-body">
                         <div className="row">
