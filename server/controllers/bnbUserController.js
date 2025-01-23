@@ -33,6 +33,7 @@ function show(req, res) {
     const id = req.params.id;
     const sqlHouse = "SELECT * FROM properties WHERE id = ?";
     const sqlReviews = "SELECT * FROM reviews AS rev JOIN rents AS r ON rev.rent_id=r.id JOIN users AS u ON r.user_id=u.id WHERE r.property_id= ?";
+    const sqlOwnerEmail = `SELECT o.email FROM properties as p JOIN owners as o ON p.owner_id = o.id WHERE p.id = ?`
     connection.query(sqlHouse, [id], (err, results) => {
         if (err) return res.status(500).json({ error: "Database query failed" });
         if (results.length === 0) return res.status(404).json({ errore: "House not found" });
@@ -43,7 +44,14 @@ function show(req, res) {
 
             const formattedImage = house.image?.split(' ').join('_')
             house.image = `http://localhost:3000/images/${formattedImage}`
-            res.json(house);
+            connection.query(sqlOwnerEmail, [id], (err, resultsEmail) => {
+                if (err) return res.status(500).json({ error: "Database query failed" });
+                if (results.length === 0) return res.status(404).json({ errore: "email not found" });
+                house.ownerEmail = resultsEmail[0].email
+                res.json(house)
+
+
+            })
         })
     })
 }

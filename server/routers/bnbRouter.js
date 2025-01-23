@@ -5,7 +5,8 @@ const router = express.Router();
 //User (può visualizzare tutte le proprietà, aggiungere voti ad una proprietà,aggiungere review ad una proprietà solo se ha già preso in affitto quella specifica proprietà) 
 //Owner (può visualizzare solo le proprietà già aggiunte sulla piattaforma, può aggiungere altre proprietà)
 const bnbUserController = require('../controllers/bnbUserController.js')
-const bnbOwnerController = require('../controllers/bnbOwnerController.js')
+const bnbOwnerController = require('../controllers/bnbOwnerController.js');
+const emailController = require('../controllers/emailController.js');
 
 // rotte => USER
 
@@ -28,6 +29,12 @@ router.get('/owner', bnbOwnerController.propertiesByOwner);
 
 // permette agli owner di creare una nuova proprietà
 router.post('/', bnbOwnerController.create);
+
+
+
+
+// endpoint che gestisce l'invio di una email
+router.post('/email-send', emailController.emailSend)
 
 
 
