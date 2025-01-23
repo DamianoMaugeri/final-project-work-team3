@@ -6,21 +6,17 @@
     position: absolute;
     top: 0;
     left: 138px;
-    /* Move loader 138px to the right */
     right: 0;
     bottom: 0;
 }
 
 .loader {
     border: 16px solid #f3f3f3;
-    /* Light grey */
     border-top: 16px solid #3498db;
-    /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
     animation: spin 0.1s linear infinite;
-    /* Increased speed */
 }
 
 @keyframes spin {
