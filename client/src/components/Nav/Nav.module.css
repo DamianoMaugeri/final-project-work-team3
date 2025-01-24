@@ -31,13 +31,7 @@
 }
 
 .link:hover {
-    background-color: #07ca54;
-    color: white;
-    
+    background-color: #0aca34ad; 
+    color: white; 
+    transform: scale(1.05); 
 }
-
-.active {
-    background-color: #07ca54;
-    transform: scale(1.0);
-    color: white;
-  }
