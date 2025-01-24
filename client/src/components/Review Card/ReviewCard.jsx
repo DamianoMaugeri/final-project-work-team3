@@ -1,4 +1,5 @@
 import style from './ReviewCard.module.css';
+import StarsVote from '../Stars Vote/StarsVote';
 
 export default function ReviewCard({ reviews }) {
 
@@ -15,13 +16,9 @@ export default function ReviewCard({ reviews }) {
                         <div className="row d-flex flex-column gap-3">
                             {reviews.map((review, index) => (
                                 <div key={index} className={`col d-flex flex-column gap-2 ${style.customSingleCard}`}>
-                                    <div className="d-flex justify-content-initial gap-3">
-                                        <div className="card-text fs-6"><strong>Check In:</strong> {new Date(review.rent_start).toLocaleDateString()}</div>
-                                        <div className="card-text fs-6"><strong>Check Out: </strong> {new Date(review.rent_end).toLocaleDateString()}</div>
-                                    </div>
                                     <div className="d-flex justify-content-between">
                                         <div className="card-text fst-italic">{review.text}</div>
-                                        <div className="card-text"><strong>Valutazione:</strong>{review.vote}</div>
+                                        <StarsVote vote={review.vote}/>
                                     </div>
 
                                     <div className="card-text fst-italic" ><strong>By: </strong>{review.first_name} {review.last_name}</div>

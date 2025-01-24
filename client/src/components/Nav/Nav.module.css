@@ -10,17 +10,24 @@
 .navlink {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 15px;
     align-items: center;
     justify-content: center;
 }
 
+.customList {
+    text-align: center;
+    width: 100%;
+}
+
 .link {
     background-color: #10242d;
-    padding: 1rem 1rem;
-    border-radius: 30px;
-    color: white; 
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; 
+    padding: 8px 15px;
+    border-radius: 6px;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    display: block;
+
 }
 
 .link:hover {
