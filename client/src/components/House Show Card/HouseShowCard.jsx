@@ -1,5 +1,5 @@
 import style from './HouseShowCard.module.css'
-
+import placeHolder from '../../assets/placeholder.png'
 export default function HouseShowCard({ houseEl }) {
 
 
@@ -13,7 +13,12 @@ export default function HouseShowCard({ houseEl }) {
                         <div className="card-body">
                             <div className="row ">
                                 <div className={`col  ${style.col}`}>
-                                    <img src={image} alt={title} className={style.sizeImg} />
+                                    <img src={image}
+                                        onError={(e) => {
+                                            e.target.onerror = null; // se la immagine e innacesibile 
+                                            e.target.src = placeHolder; // metti il placeholder
+                                        }} alt={title} className={style.sizeImg}
+                                    />
                                 </div>
                                 <div className="col fw-bold fs-4">
                                     <div>
