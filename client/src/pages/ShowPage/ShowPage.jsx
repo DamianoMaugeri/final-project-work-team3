@@ -44,7 +44,7 @@ export default function ShowPage() {
                     <HouseShowCard houseEl={house} />
                     {/* recensioni box */}
                     <ReviewCard reviews={house.reviews} />
-                    <div className="d-flex justify-content-around mb-5">
+                    <div className="d-flex justify-content-around mb-5 mt-5">
                         <button className={style.btn} onClick={() => {
                             emailBoolean && setEmailBoolean(!emailBoolean)
                             setReviewBoolean(!reviewBoolean)
