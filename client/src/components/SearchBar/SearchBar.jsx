@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
-import axios from "axios";
+import style from "./SearchBar.module.css"
 
 export default function SearchBar() {
     const { searchedCity, setSearchedCity, fetchHouses } = useContext(GlobalContext);
@@ -21,7 +21,7 @@ export default function SearchBar() {
                     onChange={(e) => setSearchedCity(e.target.value)}
                 />
                 <button
-                    className="btn btn-primary"
+                    className={`btn text-white ${style.customBtn}`}
                     onClick={handleSearch}
                 >
                     Cerca
