@@ -8,16 +8,7 @@ export default function HouseCard({ content }) {
 
     const { title, full_adress, city, image } = content
 
-    // stato per i cambiamenti del  cuoricino
-    const [liked, setLiked] = useState(false);
-
-
-    // funzione toogle per il cuoricino
-    const handleLikeToggle = (event) => {
-        event.stopPropagation();
-        event.preventDefault()
-        setLiked(!liked); //se liked è true diventa false e viceversa
-    };
+   
 
     return (
 
@@ -30,7 +21,7 @@ export default function HouseCard({ content }) {
                     alt="Placeholder"
                 />
                 {/* Cuoricino */}
-                <HeartButton liked={liked} handleLikeToggle={handleLikeToggle} />
+                <HeartButton/>
             </div>
 
             {/* contenuto della card */}
