@@ -18,13 +18,19 @@
 .link {
     background-color: #10242d;
     padding: 1rem 1rem;
-    border-radius: 30px;
-    color: white; 
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; 
+    border-radius: 10px;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
 }
 
 .link:hover {
-    background-color: #0aca34ad; 
-    color: white; 
-    transform: scale(1.05); 
+    background-color: #0aca34ad;
+    color: white;
+    transform: scale(1.05);
 }
