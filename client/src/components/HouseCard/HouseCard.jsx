@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import HeartButton from "../Heart Button/HeartButton";
 import style from './HouseCard.module.css'
+import placeHolder from '../../assets/placeholder.png'
 
 
 
@@ -8,7 +9,7 @@ export default function HouseCard({ content }) {
 
     const { title, full_adress, city, image } = content
 
-   
+
 
     return (
 
@@ -17,11 +18,15 @@ export default function HouseCard({ content }) {
             <div className="position-relative">
                 <img
                     src={image}
+                    onError={(e) => {
+                        e.target.onerror = null; // se la immagine e innacesibile 
+                        e.target.src = placeHolder; // metti il placeholder
+                    }}
                     className={`card-img-top ${style.card_img}`}
-                    alt="Placeholder"
+                    alt="House"
                 />
                 {/* Cuoricino */}
-                <HeartButton/>
+                <HeartButton />
             </div>
 
             {/* contenuto della card */}
