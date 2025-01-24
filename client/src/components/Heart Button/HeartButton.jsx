@@ -26,6 +26,7 @@ export default function HeartButton() {
         setTimeout(() => { // nasconde il # di click
             setShowCount(false);
         }, 2000);  
+        }
     };
 
 
