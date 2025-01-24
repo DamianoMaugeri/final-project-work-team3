@@ -17,16 +17,18 @@ export default function HeartButton() {
     const handleLikeToggle = (event) => {
         event.stopPropagation();
         event.preventDefault()
-       
+
         if (!liked) {
             setLiked(true); // if click heart, fill red
-            setCount((prevCount) => prevCount + 1); // add + 1 to count
-            setShowCount(true); //show # di click
+        }
+
+        setCount((prevCount) => prevCount + 1); // add + 1 to count
+        setShowCount(true); //show # di click
 
         setTimeout(() => { // nasconde il # di click
             setShowCount(false);
-        }, 2000);  
-        }
+        }, 2000);
+
     };
 
 
@@ -48,7 +50,7 @@ export default function HeartButton() {
                 </span>
             )}
 
-            
+
         </button>
     )
 }
