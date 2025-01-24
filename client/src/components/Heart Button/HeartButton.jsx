@@ -17,11 +17,11 @@ export default function HeartButton() {
     const handleLikeToggle = (event) => {
         event.stopPropagation();
         event.preventDefault()
-        setLiked(!liked); //se liked è true diventa false e viceversa
-
-        setCount((prevCount) => prevCount + 1); // click(0) + 1
-
-        setShowCount(true);  // mostra i # di click
+       
+        if (!liked) {
+            setLiked(true); // if click heart, fill red
+            setCount((prevCount) => prevCount + 1); // add + 1 to count
+            setShowCount(true); //show # di click
 
         setTimeout(() => { // nasconde il # di click
             setShowCount(false);
