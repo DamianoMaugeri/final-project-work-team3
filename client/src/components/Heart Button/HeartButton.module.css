@@ -1,3 +1,13 @@
 .customButton {
      box-shadow: "0 2px 5px rgba(0,0,0,0.2)";
+     top: 17rem !important;
+}
+
+.countDisplay {
+     position: absolute;
+     top: 9px;
+     right: 53px;
+     font-size: 1rem;
+     color: red;
+     transition: opacity 0.3s ease;
 }
