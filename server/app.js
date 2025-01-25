@@ -5,7 +5,7 @@ const cors = require('cors');
 const notFound = require('./middlewares/notFound.js');
 const errorsMiddleware = require('./middlewares/errorsMiddleware.js');
 const bnbRouter = require('./routers/bnbRouter.js')
-
+const authRouter = require('./routers/authRouter.js')
 
 
 
@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 
 
 // rotte
+app.use('/auth', authRouter);
 app.use('/api/boolbnb', bnbRouter);
 
 

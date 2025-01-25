@@ -1,44 +1,38 @@
 const connection = require("../data/db");
 
 function propertiesByOwner(req, res) {
+    const ownerId = req.user.id; // Estratto dal token JWT
 
-    const email = req.query.email;
-    const sqlAutenticationEmail = "SELECT * FROM owners WHERE email = ?"
-    const sql = "SELECT * FROM owners WHERE id = ?"
-    const sqlProperties = "SELECT * FROM properties WHERE owner_id = ?";
-    connection.query(sqlAutenticationEmail, [email], (err, results) => {
-        console.log(results)
-        if (err) return res.status(500).json({ error: "Database query failed 0" })
-        if (results.length === 0) return res.status(404).json(
-            {
-                error: "Email not found",
-                message: "No owner found with the provided Email"
-            })
-        const ownerId = results[0].id
+    const sqlOwner = 'SELECT * FROM owners WHERE id = ?';
+    const sqlProperties = 'SELECT * FROM properties WHERE owner_id = ?';
 
+    // Recupera i dati dell'owner
+    connection.query(sqlOwner, [ownerId], (err, resultsOwner) => {
+        if (err) return res.status(500).json({ error: 'Database query failed 1' });
 
-        connection.query(sql, [ownerId], (err, resultsOwner) => {
-            if (err) return res.status(500).json({ error: "Database query failed 1" });
-            if (resultsOwner.length === 0) return res.status(404).json({ error: "No match found for this owner" });
+        if (resultsOwner.length === 0) {
+            return res.status(404).json({ error: 'Nessun owner trovato con questo ID' });
+        }
 
-            const owner = results[0]
+        const owner = resultsOwner[0];
 
-            connection.query(sqlProperties, [ownerId], (err, resultsProperties) => {
-                if (err) return res.status(500).json({ error: "Database query failed 2" });
-                if (resultsProperties.length === 0) return res.status(404).json({ error: "No properties found for this owner" });
-                console.log(resultsProperties)
+        // Recupera le proprietà dell'owner
+        connection.query(sqlProperties, [ownerId], (err, resultsProperties) => {
+            if (err) return res.status(500).json({ error: 'Database query failed 2' });
 
-                resultsProperties.forEach(result => {
-                    const formattedImage = result.image?.split(' ').join('_');
-                    result.image = `http://localhost:3000/images/${formattedImage}`;
-                });
-                owner.propertiesOwned = resultsProperties
-                res.json(owner);
-            })
+            if (resultsProperties.length === 0) {
+                return res.status(404).json({ error: 'Nessuna proprietà trovata per questo owner' });
+            }
 
+            resultsProperties.forEach(result => {
+                const formattedImage = result.image?.split(' ').join('_');
+                result.image = `http://localhost:3000/images/${formattedImage}`;
+            });
+
+            owner.propertiesOwned = resultsProperties;
+            res.json(owner);
         });
-
-    })
+    });
 }
 
 

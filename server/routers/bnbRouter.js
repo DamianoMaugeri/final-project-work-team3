@@ -1,13 +1,13 @@
 const express = require('express');
-
 const router = express.Router();
 //separazione dei controller per dividere le logiche tra: 
 //User (può visualizzare tutte le proprietà, aggiungere voti ad una proprietà,aggiungere review ad una proprietà solo se ha già preso in affitto quella specifica proprietà) 
 //Owner (può visualizzare solo le proprietà già aggiunte sulla piattaforma, può aggiungere altre proprietà)
-const bnbUserController = require('../controllers/bnbUserController.js')
+const bnbUserController = require('../controllers/bnbUserController.js');
 const bnbOwnerController = require('../controllers/bnbOwnerController.js');
 const emailController = require('../controllers/emailController.js');
-
+const authenticateToken = require('../middlewares/authenticateToken.js');
+const { generateToken } = require('../utils/authService.js');
 // rotte => USER
 
 // index: mostra tutte le properties
@@ -25,10 +25,10 @@ router.post('/:id([0-9]+)/reviews', bnbUserController.postReview);
 // rotte => OWNER
 
 // propertiesByOwner: questa rotta simula un autenticazione tramite sola email e nel caso in cui ci sia corrispondenza con quella di un proprietario restituisce tutte le proprietà appartenenti a quel proprietario
-router.get('/owner', bnbOwnerController.propertiesByOwner);
+router.get('/owner', authenticateToken, bnbOwnerController.propertiesByOwner);
 
 // permette agli owner di creare una nuova proprietà
-router.post('/', bnbOwnerController.create);
+router.post('/', authenticateToken, bnbOwnerController.create);
 
 
 
