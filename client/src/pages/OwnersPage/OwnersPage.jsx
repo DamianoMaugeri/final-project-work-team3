@@ -43,7 +43,7 @@ export default function OwnersPage() {
             .then(res => {
                 // Salva il token nel localStorage
                 localStorage.setItem('token', res.data.token);
-
+                console.log(res.data)
                 // Aggiorna lo stato con i dati dell'owner
                 setOwner(res.data.owner);
 

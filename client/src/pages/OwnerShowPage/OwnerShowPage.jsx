@@ -4,31 +4,59 @@ import GlobalContext from "../../context/GlobalContext";
 import HouseCard from "../../components/HouseCard/HouseCard";
 import HouseForm from "../../components/HouseForm/HouseForm";
 import style from './OwnerShowpage.module.css';
+import axios from "axios";
 
 export default function OwnerShowpage() {
     const { owner, setOwner } = useContext(GlobalContext);
     const navigate = useNavigate();
 
+    // Funzione per recuperare i dati dell'owner
+    function fetchOwner() {
+        const token = localStorage.getItem("token"); // Recupera il token dal localStorage
+        if (!token) {
+            console.error("Token non trovato");
+            navigate("/login"); // Reindirizza al login se il token non esiste
+            return;
+        }
+
+        axios.get('http://localhost:3000/api/boolbnb/owner', {
+            headers: {
+                Authorization: `Bearer ${token}` // Aggiungi il token come intestazione
+            }
+        })
+            .then(res => {
+                console.log(res.data);
+                setOwner(res.data); // Imposta l'owner nello stato
+            })
+            .catch(err => {
+                console.error(err);
+                if (err.response && err.response.status === 401) {
+                    navigate("/login"); // Reindirizza al login in caso di errore 401
+                }
+            });
+    }
+
+    // Funzione per il logout
     function logout() {
         localStorage.removeItem('token');  // Rimuovi il token dal localStorage
         setOwner(null);  // Resetta lo stato dell'owner
         navigate("/login");  // Reindirizza al login
     }
 
-    // Se non c'è un owner, reindirizza al login
+    // Effettua il fetch dei dati dell'owner al caricamento della pagina
     useEffect(() => {
-        if (!owner || !owner.id) {
-            navigate("/login");
-        }
-    }, [owner, navigate]);
+        fetchOwner(); // Recupera i dati dell'owner
+    }, []); // L'effetto viene eseguito solo al montaggio del componente
 
     // Se l'owner è ancora in fase di caricamento, mostra un messaggio di caricamento
     if (!owner) {
         return <div>Loading...</div>;
     }
 
+    // Estrarre i dati dell'owner
     const { first_name, last_name, email, propertiesOwned } = owner;
 
+    // Ritorna il rendering del componente
     return (
         <section className={`container m-4 ${style.page}`}>
             <div className={`card ${style.customCard}`}>

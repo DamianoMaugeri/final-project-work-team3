@@ -11,7 +11,7 @@ import EmailForm from "../../components/emailForm/emailForm"
 
 export default function ShowPage() {
 
-    // recuperare l'id del libro dal path della rotta
+
     const [house, setHouse] = useState(null)
     const [reviewBoolean, setReviewBoolean] = useState("")
     const [emailBoolean, setEmailBoolean] = useState("")
@@ -38,7 +38,7 @@ export default function ShowPage() {
 
     return (
         // ShowPage div container
-        <div className={`d-flex flex-column flex-grow-1 ${style.showPageContainer}`}> 
+        <div className={`d-flex flex-column flex-grow-1 ${style.showPageContainer}`}>
             {house ? ( //if lenght > 0 render ShowPage else render loader inside  the ShowPage div container
                 <>
                     <HouseShowCard houseEl={house} />
@@ -67,10 +67,10 @@ export default function ShowPage() {
                 </>
             ) :
 
-            // ... else render loader inside  the ShowPage div container
+                // ... else render loader inside  the ShowPage div container
                 (
                     <div className="d-flex align-items-center justify-content-center flex-grow-1">
-                        <Loader /> 
+                        <Loader />
                     </div>
                 )}
         </div>
