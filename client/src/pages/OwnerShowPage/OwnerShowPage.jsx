@@ -40,7 +40,7 @@ export default function OwnerShowpage() {
     function logout() {
         localStorage.removeItem('token');  // Rimuovi il token dal localStorage
         setOwner(null);  // Resetta lo stato dell'owner
-        navigate("/login");  // Reindirizza al login
+        navigate("/owners");  // Reindirizza al login
     }
 
     // Effettua il fetch dei dati dell'owner al caricamento della pagina
