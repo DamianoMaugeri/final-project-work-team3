@@ -15,7 +15,6 @@ export default function OwnersPage() {
     const [errorMessage, setErrorMessage] = useState('');
 
     const { owner, setOwner } = useContext(GlobalContext);
-
     const navigate = useNavigate();
 
     function handleForm(e) {
@@ -35,31 +34,23 @@ export default function OwnersPage() {
         };
 
         if (!data.email || !data.password) {
-            setErrorMessage('Please enter both email and password.');
+            setErrorMessage('Per favore, inserisci email e password.');
             return;
         }
 
         axios.post(`http://localhost:3000/auth/Owners/login`, data)
             .then(res => {
-                // Salva il token nel localStorage
                 localStorage.setItem('token', res.data.token);
-                console.log(res.data)
-                // Aggiorna lo stato con i dati dell'owner
                 setOwner(res.data.owner);
-
-                // Reimposta i dati del form
                 setFormData(initialFormData);
                 setIsLogged(true);
-
-                // Naviga alla pagina dell'owner
                 navigate(`/owners/${res.data.owner.id}`);
             })
             .catch(err => {
-                setErrorMessage('Invalid email or password.');
+                setErrorMessage('Email o password non validi.');
             });
     }
 
-    // Se l'owner è già loggato, reindirizza direttamente alla sua pagina
     useEffect(() => {
         if (owner && owner.id) {
             navigate(`/owners/${owner.id}`);
@@ -67,38 +58,85 @@ export default function OwnersPage() {
     }, [navigate, owner]);
 
     return (
-        <form className={style.customForm} onSubmit={logIn}>
-            <p className={style.formGroup}>
-                <label htmlFor="email" className="form-label fw-bold">INSERISCI LA TUA EMAIL *</label>
-                <input
-                    required
-                    type="text"
-                    className="form-control"
-                    placeholder="inserisci l'email"
-                    name="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={handleForm}
-                />
-            </p>
+        <div className="d-flex flex-grow-1" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#10242D', // Sfondo scuro
+            height: '100vh',
+            width: '100%',
+            color: 'white',
+            padding: '0',
+            margin: '0',
+        }}>
+            <div className={`card p-4 ${style.customCard}`} style={{
+                maxWidth: '400px',
+                width: '100%',
+                background: 'rgba(255, 255, 255, 0.95)', // Bianco con trasparenza
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
+                borderRadius: '15px',
+            }}>
+                <h3 className="text-center mb-3" style={{ color: '#10242D' }}>
+                    Benvenuto su BooleanBnb
+                </h3>
+                <h4 className="text-center ">Area proprietari</h4>
+                <p className="text-center text-muted mb-4">
+                    Gestisci facilmente i tuoi immobili in affitto.
+                </p>
 
-            <p className={style.formGroup}>
-                <label htmlFor="password" className="form-label fw-bold">INSERISCI LA TUA PASSWORD *</label>
-                <input
-                    required
-                    type="password"
-                    className="form-control"
-                    placeholder="inserisci la password"
-                    name="password"
-                    id="password"
-                    value={formData.password}
-                    onChange={handleForm}
-                />
-            </p>
+                <form onSubmit={logIn}>
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label fw-bold" style={{ color: '#10242D' }}>
+                            Email
+                        </label>
+                        <input
+                            required
+                            type="email"
+                            className="form-control"
+                            placeholder="Inserisci la tua email"
+                            name="email"
+                            id="email"
+                            value={formData.email}
+                            onChange={handleForm}
+                        />
+                    </div>
 
-            {errorMessage && <div className="text-danger">{errorMessage}</div>}
+                    <div className="mb-3">
+                        <label htmlFor="password" className="form-label fw-bold" style={{ color: '#10242D' }}>
+                            Password
+                        </label>
+                        <input
+                            required
+                            type="password"
+                            className="form-control"
+                            placeholder="Inserisci la tua password"
+                            name="password"
+                            id="password"
+                            value={formData.password}
+                            onChange={handleForm}
+                        />
+                    </div>
 
-            <button type="submit" className="btn btn-primary">Accedi</button>
-        </form>
+                    {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
+
+                    <button type="submit" className="btn w-100" style={{
+                        backgroundColor: '#10242D',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        border: 'none',
+                        borderRadius: '5px',
+                    }}>
+                        Accedi
+                    </button>
+                </form>
+
+                <div className="text-center mt-3">
+                    <small className="text-muted">
+                        Non hai un account? <a href="/register" className="text-primary" style={{ color: '#10242D' }}>Registrati ora</a>
+                    </small>
+                </div>
+            </div>
+        </div>
     );
 }
