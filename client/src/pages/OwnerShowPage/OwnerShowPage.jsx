@@ -1,14 +1,17 @@
 import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
 import HouseCard from "../../components/HouseCard/HouseCard";
 import HouseForm from "../../components/HouseForm/HouseForm";
 import style from './OwnerShowpage.module.css';
 import axios from "axios";
+import HeaderOwners from "../../components/headerOwners/HeaderOwners";
 
 export default function OwnerShowpage() {
     const { owner, setOwner } = useContext(GlobalContext);
     const navigate = useNavigate();
+    const { id } = useParams();
 
     // Funzione per recuperare i dati dell'owner
     function fetchOwner() {
@@ -58,8 +61,9 @@ export default function OwnerShowpage() {
 
     // Ritorna il rendering del componente
     return (
-        <section className={`container m-4 ${style.page}`}>
-            <div className={`card ${style.customCard}`}>
+        <section className={`flex-grow-1 ${style.page}`}>
+            <HeaderOwners ownerId={id} onLogout={logout} />
+            <div className={`card m-4 ${style.customCard}`}>
                 <div className="card-body">
                     <div className="row">
                         <div className="col">
@@ -69,7 +73,6 @@ export default function OwnerShowpage() {
                             <h6 className="card-subtitle mb-4 text-white">
                                 {email}
                             </h6>
-                            <button onClick={logout} className="btn btn-danger">Logout</button>
                         </div>
                     </div>
 

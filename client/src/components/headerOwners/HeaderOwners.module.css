@@ -1,0 +1,32 @@
+/* Header verde personalizzato */
+.header {
+    background-color: black;
+    /* Verde brillante */
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Cambia il cursore a pointer quando si passa sopra le opzioni del menu */
+.menuItem {
+    cursor: pointer;
+}
+
+/* Se vuoi aggiungere uno stile al passaggio del mouse per un effetto più visibile */
+.menuItem:hover {
+    background-color: #f1f1f1;
+}
+
+/* Stili personalizzati per il Popover */
+.customPopover .popover-body {
+    padding: 0;
+    /* Aggiusta il padding se necessario */
+}
+
+.customPopover .list-group-item {
+    border: none;
+}
+
+.customPopover .list-group-item:hover {
+    background-color: #f1f1f1;
+}

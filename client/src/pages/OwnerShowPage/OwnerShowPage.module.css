@@ -11,6 +11,7 @@
 }
 
 .page {
+    background-color: #F7F3E9;
     overflow: auto;
     margin: 0 auto;
 }
