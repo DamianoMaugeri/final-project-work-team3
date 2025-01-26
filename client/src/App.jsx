@@ -49,7 +49,7 @@ function App() {
           <Routes>
             <Route element={<MainLayout />}>
               <Route path="/" element={<MainPage />} />
-              <Route path="/:id([0-9]+)" element={<ShowPage />} />
+              <Route path="/:id" element={<ShowPage />} />
               <Route path='/owners' element={<OwnersPage />} />
               <Route path='/owners/:id' element={<OwnerShowpage />} />
               <Route path='*' element={<NotFoundPage />} />

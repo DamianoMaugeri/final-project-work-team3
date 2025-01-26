@@ -7,7 +7,7 @@ import placeHolder from '../../assets/placeholder.png'
 
 export default function HouseCard({ content }) {
 
-    const { title, full_adress, city, image } = content
+    const { price_per_day, title, full_address, city, image } = content
 
 
 
@@ -31,10 +31,18 @@ export default function HouseCard({ content }) {
 
             {/* contenuto della card */}
             <div className="card-body">
-                <h5 className="card-title">{title}</h5>
-                <p className="card-text">
-                    {full_adress}
-                </p>
+                <div className="d-flex justify-content-between">
+                    <div>
+                        <h5 className="card-title">{title}</h5>
+                        <p className="card-text">{full_address}</p>
+
+                    </div>
+                    <div>
+                        <h5>{price_per_day.toString().replace('.', ',')} &#x20AC;</h5>
+                        <p>giorno</p>
+
+                    </div>
+                </div>
                 <p className="card-text">{city}</p>
             </div>
         </div>
