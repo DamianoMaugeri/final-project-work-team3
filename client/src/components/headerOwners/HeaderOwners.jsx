@@ -12,13 +12,13 @@ export default function HeaderOwners({ ownerId, onLogout, firstName, lastName })
     const handleOption = (option) => {
         setShowPopover(false); // Nascondi il popover dopo aver scelto un'opzione
         if (option === "properties") {
-            navigate(`/owner/${ownerId}/properties`);
+            navigate(`/owners/${ownerId}`);
         } else if (option === "messages") {
-            navigate(`/owner/${ownerId}/messages`);
+            navigate(`/owners/${ownerId}/messages`);
         } else if (option === "addProperty") {
-            navigate(`/owner/${ownerId}/add-property`);
+            navigate(`/owners/${ownerId}/add-property`);
         } else if (option === "profile") {
-            navigate(`/owner/${ownerId}/profile`);
+            navigate(`/owners/${ownerId}/profile`);
         } else if (option === "logout") {
             localStorage.removeItem("token");
             onLogout()
