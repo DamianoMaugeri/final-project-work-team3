@@ -11,7 +11,7 @@ export default function ReviewCard({ reviews }) {
                 <div>
                     <h3 className="card-title mb-2  fw-bold fs-4">Recensioni degli affittuari:</h3>
                 </div>
-                <div className="card" >
+                <div className="card border-0" >
                     <div className={`card-body ${style.customCardBody}`} >
                         <div className="row d-flex flex-column gap-3">
                             {reviews.map((review, index) => (
@@ -21,7 +21,7 @@ export default function ReviewCard({ reviews }) {
                                         <StarsVote vote={review.vote} />
                                     </div>
 
-                                    <div className="card-text fst-italic" ><strong>By: </strong>{review.first_name} {review.last_name}</div>
+                                    <div className="card-text fst-italic" >{review.first_name.toUpperCase()} {review.last_name.toUpperCase()}</div>
 
 
                                 </div>
