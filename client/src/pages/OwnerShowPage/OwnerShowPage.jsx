@@ -13,12 +13,11 @@ export default function OwnerShowpage() {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    // Funzione per recuperare i dati dell'owner
     function fetchOwner() {
-        const token = localStorage.getItem("token"); // Recupera il token dal localStorage
+        const token = localStorage.getItem("token");
         if (!token) {
             console.error("Token non trovato");
-            navigate("/login"); // Reindirizza al login se il token non esiste
+            navigate("/login");
             return;
         }
 
@@ -39,43 +38,28 @@ export default function OwnerShowpage() {
             });
     }
 
-    // Funzione per il logout
+
     function logout() {
-        localStorage.removeItem('token');  // Rimuovi il token dal localStorage
-        setOwner(null);  // Resetta lo stato dell'owner
-        navigate("/owners");  // Reindirizza al login
+        localStorage.removeItem('token');
+        setOwner(null);
+        navigate("/owners");
     }
 
-    // Effettua il fetch dei dati dell'owner al caricamento della pagina
     useEffect(() => {
-        fetchOwner(); // Recupera i dati dell'owner
-    }, []); // L'effetto viene eseguito solo al montaggio del componente
+        fetchOwner();
+    }, []);
 
-    // Se l'owner è ancora in fase di caricamento, mostra un messaggio di caricamento
     if (!owner) {
         return <div>Loading...</div>;
     }
 
-    // Estrarre i dati dell'owner
     const { first_name, last_name, email, propertiesOwned } = owner;
 
-    // Ritorna il rendering del componente
     return (
         <section className={`flex-grow-1 ${style.page}`}>
-            <HeaderOwners ownerId={id} onLogout={logout} />
+            <HeaderOwners ownerId={id} onLogout={logout} firstName={first_name} lastName={last_name} />
             <div className={`card m-4 ${style.customCard}`}>
                 <div className="card-body">
-                    <div className="row">
-                        <div className="col">
-                            <h1 className="card-title">
-                                {first_name} {last_name}
-                            </h1>
-                            <h6 className="card-subtitle mb-4 text-white">
-                                {email}
-                            </h6>
-                        </div>
-                    </div>
-
                     <div className="row">
                         <div className="col">
                             <h3 className="mb-3">I tuoi immobili:</h3>

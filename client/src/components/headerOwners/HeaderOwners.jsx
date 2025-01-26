@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import style from './HeaderOwners.module.css';
 
-export default function HeaderOwners({ ownerId, onLogout }) {
+export default function HeaderOwners({ ownerId, onLogout, firstName, lastName }) {
     const [showPopover, setShowPopover] = useState(false);
     const menuButtonRef = useRef(null); // Riferimento al bottone "Menu"
     const navigate = useNavigate();
@@ -51,8 +51,8 @@ export default function HeaderOwners({ ownerId, onLogout }) {
     );
 
     return (
-        <header className={`d-flex justify-content-between align-items-center rounded-0 ${style.header}`}>
-            <h1 className="text-white">Benvenuto, Proprietario</h1>
+        <header className={`d-flex justify-content-around align-items-center rounded-0 ${style.header}`}>
+            <h3 className={style.custom_margin_left}>Benvenuto, {firstName} {lastName}</h3>
 
             {/* OverlayTrigger con Popover */}
             <OverlayTrigger
@@ -62,7 +62,7 @@ export default function HeaderOwners({ ownerId, onLogout }) {
                 show={showPopover}
                 onToggle={() => setShowPopover(!showPopover)} // Mostra o nascondi il popover
             >
-                <Button ref={menuButtonRef} variant="primary">Menu</Button>
+                <Button ref={menuButtonRef} variant="primary" className={style.customMenuButton} >Menu</Button>
             </OverlayTrigger>
         </header>
     );
