@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import style from './HeaderOwners.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 
 export default function HeaderOwners({ ownerId, onLogout, firstName, lastName }) {
     const [showPopover, setShowPopover] = useState(false);
@@ -62,7 +64,7 @@ export default function HeaderOwners({ ownerId, onLogout, firstName, lastName })
                 show={showPopover}
                 onToggle={() => setShowPopover(!showPopover)} // Mostra o nascondi il popover
             >
-                <Button ref={menuButtonRef} variant="primary" className={style.customMenuButton} >Menu</Button>
+                <Button ref={menuButtonRef} variant="primary" className={style.customMenuButton} ><FontAwesomeIcon icon={faCircleUser} style={{ color: "#ffffff" }} /> Area proprietari</Button>
             </OverlayTrigger>
         </header>
     );

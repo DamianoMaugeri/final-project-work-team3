@@ -11,7 +11,7 @@ export default function SearchBar() {
     }
 
     return (
-        <div className="container mt-5 mb-5">
+        <div className={`container mt-5 mb-5 ${style.margin_top}`}>
             <div className="input-group">
                 <input
                     type="text"
