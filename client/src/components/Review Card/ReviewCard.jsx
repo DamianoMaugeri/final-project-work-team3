@@ -7,7 +7,7 @@ export default function ReviewCard({ reviews }) {
 
     return (
         reviews.length > 0 ?
-            <section className="container mt-4">
+            <section className="container mt-4 mb-5">
                 <div>
                     <h3 className="card-title mb-2  fw-bold fs-4">Recensioni degli affittuari:</h3>
                 </div>

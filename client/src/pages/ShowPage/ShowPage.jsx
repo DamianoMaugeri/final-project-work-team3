@@ -7,7 +7,7 @@ import axios from "axios"
 import style from "./ShowPage.module.css"
 import Loader from "../../components/Loader/Loader"
 import EmailForm from "../../components/emailForm/emailForm"
-
+import HeaderMain from "../../components/HeaderMain/HeaderMain"
 
 export default function ShowPage() {
 
@@ -38,7 +38,8 @@ export default function ShowPage() {
 
     return (
         // ShowPage div container
-        <div className={`d-flex flex-column flex-grow-1 ${style.showPageContainer}`}>
+        <div className={`d-flex flex-column flex-grow-1 mt-5 pt-3 ${style.showPageContainer}`}>
+            <HeaderMain />
             {house ? ( //if lenght > 0 render ShowPage else render loader inside  the ShowPage div container
                 <>
                     <HouseShowCard houseEl={house} />
