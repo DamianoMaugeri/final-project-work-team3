@@ -80,7 +80,7 @@ export default function OwnerShowpage() {
                     <div className="row mt-4">
                         <h1>Aggiungi un nuovo immobile:</h1>
                         <div className="col mt-4">
-                            <HouseForm id={id} />
+                            <HouseForm id={id} onSuccess={fetchOwner} />
                         </div>
                     </div>
                 </div>

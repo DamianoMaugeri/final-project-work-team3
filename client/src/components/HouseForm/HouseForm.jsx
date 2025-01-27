@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -12,6 +13,7 @@ const initialFormData = {
     city: "",
     image: "",
     house_type: "",
+    price_per_day: ''
 }
 
 export default function HouseForm({ id, onSuccess = () => { } }) {
@@ -54,6 +56,7 @@ export default function HouseForm({ id, onSuccess = () => { } }) {
         data.append("full_address", formData.full_address.trim());
         data.append("city", formData.city.trim());
         data.append("house_type", formData.house_type.trim());
+        data.append("price_per_day", parseInt(formData.price_per_day))
         data.append("image", formData.image); // Aggiungi l'immagine al FormData
 
 
@@ -101,6 +104,7 @@ export default function HouseForm({ id, onSuccess = () => { } }) {
                 // se la chiamata va a buon fine dovremmo refetchare il book
                 // e resettare il form
                 setFormData(initialFormData)
+                navigate(`/owners/${ownerId}`);
                 onSuccess()
             }).catch(err => {
                 console.log(err)
@@ -149,6 +153,11 @@ export default function HouseForm({ id, onSuccess = () => { } }) {
             <p>
                 <label htmlFor="city" className="form-label">CITTA' *</label>
                 <input required type="text" className="form-control" placeholder="inserisci la città" name="city" id="city" value={formData.city} onChange={handleForm} />
+
+            </p>
+            <p>
+                <label htmlFor="price_per_day" className="form-label">PREZZO GIORNALIERO *</label>
+                <input required type="text" className="form-control" placeholder="inserisci il prezzo" name="price_per_day" id="price_per_day" value={formData.price_per_day} onChange={handleForm} />
 
             </p>
 

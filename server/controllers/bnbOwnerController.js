@@ -46,11 +46,11 @@ function create(req, res) {
     console.log(req.body)
 
 
-    const { title, number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, city, house_type } = req.body;
+    const { title, number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, city, house_type, price_per_day } = req.body;
 
     const vote = 0
 
-    const price_per_day = 10000
+
 
     // Controlla che tutti i campi obbligatori siano presenti
     if (!owner_id || !title || !number_of_rooms || !number_of_beds || !number_of_bathrooms || !size || !full_address || !city || !price_per_day) {
