@@ -38,7 +38,7 @@ export default function Filters() {
 
             {/* Contenitore dei filtri */}
             {filterActive && (
-                <div className={`${style.filters} p-0`}>
+                <div className={`${style.filters} p-3 text-white`}>
                     {/* Filtro: Numero di stanze */}
                     <button className='d-flex justify-content-between align-items-baseline w-100' onClick={() => toggleFilter('rooms')}>
                         Numero di stanze

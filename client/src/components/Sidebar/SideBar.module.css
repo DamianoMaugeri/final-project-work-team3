@@ -1,5 +1,58 @@
 .sidebar {
-    background-color: #2C3E50;
-    color: white;
-    z-index: 20;
+    height: 100%;
+    width: 250px;
+    background-color: #2c3e50;
+    transition: transform 0.6s ease-in-out, width 0.6s ease-in-out;
+    /* Transizioni più fluide */
+    overflow: hidden;
+    will-change: transform, width;
+    /* Migliora le prestazioni */
+}
+
+.openSidebar {
+    transform: translateX(0);
+    width: 250px;
+    /* Larghezza completa della sidebar */
+}
+
+.closedSidebar {
+    transform: translateX(-100%);
+    width: 0;
+}
+
+.toggleButton {
+    z-index: 100;
+    position: fixed;
+    top: 100px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    background-color: rgb(182, 177, 177);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+    /* Transizione morbida per il bottone */
+    cursor: pointer;
+    will-change: transform, background-color;
+    /* Migliora le prestazioni */
+}
+
+.toggleButton:hover {
+    background-color: #444;
+    /* Cambiamento di colore più morbido */
+}
+
+.toggleButton.open {
+    left: 260px;
+    /* Posizione quando la sidebar è aperta */
+    transition: left 0.6s ease-in-out;
+    /* Sincronizza con la sidebar */
+}
+
+.sidebar:hover {
+    width: 250px;
+    /* Espansione fluida */
+    transition: width 0.6s ease-in-out;
 }

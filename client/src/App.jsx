@@ -11,6 +11,7 @@ import OwnersPage from './pages/OwnersPage/OwnersPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import OwnerShowpage from './pages/OwnerShowPage/OwnerShowPage';
 import axios from 'axios';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 
