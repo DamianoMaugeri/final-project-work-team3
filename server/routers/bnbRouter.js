@@ -28,7 +28,9 @@ router.post('/:id([0-9]+)/reviews', bnbUserController.postReview);
 router.get('/owner', bnbOwnerController.propertiesByOwner);
 
 // permette agli owner di creare una nuova proprietà
-router.post('/', bnbOwnerController.create);
+router.post('/owner/:id([0-9]+)', bnbOwnerController.create);
+
+
 
 
 

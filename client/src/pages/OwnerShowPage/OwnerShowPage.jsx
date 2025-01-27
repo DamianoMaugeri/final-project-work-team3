@@ -52,7 +52,7 @@ export default function OwnerShowpage() {
                         <div className="row mt-4">
                             <h1>Aggiungi un nuovo immobile:</h1>
                             <div className="col mt-4">
-                                <HouseForm />
+                                <HouseForm id={id} />
                             </div>
                         </div>
                     </div>

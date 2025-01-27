@@ -14,63 +14,88 @@ const initialFormData = {
     house_type: "",
 }
 
-export default function HouseForm(id, onSuccess = () => { }) {
+export default function HouseForm({ id, onSuccess = () => { } }) {
 
 
     const [formData, setFormData] = useState(initialFormData)
 
     function handleForm(e) {
-        const { value, name } = e.target
+        const { value, name, files } = e.target
 
-        setFormData(
-            {
-                ...formData,
-                [name]: value
-            }
-        )
+        if (name === 'image') {
+            setFormData(
+                {
+                    ...formData,
+                    [name]: files[0]
+                }
+            )
+
+
+        } else {
+            setFormData(
+                {
+                    ...formData,
+                    [name]: value
+                }
+            )
+        }
     };
 
     function storeNewHouse(e) {
         e.preventDefault()
 
 
-        const data = {
-            title: formData.title.trim() || undefined,
-            number_of_rooms: parseInt(formData.number_of_rooms),
-            number_of_beds: parseInt(formData.number_of_beds),
-            number_of_bathrooms: parseInt(formData.number_of_bathrooms),
-            size: parseInt(formData.size),
-            full_address: formData.full_address.trim(),
-            city: formData.city.trim(),
-            image: formData.image,
-            house_type: formData.house_type.trim(),
+        const data = new FormData(); // Usa FormData per gestire i file
+        data.append("title", formData.title.trim());
+        data.append("number_of_rooms", parseInt(formData.number_of_rooms));
+        data.append("number_of_beds", parseInt(formData.number_of_beds));
+        data.append("number_of_bathrooms", parseInt(formData.number_of_bathrooms));
+        data.append("size", parseInt(formData.size));
+        data.append("full_address", formData.full_address.trim());
+        data.append("city", formData.city.trim());
+        data.append("house_type", formData.house_type.trim());
+        data.append("image", formData.image); // Aggiungi l'immagine al FormData
+
+
+        // const data = {
+        //     title: formData.title.trim() || undefined,
+        //     number_of_rooms: parseInt(formData.number_of_rooms),
+        //     number_of_beds: parseInt(formData.number_of_beds),
+        //     number_of_bathrooms: parseInt(formData.number_of_bathrooms),
+        //     size: parseInt(formData.size),
+        //     full_address: formData.full_address.trim(),
+        //     city: formData.city.trim(),
+        //     image: formData.image,
+        //     house_type: formData.house_type.trim()
 
 
 
-        }
+        // }
 
 
 
         // validazione lato client
-        if (!data.title ||
-            !data.number_of_rooms ||
-            data.number_of_rooms < 0 ||
-            !data.number_of_beds ||
-            data.number_of_beds < 0 ||
-            !data.number_of_bathrooms ||
-            data.number_of_bathrooms < 0 ||
-            !data.size ||
-            data.size < 0 ||
-            !data.full_address ||
-            !data.image ||
-            !data.house_type) {
-            console.log('form is not valid')
-            return
-        }
+        // if (!data.title ||
+        //     !data.number_of_rooms ||
+        //     data.number_of_rooms < 0 ||
+        //     !data.number_of_beds ||
+        //     data.number_of_beds < 0 ||
+        //     !data.number_of_bathrooms ||
+        //     data.number_of_bathrooms < 0 ||
+        //     !data.size ||
+        //     data.size < 0 ||
+        //     !data.full_address ||
+        //     !data.image ||
+        //     !data.house_type) {
+        //     console.log('form is not valid')
+        //     return
+        // }
 
 
 
-        axios.post(`http://localhost:3000/api/boolbnb/owners/${id}`, data)
+        axios.post(`http://localhost:3000/api/boolbnb/owner/${id}`, data, {
+            headers: { "Content-Type": "multipart/form-data" }, // Importante per inviare il FormData
+        })
             .then(res => {
                 console.log(res)
                 // se la chiamata va a buon fine dovremmo refetchare il book
@@ -81,6 +106,7 @@ export default function HouseForm(id, onSuccess = () => { }) {
                 console.log(err)
 
             })
+
     }
 
 
@@ -88,7 +114,7 @@ export default function HouseForm(id, onSuccess = () => { }) {
 
 
     return (
-        <form onSubmit={storeNewHouse}>
+        <form onSubmit={storeNewHouse} encType="multipart/form-data"  >
 
             <p>
                 <label htmlFor="title" className="form-label">NOME DELLA CASA *</label>
@@ -116,18 +142,13 @@ export default function HouseForm(id, onSuccess = () => { }) {
 
             </p>
             <p>
-                <label htmlFor="full_address" className="form-label">EMAIL *</label>
+                <label htmlFor="full_address" className="form-label">INDIRIZZO  *</label>
                 <input required type="text" className="form-control" placeholder="inserisci l' indirizzo" name="full_address" id="full_address" value={formData.full_address} onChange={handleForm} />
 
             </p>
             <p>
                 <label htmlFor="city" className="form-label">CITTA' *</label>
                 <input required type="text" className="form-control" placeholder="inserisci la città" name="city" id="city" value={formData.city} onChange={handleForm} />
-
-            </p>
-            <p>
-                <label htmlFor="image" className="form-label">FOTO *</label>
-                <input required type="text" className="form-control" placeholder="inserisci il nome della foto" name="image" id="image" value={formData.image} onChange={handleForm} />
 
             </p>
 
@@ -143,6 +164,11 @@ export default function HouseForm(id, onSuccess = () => { }) {
                     <option value="casa indipendente">Casa indipendente</option>
 
                 </select>
+            </p>
+            <p>
+                <label htmlFor="image" className="form-label" >FOTO *</label>
+                <input required type="file" className="form-control" placeholder="inserisci il nome della foto" name="image" id="image" onChange={handleForm} />
+
             </p>
 
             <div>

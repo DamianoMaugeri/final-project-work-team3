@@ -1,4 +1,6 @@
 const connection = require("../data/db");
+const path = require('path');
+const fs = require('fs');
 
 function propertiesByOwner(req, res) {
 
@@ -43,19 +45,62 @@ function propertiesByOwner(req, res) {
 
 
 function create(req, res) {
-    const { owner_id, title, number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, city, image, price_per_day, vote, house_type } = req.body;
+    console.log('funzione create')
+
+    const owner_id = req.params.id;
+
+    console.log(req.body)
+
+
+    const { title, number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, city, house_type } = req.body;
+
+    const vote = 0
+
+    const price_per_day = 10000
 
     // Controlla che tutti i campi obbligatori siano presenti
-    if (!owner_id || !title || !number_of_rooms || !number_of_beds || !number_of_bathrooms || !size || !full_address || !city || !price_per_day || !vote) {
+    if (!owner_id || !title || !number_of_rooms || !number_of_beds || !number_of_bathrooms || !size || !full_address || !city || !price_per_day) {
+        console.log('fallisco qui')
         return res.status(400).json({ error: "All fields are required" });
     }
+    // controllo che esiste un file 
+    if (req.files === null || Object.keys(req.files).length === 0) {
+        res.status(400).json('Nessun file Caricato')
+        return
+    }
+
+    // prendo il file e seleziono il path in cui salvarlo 'public/images
+
+    const imageFile = req.files.image;
+
+    const uploadsPath = path.join(__dirname, '..', 'public', 'images');
+
+    if (!fs.existsSync(uploadsPath)) {
+        fs.mkdirSync(uploadsPath, { recursive: true });
+    }
+
+    const imgFinalPath = path.join(uploadsPath, imageFile.name);
+
+
+    // salvo il file in images
+
+    imageFile.mv(imgFinalPath, (err) => {
+        if (err) {
+
+            res.status(500).json({ error: `Errore spostamento immagine ${imageFile.name}` })
+            return
+        }
+    })
+
+
+
     // house_type può essere nullo e nel caso in cui non è nullo i suoi valori possibili sono : appartamento, casa indipendente, villa, villetta a schiera, chalet, baita (NOTA BENE QUALSIASI ALTRO VALORE NON VERRA' ACCETTATO!!!)
     const sql = `
         INSERT INTO properties (owner_id, title, number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, city, image, price_per_day, vote, house_type) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    connection.query(sql, [owner_id, title, number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, city, image, price_per_day, vote, house_type], (err, results) => {
+    connection.query(sql, [owner_id, title, number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, city, imageFile.name, price_per_day, vote, house_type], (err, results) => {
         if (err) return res.status(500).json({ error: "Database query failed" });
 
         res.status(201).json({
@@ -64,5 +109,8 @@ function create(req, res) {
         });
     });
 }
+
+
+
 
 module.exports = { propertiesByOwner, create }
