@@ -8,10 +8,10 @@ const bcrypt = require('bcrypt');
 const connection = require('../data/db');
 
 // Dati dell'utente da registrare (in un'applicazione reale, questi verrebbero ricevuti tramite una richiesta HTTP)
-const firstName = "pinco";  // Nome dell'utente
-const lastName = "pallino";  // Cognome dell'utente
-const email = 'pinco.pallino@email.com';  // Email dell'utente
-const plainPassword = 'passwordprova123';  // La password in chiaro (prima di essere criptata)
+const firstName = "Davide";  // Nome dell'utente
+const lastName = "Costa";  // Cognome dell'utente
+const email = 'davide.costa@example.com';  // Email dell'utente
+const plainPassword = 'Davide123';  // La password in chiaro (prima di essere criptata)
 
 // Il numero di iterazioni (rounds) per l'algoritmo di hashing
 const saltRounds = 10;  // Un valore di 10 è generalmente considerato un buon compromesso tra prestazioni e sicurezza

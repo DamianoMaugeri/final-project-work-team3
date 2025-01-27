@@ -57,8 +57,10 @@ CREATE TABLE `owners` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `password_hash` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +69,7 @@ CREATE TABLE `owners` (
 
 LOCK TABLES `owners` WRITE;
 /*!40000 ALTER TABLE `owners` DISABLE KEYS */;
-INSERT INTO `owners` VALUES (1,'Mario','Rossi','mario.rossi@example.com'),(2,'Luca','Bianchi','luca.bianchi@example.com'),(3,'Giulia','Verdi','giulia.verdi@example.com'),(4,'Anna','Neri','anna.neri@example.com'),(5,'Paolo','Gialli','paolo.gialli@example.com');
+INSERT INTO `owners` VALUES (1,'Mario','Rossi','mario.rossi@example.com','asdsadasda'),(2,'Luca','Bianchi','luca.bianchi@example.com','sadsadasd'),(3,'Giulia','Verdi','giulia.verdi@example.com','e2131eeq'),(4,'Anna','Neri','anna.neri@example.com','12e21ewqe'),(5,'Paolo','Gialli','paolo.gialli@example.com','eqwee1221'),(6,'pinco','pallino','pinco.pallino@email.com','$2b$10$CjoFW1ocPvwlooelNJX2UuXFcXzOY7ImTQlMb/dyCjUYDyqiA.6wC'),(7,'pape','rino','pape.rino@email.com','$2b$10$1.avPRBn9XYXoWWtwjzO3uU.CsV9vGKw7M7wVndtPvCdeCWpwWq2i'),(8,'Marco','Gialli','marco.gialli@example.com','$2b$10$B537dnQohNTQs2NP/WnYHOiLjB6b1yxq6yfv3WyZuWy5GWYBZ/8Dm'),(10,'Chiara','Conti','chiara.conti@example.com','$2b$10$4ugfOnpffJFoEmblMrTk/u1UxFCWsUS1MpdSu9Q64mX.aUIm3bPua'),(11,'Giulia','Moretti','giulia.moretti@example.com','$2b$10$iLgcbgqct8Ro3YtNb9FzXueEclwKqSwAxAHuLXztHI8R7RO3id9i6'),(12,'Stefano','Ricci','stefano.ricci@example.com','$2b$10$k88CxTyjdId/DRChJCRDdeINJYPPn.WZ5H1DJN7UBNd.oCj2Klx2K'),(13,'Elisa','Greco','elisa.greco@example.com','$2b$10$b4iJKk9WnzEKLpXiwuHRleq.ieXDEbTII5pwLYqCLdHlXI4VfLKw.'),(14,'Francesco','De Luca','francesco.deluca@example.com','$2b$10$EoSKpI/QNldlDumTWW0HlOEgEiU8SYE9HGKwRE2IqMU3XwWo6vsMO'),(15,'Martina','Russo','martina.russo@example.com','$2b$10$i.UbaMRoPXcoKJ1B.hL.nu5lPfifWPNmVciQnlgzCC91xR2cWzWFq'),(16,'Giovanni','Esposito','giovanni.esposito@example.com','$2b$10$BPAnv1uMJzv05s2A7ErDKO5wDJBm12LV60tHmzi6tOWikjbPBch76'),(17,'Sara','Romano','sara.romano@example.com','$2b$10$LBFY6V58I5tbzOaKBnjjqeHmVh2V5ksRf27aHHu1qavwPZmAS7FUm'),(18,'Matteo','Bruno','matteo.bruno@example.com','$2b$10$iXH7w/iVMLufgo2YTSkjfeRQC9eujNykY2pgmdusq.YKYR8ntWiq.'),(19,'Valeria','Grassi','valeria.grassi@example.com','$2b$10$o3mGrQancA2Ahyw3OTWqMe60l7dK7dCuNHmSmUzMJlCwOKwlY970e'),(21,'Alessandro','Pini','alessandro.pini@example.com','$2b$10$vCuUXTkkDHTAn1bdgEFxcOUI4smzQD3fuRCZjG7hOwFfYwW2sVTjq'),(22,'Federica','Orlando','federica.orlando@example.com','$2b$10$MgXBlm4c8nDIfKyyJHXe2eUKHme.DrivmIKxDqddFBY9Gw3VbuHDC'),(23,'Andrea','Leone','andrea.leone@example.com','$2b$10$Alm8A8trJ8XO1YrUDyH1/O7MbvFzVl.E0b2reg7.YBYW/WeG3BNSa'),(24,'Roberta','Barbieri','roberta.barbieri@example.com','$2b$10$t.7nkA625rzSEeJ6d2uhfurYsHnql.O9c7CVPuocnivxTTZL3yg/y'),(25,'Davide','Costa','davide.costa@example.com','$2b$10$F6AAVo7K.FfrXiz9b37mxOWjM2JrNiLFkshQN.JSzuWOANZ00nIPW');
 /*!40000 ALTER TABLE `owners` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +98,7 @@ CREATE TABLE `properties` (
   KEY `owner_id` (`owner_id`),
   CONSTRAINT `properties_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `owners` (`id`) ON DELETE CASCADE,
   CONSTRAINT `properties_chk_1` CHECK ((`vote` between 0 and 100))
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +107,7 @@ CREATE TABLE `properties` (
 
 LOCK TABLES `properties` WRITE;
 /*!40000 ALTER TABLE `properties` DISABLE KEYS */;
-INSERT INTO `properties` VALUES (1,'Appartamento Moderno',3,2,1,80,'Via Roma 10, Milano','Milano','modern.jpg','appartamento',30,1,70.90),(2,'Villa Panoramica',6,4,3,200,'Via delle Colline 5, Firenze','Firenze','villa.jpg','villa',90,2,110.00),(3,'Chalet in Montagna',4,3,2,120,'Località Alpi 12, Trento','Trento','chalet.jpg','chalet',75,3,40.00),(4,'Villetta con Giardino',5,3,2,150,'Via dei Fiori 8, Torino','Torino','villetta.jpg','villetta a schiera',80,4,60.00),(5,'Baita Rustica',2,1,1,60,'Località Bosco 3, Bolzano','Bolzano','baita.jpg','baita',70,5,100.00),(6,'villetta indipendente',3,1,1,75,'via pincopalla','Lecce',NULL,NULL,20,2,60.00);
+INSERT INTO `properties` VALUES (1,'Appartamento Moderno',3,2,1,80,'Via Roma 10, Milano','Milano','modern.jpg','appartamento',40,1,70.90),(2,'Villa Panoramica',6,4,3,200,'Via delle Colline 5, Firenze','Firenze','villa.jpg','villa',90,2,110.00),(3,'Chalet in Montagna',4,3,2,120,'Località Alpi 12, Trento','Trento','chalet.jpg','chalet',75,3,40.00),(4,'Villetta con Giardino',5,3,2,150,'Via dei Fiori 8, Torino','Torino','villetta.jpg','villetta a schiera',80,4,60.00),(5,'Baita Rustica',2,1,1,60,'Località Bosco 3, Bolzano','Bolzano','baita.jpg','baita',70,5,100.00),(6,'villetta indipendente',3,1,1,75,'via pincopalla','Lecce',NULL,'villa',20,2,60.00),(7,'villa con giardino',4,2,2,140,'via a caso','Napoli','villacongiardino.jpg','villa',40,6,120.00),(8,'bilocale centrale',2,1,1,70,'viale italia','Roma','bilocalecentrale.jpg','appartamento',36,6,200.00),(29,'Appartamento elegante in centro',3,2,1,80,'Via Roma 10, Milano','Milano','image1.jpg','appartamento',4,1,120.50),(30,'Villa con piscina privata',6,4,3,200,'Via dei Colli 25, Firenze','Firenze','image2.jpg','villa',5,2,400.00),(31,'Casa indipendente spaziosa',4,3,2,150,'Via Verdi 12, Torino','Torino','image3.jpg','casa indipendente',4,3,180.00),(32,'Villetta a schiera moderna',5,3,2,140,'Via Dante 8, Bologna','Bologna','image4.jpg','villetta a schiera',3,4,150.00),(33,'Chalet di montagna',4,4,2,130,'Strada Alpina 7, Cortina d\'Ampezzo','Cortina d\'Ampezzo','image5.jpg','chalet',5,5,250.00),(34,'Baita rustica immersa nel verde',3,3,1,90,'Valle Verde, Trento','Trento','image6.jpg','baita',4,6,130.00),(35,'Appartamento vista mare',2,2,1,70,'Lungomare 45, Napoli','Napoli','image7.jpg','appartamento',5,7,100.00),(36,'Casa indipendente con giardino',4,3,2,160,'Via Libertà 30, Palermo','Palermo','image8.jpg','casa indipendente',4,8,190.00),(37,'Villa storica con parco',8,6,4,350,'Via Antica 1, Roma','Roma','image9.jpg','villa',5,10,700.00),(38,'Villetta a schiera accogliente',4,2,2,120,'Via del Sole 15, Bari','Bari','image10.jpg','villetta a schiera',3,11,140.00),(39,'Chalet esclusivo con sauna',5,5,3,200,'Strada Neve 12, Bolzano','Bolzano','image11.jpg','chalet',5,12,320.00),(40,'Baita romantica',2,2,1,60,'Val del Cuore, Aosta','Aosta','image12.jpg','baita',4,13,120.00),(41,'Appartamento centrale',3,2,1,85,'Piazza Duomo 3, Milano','Milano','image13.jpg','appartamento',4,14,110.00),(42,'Casa indipendente panoramica',5,4,2,170,'Via Alta 22, Genova','Genova','image14.jpg','casa indipendente',4,15,210.00),(43,'Villa moderna con piscina',7,5,4,250,'Via Elegante 10, Venezia','Venezia','image15.jpg','villa',5,16,500.00),(44,'Villetta a schiera vicino al parco',4,3,2,130,'Via Parco 5, Verona','Verona','image16.jpg','villetta a schiera',3,17,160.00),(45,'Chalet in posizione strategica',6,6,3,220,'Montagna 18, Livigno','Livigno','image17.jpg','chalet',5,18,270.00),(46,'Baita accogliente e rustica',3,3,1,80,'Bosco Vecchio, Belluno','Belluno','image18.jpg','baita',4,19,140.00),(47,'Appartamento economico e pratico',2,1,1,60,'Via Garibaldi 4, Pisa','Pisa','image19.jpg','appartamento',3,24,80.00),(48,'Casa indipendente per famiglie',5,4,2,180,'Via Felicità 12, Catania','Catania','image20.jpg','casa indipendente',4,21,220.00);
 /*!40000 ALTER TABLE `properties` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,4 +206,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-22 15:43:19
+-- Dump completed on 2025-01-27 10:20:42
