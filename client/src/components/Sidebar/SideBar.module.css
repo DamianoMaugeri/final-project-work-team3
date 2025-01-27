@@ -25,9 +25,9 @@
     position: fixed;
     top: 100px;
     left: 10px;
-    width: 40px;
-    height: 40px;
-    font-size: 30px;
+    width: 35px;
+    height: 35px;
+    font-size: 28px;
     background-color: rgb(182, 177, 177);
     color: rgb(0, 0, 0);
     border: none;
@@ -45,7 +45,8 @@
 }
 
 .toggleButton.open {
-    left: 260px;
+    left: 210px;
+    top: 70px;
     /* Posizione quando la sidebar è aperta */
     transition: left 0.6s ease-in-out;
     /* Sincronizza con la sidebar */
