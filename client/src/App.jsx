@@ -12,6 +12,7 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import OwnerShowpage from './pages/OwnerShowPage/OwnerShowPage';
 import axios from 'axios';
 import AddProperty from './pages/addpropertyPage/AddProperty';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 
