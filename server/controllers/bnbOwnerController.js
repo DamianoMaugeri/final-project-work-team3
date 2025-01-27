@@ -4,7 +4,7 @@ const fs = require('fs');
 
 function propertiesByOwner(req, res) {
     const ownerId = req.user.id; // Estratto dal token JWT
-
+    console.log(ownerId)
     const sqlOwner = 'SELECT * FROM owners WHERE id = ?';
     const sqlProperties = 'SELECT * FROM properties WHERE owner_id = ?';
 
@@ -22,9 +22,9 @@ function propertiesByOwner(req, res) {
         connection.query(sqlProperties, [ownerId], (err, resultsProperties) => {
             if (err) return res.status(500).json({ error: 'Database query failed 2' });
 
-            if (resultsProperties.length === 0) {
-                return res.status(404).json({ error: 'Nessuna proprietà trovata per questo owner' });
-            }
+            // if (resultsProperties.length === 0) {
+            //     return res.status(404).json({ error: 'Nessuna proprietà trovata per questo owner' });
+            // }
 
             resultsProperties.forEach(result => {
                 const formattedImage = result.image?.split(' ').join('_');
