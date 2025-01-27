@@ -43,27 +43,25 @@ export default function ShowPage() {
                 <>
                     <HouseShowCard houseEl={house} />
                     {/* recensioni box */}
-                    <ReviewCard reviews={house.reviews} />
+
+
                     <div className="d-flex justify-content-around mb-5 mt-5">
-
-
                         <button className={`${style.btn} ${reviewBoolean ? style['btn-active'] : ''}`} onClick={() => {
                             emailBoolean && setEmailBoolean(!emailBoolean)
                             setReviewBoolean(!reviewBoolean)
-                        }}>Lascia una recensione
-                        </button>
+                        }}>Lascia una recensione</button>
 
                         <button className={`${style.btn} ${emailBoolean ? style['btn-active'] : ''}`} onClick={() => {
                             reviewBoolean && setReviewBoolean(!reviewBoolean)
                             setEmailBoolean(!emailBoolean)
                         }}>Contatta il proprietario</button>
-
-
                     </div>
                     {/* form recensioni */}
                     {!emailBoolean && reviewBoolean && <ReviewForm />}
 
                     {!reviewBoolean && emailBoolean && <EmailForm email={house.ownerEmail} />}
+
+                    <ReviewCard reviews={house.reviews} />
                 </>
             ) :
 
