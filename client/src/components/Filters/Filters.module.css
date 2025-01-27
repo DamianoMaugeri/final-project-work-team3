@@ -1,8 +1,33 @@
 .filters {
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
+    flex-grow: 1;
     gap: 10px;
-    justify-content: center;
+    font-weight: bold;
 
+}
+
+.fil {
+    background-color: #10242d;
+    padding: 8px 15px;
+    border-radius: 6px;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    display: block;
+    width: 150px;
+    margin: 0 auto;
+    text-wrap: nowrap;
+    font-weight: bold;
+    text-align: center;
+    max-width: 100%;
+    margin-bottom: 20px;
+
+}
+
+.fil:hover {
+    background-color: #0aca34ad;
+    color: white;
+    transform: scale(1.05);
 }

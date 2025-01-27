@@ -10,22 +10,16 @@ export default function HeartButton() {
 
     // stato per il contatore
     const [count, setCount] = useState(0);
-    const [showCount, setShowCount] = useState(false);
 
 
     // funzione toogle per il cuoricino
     const handleLikeToggle = (event) => {
         event.stopPropagation();
         event.preventDefault()
-        setLiked(!liked); //se liked è true diventa false e viceversa
 
-        setCount((prevCount) => prevCount + 1); // click(0) + 1
-
-        setShowCount(true);  // mostra i # di click
-
-        setTimeout(() => { // nasconde il # di click
-            setShowCount(false);
-        }, 2000);  
+        if (!liked) {
+            setLiked(true);
+        }
     };
 
 
@@ -40,14 +34,6 @@ export default function HeartButton() {
             ) : (
                 <OutlineHeartIcon className="text-dark" style={{ height: "1.5rem" }} />
             )}
-
-            {showCount && (
-                <span className={style.countDisplay}>
-                    {count}
-                </span>
-            )}
-
-            
         </button>
     )
 }

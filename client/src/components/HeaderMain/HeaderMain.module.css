@@ -1,0 +1,27 @@
+.customMenuButton {
+    background-color: #0aca34ad !important;
+    border-color: #0aca34ad !important;
+    margin-right: 30px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none !important;
+}
+
+.customMenuButton:hover {
+    background-color: #0aca34 !important;
+    border-color: #0aca34 !important;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #2C3E50;
+    height: 70px;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

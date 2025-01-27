@@ -7,7 +7,7 @@ const errorsMiddleware = require('./middlewares/errorsMiddleware.js');
 const bnbRouter = require('./routers/bnbRouter.js');
 const fileupload = require('express-fileupload');
 
-
+const authRouter = require('./routers/authRouter.js')
 
 
 
@@ -53,6 +53,7 @@ app.get('/', (req, res) => {
 
 
 // rotte
+app.use('/auth', authRouter);
 app.use('/api/boolbnb', bnbRouter);
 
 

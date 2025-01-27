@@ -46,8 +46,7 @@ function show(req, res) {
             house.image = `http://localhost:3000/images/${formattedImage}`
             connection.query(sqlOwnerEmail, [id], (err, resultsEmail) => {
                 if (err) return res.status(500).json({ error: "Database query failed" });
-                if (results.length === 0) return res.status(404).json({ errore: "email not found" });
-                house.ownerEmail = resultsEmail[0].email
+                if (resultsEmail.length > 0) house.ownerEmail = resultsEmail[0].email
                 res.json(house)
 
 

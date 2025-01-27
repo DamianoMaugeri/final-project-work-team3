@@ -20,7 +20,7 @@ function App() {
 
   const [houses, setHouses] = useState([])
   const [searchedCity, setSearchedCity] = useState('');
-  const [owner, setOwner] = useState(undefined)
+  const [owner, setOwner] = useState({})
 
 
   function fetchHouses() {

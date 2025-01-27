@@ -11,7 +11,7 @@ import EmailForm from "../../components/emailForm/emailForm"
 
 export default function ShowPage() {
 
-    // recuperare l'id del libro dal path della rotta
+
     const [house, setHouse] = useState(null)
     const [reviewBoolean, setReviewBoolean] = useState("")
     const [emailBoolean, setEmailBoolean] = useState("")
@@ -38,39 +38,37 @@ export default function ShowPage() {
 
     return (
         // ShowPage div container
-        <div className={`d-flex flex-column flex-grow-1 ${style.showPageContainer}`}> 
+        <div className={`d-flex flex-column flex-grow-1 ${style.showPageContainer}`}>
             {house ? ( //if lenght > 0 render ShowPage else render loader inside  the ShowPage div container
                 <>
                     <HouseShowCard houseEl={house} />
                     {/* recensioni box */}
-                    <ReviewCard reviews={house.reviews} />
+
+
                     <div className="d-flex justify-content-around mb-5 mt-5">
-
-
                         <button className={`${style.btn} ${reviewBoolean ? style['btn-active'] : ''}`} onClick={() => {
                             emailBoolean && setEmailBoolean(!emailBoolean)
                             setReviewBoolean(!reviewBoolean)
-                        }}>Lascia una recensione
-                        </button>
+                        }}>Lascia una recensione</button>
 
                         <button className={`${style.btn} ${emailBoolean ? style['btn-active'] : ''}`} onClick={() => {
                             reviewBoolean && setReviewBoolean(!reviewBoolean)
                             setEmailBoolean(!emailBoolean)
                         }}>Contatta il proprietario</button>
-
-
                     </div>
                     {/* form recensioni */}
                     {!emailBoolean && reviewBoolean && <ReviewForm />}
 
                     {!reviewBoolean && emailBoolean && <EmailForm email={house.ownerEmail} />}
+
+                    <ReviewCard reviews={house.reviews} />
                 </>
             ) :
 
-            // ... else render loader inside  the ShowPage div container
+                // ... else render loader inside  the ShowPage div container
                 (
                     <div className="d-flex align-items-center justify-content-center flex-grow-1">
-                        <Loader /> 
+                        <Loader />
                     </div>
                 )}
         </div>
