@@ -7,7 +7,7 @@ import placeHolder from '../../assets/placeholder.png'
 
 export default function HouseCard({ content }) {
 
-    const { price_per_day, title, full_address, city, image } = content
+    const { id, price_per_day, title, full_address, city, image, vote } = content
 
 
 
@@ -26,7 +26,7 @@ export default function HouseCard({ content }) {
                     alt="House"
                 />
                 {/* Cuoricino */}
-                <HeartButton />
+                <HeartButton vote={vote} id={id} />
             </div>
 
             {/* contenuto della card */}
