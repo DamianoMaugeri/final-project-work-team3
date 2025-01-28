@@ -13,6 +13,7 @@ import OwnerShowpage from './pages/OwnerShowPage/OwnerShowPage';
 import axios from 'axios';
 import AddProperty from './pages/addpropertyPage/AddProperty';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Navigate } from "react-router-dom";
 
 
 
@@ -20,10 +21,23 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
 
+
+
   const [houses, setHouses] = useState([]);
   const [searchedCity, setSearchedCity] = useState('');
   const [owner, setOwner] = useState({});
   const [sidebarUserOrOwner, setSidebarUserOrOwner] = useState(true);
+
+
+
+
+  function logout() {
+    localStorage.removeItem('token');
+    setOwner(null);
+    Navigate("/owners");
+  }
+
+
 
   function fetchHouses() {
 
@@ -47,7 +61,7 @@ function App() {
 
   return (
     <>
-      <GlobalContext.Provider value={{ houses, setHouses, searchedCity, setSearchedCity, owner, setOwner, fetchHouses, sidebarUserOrOwner, setSidebarUserOrOwner }}>
+      <GlobalContext.Provider value={{ houses, setHouses, searchedCity, setSearchedCity, owner, setOwner, fetchHouses, sidebarUserOrOwner, setSidebarUserOrOwner, logout }}>
         <BrowserRouter>
           <Routes>
             <Route element={<MainLayout />}>

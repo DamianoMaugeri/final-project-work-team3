@@ -7,9 +7,15 @@ import HouseForm from "../../components/HouseForm/HouseForm";
 import style from './OwnerShowpage.module.css';
 import axios from "axios";
 import HeaderOwners from "../../components/headerOwners/HeaderOwners";
+import useLogout from "../../hook/useLogout";
+
 
 export default function OwnerShowpage() {
     const { owner, setOwner, setSidebarUserOrOwner } = useContext(GlobalContext);
+
+    const logout = useLogout()
+
+
     const navigate = useNavigate();
     const { id } = useParams();
     function fetchOwner() {
@@ -39,11 +45,7 @@ export default function OwnerShowpage() {
     }
 
 
-    function logout() {
-        localStorage.removeItem('token');
-        setOwner(null);
-        navigate("/owners");
-    }
+
 
     useEffect(() => {
         fetchOwner();
@@ -77,12 +79,6 @@ export default function OwnerShowpage() {
                         </div>
                     </div>
 
-                    <div className="row mt-4">
-                        <h1>Aggiungi un nuovo immobile:</h1>
-                        <div className="col mt-4">
-                            <HouseForm id={id} onSuccess={fetchOwner} />
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

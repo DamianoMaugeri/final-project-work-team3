@@ -18,6 +18,8 @@ const initialFormData = {
 
 export default function HouseForm({ id, onSuccess = () => { } }) {
 
+    const navigate = useNavigate()
+
 
     const [formData, setFormData] = useState(initialFormData)
 
@@ -104,7 +106,7 @@ export default function HouseForm({ id, onSuccess = () => { } }) {
                 // se la chiamata va a buon fine dovremmo refetchare il book
                 // e resettare il form
                 setFormData(initialFormData)
-                navigate(`/owners/${ownerId}`);
+                navigate(`/owners/${id}`);
                 onSuccess()
             }).catch(err => {
                 console.log(err)

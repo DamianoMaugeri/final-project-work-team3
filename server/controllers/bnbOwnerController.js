@@ -67,13 +67,15 @@ function create(req, res) {
 
     const imageFile = req.files.image;
 
+    const formattedImageName = imageFile.name.replace(/ /g, "-")
+
     const uploadsPath = path.join(__dirname, '..', 'public', 'images');
 
     if (!fs.existsSync(uploadsPath)) {
         fs.mkdirSync(uploadsPath, { recursive: true });
     }
 
-    const imgFinalPath = path.join(uploadsPath, imageFile.name);
+    const imgFinalPath = path.join(uploadsPath, formattedImageName);
 
 
     // salvo il file in images
@@ -81,7 +83,7 @@ function create(req, res) {
     imageFile.mv(imgFinalPath, (err) => {
         if (err) {
 
-            res.status(500).json({ error: `Errore spostamento immagine ${imageFile.name}` })
+            res.status(500).json({ error: `Errore spostamento immagine ${formattedImageName}` })
             return
         }
     })
@@ -94,7 +96,7 @@ function create(req, res) {
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    connection.query(sql, [owner_id, title, number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, city, imageFile.name, price_per_day, vote, house_type], (err, results) => {
+    connection.query(sql, [owner_id, title, number_of_rooms, number_of_beds, number_of_bathrooms, size, full_address, city, formattedImageName, price_per_day, vote, house_type], (err, results) => {
         if (err) return res.status(500).json({ error: "Database query failed" });
 
         res.status(201).json({

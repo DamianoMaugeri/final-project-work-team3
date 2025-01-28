@@ -1,11 +1,14 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import style from './HeaderOwners.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
+import GlobalContext from "../../context/GlobalContext";
 
 export default function HeaderOwners({ ownerId, onLogout, firstName, lastName }) {
+
+    const { setSidebarUserOrOwner } = useContext(GlobalContext)
     const [showPopover, setShowPopover] = useState(false);
     const menuButtonRef = useRef(null); // Riferimento al bottone "Menu"
     const navigate = useNavigate();
@@ -27,21 +30,18 @@ export default function HeaderOwners({ ownerId, onLogout, firstName, lastName })
         }
     };
 
+
+
+
     // Popover contenente le opzioni del menu
     const popover = (
         <Popover id="popover-basic" className={style.customPopover}>
             <Popover.Body>
                 <ul className="list-group">
-                    <li className={`list-group-item ${style.menuItem}`} onClick={() => handleOption("properties")}>
-                        Le mie proprietà
-                    </li>
+
                     <li className={`list-group-item ${style.menuItem}`} onClick={() => handleOption("messages")}>
                         I miei messaggi
-                    </li>
-                    <li className={`list-group-item ${style.menuItem}`} onClick={() => handleOption("addProperty")}>
-                        Aggiungi immobile
-                    </li>
-                    <li className={`list-group-item ${style.menuItem}`} onClick={() => handleOption("profile")}>
+                    </li>                    <li className={`list-group-item ${style.menuItem}`} onClick={() => handleOption("profile")}>
                         Dati personali
                     </li>
                     <li className={`list-group-item text-danger ${style.menuItem}`} onClick={() => handleOption("logout")}>
@@ -64,7 +64,7 @@ export default function HeaderOwners({ ownerId, onLogout, firstName, lastName })
                 show={showPopover}
                 onToggle={() => setShowPopover(!showPopover)} // Mostra o nascondi il popover
             >
-                <Button ref={menuButtonRef} variant="primary" className={style.customMenuButton} ><FontAwesomeIcon icon={faCircleUser} style={{ color: "#ffffff" }} /> Area proprietari</Button>
+                <Button ref={menuButtonRef} variant="primary" onClick={() => setSidebarUserOrOwner(false)} className={style.customMenuButton} ><FontAwesomeIcon icon={faCircleUser} style={{ color: "#ffffff" }} /> Area proprietari</Button>
             </OverlayTrigger>
         </header>
     );
