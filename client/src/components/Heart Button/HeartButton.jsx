@@ -35,16 +35,25 @@ export default function HeartButton({ vote, id }) {
     };
 
     return (
-        <button
-            onClick={handleLikeToggle}
-            className={`btn btn-light position-absolute end-0 m-2 p-2 rounded-circle ${style.customButton}`}
-            title={`Like: ${count}`} // nuvoletta con il numero dei like
-        >
-            {tempLiked ? (
-                <SolidHeartIcon className="text-danger" style={{ height: "1.5rem" }} />
-            ) : (
-                <OutlineHeartIcon className="text-dark" style={{ height: "1.5rem" }} />
-            )}
-        </button>
+        <div className="position-relative">
+            <button
+                onClick={handleLikeToggle}
+                className={`btn btn-light position-absolute end-0  m-2 p-2 rounded-circle ${style.customButton}`}
+            >
+                {tempLiked ? (
+                    <SolidHeartIcon className="text-danger" style={{ height: "1.5rem" }} />
+                ) : (
+                    <OutlineHeartIcon className="text-dark" style={{ height: "1.5rem" }} />
+                )}
+            </button>
+
+            <span
+                className={`${style.tooltip}`}
+                data-visible={false}
+            >
+                {`Like: ${count}`}
+            </span>
+        </div>
     );
 }
+
