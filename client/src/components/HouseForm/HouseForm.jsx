@@ -118,75 +118,79 @@ export default function HouseForm({ id, onSuccess = () => { } }) {
 
 
     return (
-        <form onSubmit={storeNewHouse} encType="multipart/form-data"  >
-
-            <p>
-                <label htmlFor="title" className="form-label">NOME DELLA CASA *</label>
-                <input required type="text" className="form-control" placeholder="inserisci il nome della casa" name="title" id="title" value={formData.title} onChange={handleForm} />
-
-            </p>
-            <p>
-                <label htmlFor="number_of_rooms" className="form-label">NUMERO DI STANZE *</label>
-                <input required type="text" className="form-control" placeholder="inserisci il numero di stampe" name="number_of_rooms" id="number_of_rooms" value={formData.number_of_rooms} onChange={handleForm} />
-
-            </p>
-            <p>
-                <label htmlFor="number_of_beds" className="form-label">NUMERO DI LETTI *</label>
-                <input required type="text" className="form-control" placeholder="inserisci il numero di letti " name="number_of_beds" id="number_of_beds" value={formData.number_of_beds} onChange={handleForm} />
-
-            </p>
-            <p>
-                <label htmlFor="number_of_bathrooms" className="form-label">NUMERO DI BAGNI *</label>
-                <input required type="text" className="form-control" placeholder="inserisci il numero di bagni" name="number_of_bathrooms" id="number_of_bathrooms" value={formData.number_of_bathrooms} onChange={handleForm} />
-
-            </p>
-            <p>
-                <label htmlFor="size" className="form-label">TETRI QUADRI DELLA CASA *</label>
-                <input required type="text" className="form-control" placeholder="inserisci la metratura della casa" name="size" id="size" value={formData.size} onChange={handleForm} />
-
-            </p>
-            <p>
-                <label htmlFor="full_address" className="form-label">INDIRIZZO  *</label>
-                <input required type="text" className="form-control" placeholder="inserisci l' indirizzo" name="full_address" id="full_address" value={formData.full_address} onChange={handleForm} />
-
-            </p>
-            <p>
-                <label htmlFor="city" className="form-label">CITTA' *</label>
-                <input required type="text" className="form-control" placeholder="inserisci la città" name="city" id="city" value={formData.city} onChange={handleForm} />
-
-            </p>
-            <p>
-                <label htmlFor="price_per_day" className="form-label">PREZZO GIORNALIERO *</label>
-                <input required type="text" className="form-control" placeholder="inserisci il prezzo" name="price_per_day" id="price_per_day" value={formData.price_per_day} onChange={handleForm} />
-
-            </p>
+        <form onSubmit={storeNewHouse} encType="multipart/form-data" className="container"  >
+            <div className="row">
 
 
-            <p className='form-control'>
-                <label htmlFor="house_type" className="form-label" >TIPO DI CASA *</label>
-                <select required name="house_type" id="house_type" className="form-control" value={formData.house_type} onChange={handleForm}>
-                    <option value="appartamento">Appartamento</option>
-                    <option value="villa">Villa</option>
-                    <option value="chalet">Chalet</option>
-                    <option value="villetta a schiera">Villetta a schiera</option>
-                    <option value="baita">Baita</option>
-                    <option value="casa indipendente">Casa indipendente</option>
 
-                </select>
-            </p>
-            <p>
-                <label htmlFor="image" className="form-label" >FOTO *</label>
-                <input required type="file" className="form-control" placeholder="inserisci il nome della foto" name="image" id="image" onChange={handleForm} />
+                <p className="col-12">
+                    <label htmlFor="title" className="form-label">NOME DELLA CASA *</label>
+                    <input required type="text" className="form-control" placeholder="inserisci il nome della casa" name="title" id="title" value={formData.title} onChange={handleForm} />
 
-            </p>
+                </p>
+                <p className="col-md-6 col-sm-12" >
+                    <label htmlFor="number_of_rooms" className="form-label">NUMERO DI STANZE *</label>
+                    <input required type="text" className="form-control" placeholder="inserisci il numero di stampe" name="number_of_rooms" id="number_of_rooms" value={formData.number_of_rooms} onChange={handleForm} />
 
-            <div>
-                {/* {isFormValid === false && <div>i dati non sono validi</div>} */}
-                <button className="submit-button">invia</button>
+                </p>
+                <p className="col-md-6 col-sm-12">
+                    <label htmlFor="number_of_beds" className="form-label">NUMERO DI LETTI *</label>
+                    <input required type="text" className="form-control" placeholder="inserisci il numero di letti " name="number_of_beds" id="number_of_beds" value={formData.number_of_beds} onChange={handleForm} />
+
+                </p>
+                <p className="col-md-6 col-sm-12">
+                    <label htmlFor="number_of_bathrooms" className="form-label">NUMERO DI BAGNI *</label>
+                    <input required type="text" className="form-control" placeholder="inserisci il numero di bagni" name="number_of_bathrooms" id="number_of_bathrooms" value={formData.number_of_bathrooms} onChange={handleForm} />
+
+                </p>
+                <p className="col-md-6 col-sm-12" >
+                    <label htmlFor="size" className="form-label">TETRI QUADRI DELLA CASA *</label>
+                    <input required type="text" className="form-control" placeholder="inserisci la metratura della casa" name="size" id="size" value={formData.size} onChange={handleForm} />
+
+                </p>
+                <p className="col-md-6 col-sm-12">
+                    <label htmlFor="full_address" className="form-label">INDIRIZZO  *</label>
+                    <input required type="text" className="form-control" placeholder="inserisci l' indirizzo" name="full_address" id="full_address" value={formData.full_address} onChange={handleForm} />
+
+                </p>
+                <p className="col-md-6 col-sm-12">
+                    <label htmlFor="city" className="form-label">CITTA' *</label>
+                    <input required type="text" className="form-control" placeholder="inserisci la città" name="city" id="city" value={formData.city} onChange={handleForm} />
+
+                </p>
+                <p className="col-md-6 col-sm-12">
+                    <label htmlFor="price_per_day" className="form-label">PREZZO GIORNALIERO *</label>
+                    <input required type="text" className="form-control" placeholder="inserisci il prezzo" name="price_per_day" id="price_per_day" value={formData.price_per_day} onChange={handleForm} />
+
+                </p>
+
+
+                <p className=' col-md-6 col-sm-12"'>
+                    <label htmlFor="house_type" className="form-label" >TIPO DI CASA *</label>
+                    <select required name="house_type" id="house_type" className="form-control" value={formData.house_type} onChange={handleForm}>
+                        <option value="appartamento">Appartamento</option>
+                        <option value="villa">Villa</option>
+                        <option value="chalet">Chalet</option>
+                        <option value="villetta a schiera">Villetta a schiera</option>
+                        <option value="baita">Baita</option>
+                        <option value="casa indipendente">Casa indipendente</option>
+
+                    </select>
+                </p>
+                <p>
+                    <label htmlFor="image" className="form-label" >FOTO *</label>
+                    <input required type="file" className="form-control" placeholder="inserisci il nome della foto" name="image" id="image" onChange={handleForm} />
+
+                </p>
+
+                <div className="col-12 mt-3 mb-3">
+                    {/* {isFormValid === false && <div>i dati non sono validi</div>} */}
+                    <button className="submit-button form-submit">invia</button>
+                </div>
+
+
+
             </div>
-
-
-
 
 
         </form>
