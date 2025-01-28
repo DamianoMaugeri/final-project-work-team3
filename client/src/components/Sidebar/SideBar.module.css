@@ -36,7 +36,7 @@
     /* Transizione morbida per il bottone */
     cursor: pointer;
     will-change: transform, background-color;
-    /* Migliora le prestazioni */
+    margin-top: 5px
 }
 
 .toggleButton:hover {
