@@ -3,10 +3,11 @@ import Filters from "../Filters/Filters";
 import Logo from "../Logo/Logo";
 import Nav from "../Nav/Nav";
 import style from './SideBar.module.css';
-
+import GlobalContext from '../../context/GlobalContext';
+import { useContext } from 'react';
 export default function SideBar() {
     const [isOpen, setIsOpen] = useState(false); // Stato per controllare se la sidebar è aperta o chiusa
-
+    const { sidebarUserOrOwner } = useContext(GlobalContext);
     const toggleSidebar = () => {
         setIsOpen(prevState => !prevState); // Cambia lo stato di apertura della sidebar
     };
@@ -24,7 +25,8 @@ export default function SideBar() {
             {/* Sidebar che si espande e si chiude */}
             <div className={`${style.sidebar} ${isOpen ? style.openSidebar : style.closedSidebar}`}>
                 <Nav />
-                <Filters />
+                {sidebarUserOrOwner &&
+                    <Filters />}
             </div>
         </div>
     );
