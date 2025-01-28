@@ -20,10 +20,10 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
 
-  const [houses, setHouses] = useState([])
+  const [houses, setHouses] = useState([]);
   const [searchedCity, setSearchedCity] = useState('');
-  const [owner, setOwner] = useState({})
-
+  const [owner, setOwner] = useState({});
+  const [sidebarUserOrOwner, setSidebarUserOrOwner] = useState(true);
 
   function fetchHouses() {
 
@@ -35,7 +35,8 @@ function App() {
       .then(res => {
         console.log(searchedCity, "debug prova")
         setHouses(res.data)
-        console.log(res.data)
+        setSidebarUserOrOwner(true)
+
       }).catch(err => console.error(err))
       .finally(() => {
         console.log('finally')
@@ -46,7 +47,7 @@ function App() {
 
   return (
     <>
-      <GlobalContext.Provider value={{ houses, setHouses, searchedCity, setSearchedCity, owner, setOwner, fetchHouses }}>
+      <GlobalContext.Provider value={{ houses, setHouses, searchedCity, setSearchedCity, owner, setOwner, fetchHouses, sidebarUserOrOwner, setSidebarUserOrOwner }}>
         <BrowserRouter>
           <Routes>
             <Route element={<MainLayout />}>
