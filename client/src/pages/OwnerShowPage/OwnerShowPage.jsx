@@ -9,10 +9,9 @@ import axios from "axios";
 import HeaderOwners from "../../components/headerOwners/HeaderOwners";
 
 export default function OwnerShowpage() {
-    const { owner, setOwner } = useContext(GlobalContext);
+    const { owner, setOwner, setSidebarUserOrOwner } = useContext(GlobalContext);
     const navigate = useNavigate();
     const { id } = useParams();
-
     function fetchOwner() {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -29,6 +28,7 @@ export default function OwnerShowpage() {
             .then(res => {
                 console.log(res.data);
                 setOwner(res.data); // Imposta l'owner nello stato
+                setSidebarUserOrOwner(false);
             })
             .catch(err => {
                 console.error(err);

@@ -10,6 +10,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background-color: #F7F3E9;
+
 }
 
 ul,
@@ -46,4 +48,17 @@ button {
   flex-grow: 1;
   overflow: hidden;
 
+}
+
+.form-submit {
+  background-color: #0aca34ad;
+  padding: 8px 15px;
+  border-radius: 6px;
+  color: white;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.form-submit:hover {
+  background-color: #06fc3bad;
+  transform: scale(1.05);
 }
