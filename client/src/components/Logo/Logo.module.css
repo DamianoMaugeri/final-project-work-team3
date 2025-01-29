@@ -21,3 +21,8 @@
     /* Adatta il logo alle proporzioni del contenitore */
     cursor: pointer;
 }
+
+.logoImage:hover {
+    padding: 1px;
+    opacity: 85%;
+}
