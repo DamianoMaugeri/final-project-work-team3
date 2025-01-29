@@ -60,8 +60,7 @@ function show(req, res) {
 function showSlug(req, res) {
     const slug = req.params.slug;
     // formattare di nuovo il titolo
-    const formattedSlug = slug.replace(/-/g, " ")
-    console.log('arrivo qui')
+    const formattedSlug = slug.replace(/-/g, " ");
 
     const sqlHouse = "SELECT * FROM properties WHERE title = ?";
     const sqlReviews = "SELECT * FROM reviews AS rev JOIN rents AS r ON rev.rent_id=r.id JOIN users AS u ON r.user_id=u.id WHERE r.property_id= ?";
