@@ -39,15 +39,16 @@ function App() {
 
 
 
-  function fetchHouses() {
+  function fetchHouses(roomNumber = undefined) {
     console.log("Chiamata API con parametri:", {
-      city: searchedCity,
-      numberOfRooms: selectedRoomNumbers
+      city: searchedCity, numberOfRooms: roomNumber
     });
+
+
     axios.get('http://localhost:3000/api/boolbnb', {
       params: {
         city: searchedCity,
-        numberOfRooms: selectedRoomNumbers
+        numberOfRooms: roomNumber
       }
     })
       .then(res => {

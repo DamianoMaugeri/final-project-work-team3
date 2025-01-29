@@ -64,6 +64,7 @@ export default function Filters() {
                                 <button key={option} onClick={() => {
                                     const newRoomNumber = option === '5+' ? 5 : parseInt(option);
                                     setSelectedRoomNumbers(newRoomNumber); // Aggiorna il numero di stanze
+                                    fetchHouses(newRoomNumber)
                                 }} className={`${style.filter_button}`}>
                                     {option}
                                 </button>
