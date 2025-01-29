@@ -23,6 +23,8 @@ export default function HouseForm({ id, onSuccess = () => { } }) {
 
     const [formData, setFormData] = useState(initialFormData)
 
+    const [isFormValid, setIsFormValid] = useState(true)
+
     function handleForm(e) {
         const { value, name, files } = e.target
 
@@ -45,8 +47,30 @@ export default function HouseForm({ id, onSuccess = () => { } }) {
         }
     };
 
+
+
+
+
+
+
+
+
     function storeNewHouse(e) {
         e.preventDefault()
+        setIsFormValid(true)
+
+        if (!formData.title || !formData.full_address ||
+            !formData.city || !formData.house_type ||
+            isNaN(parseInt(formData.number_of_rooms)) ||
+            isNaN(parseInt(formData.number_of_beds)) ||
+            isNaN(parseInt(formData.number_of_bathrooms)) ||
+            isNaN(parseInt(formData.size)) ||
+            isNaN(parseInt(formData.price_per_day)) ||
+            !formData.image) {
+            setIsFormValid(false)
+            return
+
+        }
 
 
         const data = new FormData(); // Usa FormData per gestire i file
@@ -62,39 +86,10 @@ export default function HouseForm({ id, onSuccess = () => { } }) {
         data.append("image", formData.image); // Aggiungi l'immagine al FormData
 
 
-        // const data = {
-        //     title: formData.title.trim() || undefined,
-        //     number_of_rooms: parseInt(formData.number_of_rooms),
-        //     number_of_beds: parseInt(formData.number_of_beds),
-        //     number_of_bathrooms: parseInt(formData.number_of_bathrooms),
-        //     size: parseInt(formData.size),
-        //     full_address: formData.full_address.trim(),
-        //     city: formData.city.trim(),
-        //     image: formData.image,
-        //     house_type: formData.house_type.trim()
 
 
 
-        // }
 
-
-
-        // validazione lato client
-        // if (!data.title ||
-        //     !data.number_of_rooms ||
-        //     data.number_of_rooms < 0 ||
-        //     !data.number_of_beds ||
-        //     data.number_of_beds < 0 ||
-        //     !data.number_of_bathrooms ||
-        //     data.number_of_bathrooms < 0 ||
-        //     !data.size ||
-        //     data.size < 0 ||
-        //     !data.full_address ||
-        //     !data.image ||
-        //     !data.house_type) {
-        //     console.log('form is not valid')
-        //     return
-        // }
 
 
 
@@ -185,9 +180,9 @@ export default function HouseForm({ id, onSuccess = () => { } }) {
 
                 </p>
 
-                <div className="col-12 mt-3 mb-3">
-                    {/* {isFormValid === false && <div>i dati non sono validi</div>} */}
+                <div className="col-12 mt-3 mb-3 d-flex gap-5" >
                     <button className="submit-button form-submit">invia</button>
+                    {isFormValid === false && <div>i dati non sono validi</div>}
                 </div>
 
 
