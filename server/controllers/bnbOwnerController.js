@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 function propertiesByOwner(req, res) {
+
     const ownerId = req.user.id; // Estratto dal token JWT
     console.log(ownerId)
     const sqlOwner = 'SELECT * FROM owners WHERE id = ?';

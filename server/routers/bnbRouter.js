@@ -8,6 +8,18 @@ const bnbOwnerController = require('../controllers/bnbOwnerController.js');
 const emailController = require('../controllers/emailController.js');
 const authenticateToken = require('../middlewares/authenticateToken.js');
 const { generateToken } = require('../utils/authService.js');
+
+
+
+// rotte => OWNER
+
+// propertiesByOwner: questa rotta simula un autenticazione tramite sola email e nel caso in cui ci sia corrispondenza con quella di un proprietario restituisce tutte le proprietà appartenenti a quel proprietario
+router.get('/owner', authenticateToken, bnbOwnerController.propertiesByOwner);
+
+// permette agli owner di creare una nuova proprietà
+router.post('/owner/:id([0-9]+)', bnbOwnerController.create);
+
+
 // rotte => USER
 
 // index: mostra tutte le properties
@@ -23,13 +35,6 @@ router.patch('/:id([0-9]+)', bnbUserController.update);
 //postReview: permette di inserire una review solo se l'utente ha una prenotazione e se non ha già lasciato una review (controllo fatto tramite email dell'user)
 router.post('/:id([0-9]+)/reviews', bnbUserController.postReview);
 
-// rotte => OWNER
-
-// propertiesByOwner: questa rotta simula un autenticazione tramite sola email e nel caso in cui ci sia corrispondenza con quella di un proprietario restituisce tutte le proprietà appartenenti a quel proprietario
-router.get('/owner', authenticateToken, bnbOwnerController.propertiesByOwner);
-
-// permette agli owner di creare una nuova proprietà
-router.post('/owner/:id([0-9]+)', bnbOwnerController.create);
 
 
 router.post('/', authenticateToken, bnbOwnerController.create);

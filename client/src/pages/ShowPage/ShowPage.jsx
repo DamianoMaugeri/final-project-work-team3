@@ -11,7 +11,7 @@ import HeaderMain from "../../components/HeaderMain/HeaderMain"
 
 export default function ShowPage() {
 
-    const navigate = useNavigate();
+
     const [house, setHouse] = useState(null)
     const [reviewBoolean, setReviewBoolean] = useState("")
     const [emailBoolean, setEmailBoolean] = useState("")
