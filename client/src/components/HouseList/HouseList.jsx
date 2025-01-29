@@ -1,8 +1,8 @@
 import GlobalContext from "../../context/GlobalContext"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from 'axios'
 import HouseCard from "../HouseCard/HouseCard"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams, useLocation } from "react-router-dom"
 import Loader from "../Loader/Loader"
 
 export default function HouseList() {
@@ -10,14 +10,29 @@ export default function HouseList() {
 
     const { houses, setHouses, searchedCity, fetchHouses } = useContext(GlobalContext)
 
+    const location = useLocation();
 
 
 
 
 
+    // useEffect(() => {
+    //     fetchHouses()
+    // }, []);
 
     useEffect(() => {
-        fetchHouses()
+
+        const searchParams = new URLSearchParams(location.search);
+        const queryParams = {};
+
+        for (const [key, value] of searchParams.entries()) {
+            if (value && value !== "null") { // Ignora i parametri vuoti o "null"
+                queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
+            }
+        }
+        console.log("Parametri della query:", queryParams);
+        fetchHouses(queryParams)
+
     }, []);
 
 

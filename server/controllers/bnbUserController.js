@@ -9,14 +9,18 @@ function index(req, res) {
         sql += " WHERE city LIKE ?"
         params.push(`%${req.query.city}%`)
     }
-    if (req.query.numberOfRooms) {
+    console.log(req.query.rooms)
+    if (req.query.rooms) {
+        console.log(req.query.rooms)
+
+
         req.query.city ? sql += " AND number_of_rooms " : sql += " WHERE number_of_rooms ";
-        if (req.query.numberOfRooms === "5") {
+        if (req.query.rooms === "5+") {
             sql += ">= ?"
             params.push(5)
         } else {
             sql += "= ?"
-            params.push(parseInt(req.query.numberOfRooms, 10))
+            params.push(parseInt(req.query.rooms, 10))
         }
     }
     sql += " ORDER BY vote DESC"

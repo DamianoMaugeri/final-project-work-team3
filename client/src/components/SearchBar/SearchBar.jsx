@@ -1,14 +1,39 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import style from "./SearchBar.module.css"
 
 export default function SearchBar() {
-    const { searchedCity, setSearchedCity, fetchHouses } = useContext(GlobalContext);
+    const { searchedCity, setSearchedCity, fetchHouses, filters, setFilters, setSearchParams } = useContext(GlobalContext);
 
 
-    function handleSearch() {
-        fetchHouses()
+    function handleSearch(e) {
+        const { name, value } = e.target;
+        const newFilters = {
+            ...filters,
+            city: searchedCity
+        };
+        setFilters(newFilters);
+        setSearchParams(newFilters);
+        console.log('ciao')
+        // fetchHouses()
     }
+
+    useEffect(() => {
+
+        const searchParams = new URLSearchParams(location.search);
+        const queryParams = {};
+
+        for (const [key, value] of searchParams.entries()) {
+            if (value && value !== "null") { // Ignora i parametri vuoti o "null"
+                queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
+            }
+        }
+        console.log("Parametri della query:", queryParams);
+        fetchHouses(queryParams)
+
+    }, [location.search]);
+
+
 
     return (
         <div className={`container mt-5 mb-5 ${style.margin_top}`}>
@@ -17,6 +42,7 @@ export default function SearchBar() {
                     type="text"
                     className="form-control"
                     placeholder="Inserisci la città..."
+                    name="city"
                     value={searchedCity}
                     onChange={(e) => setSearchedCity(e.target.value)}
                 />

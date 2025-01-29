@@ -13,7 +13,7 @@ import OwnerShowpage from './pages/OwnerShowPage/OwnerShowPage';
 import axios from 'axios';
 import AddProperty from './pages/addpropertyPage/AddProperty';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 
 
 
@@ -29,6 +29,16 @@ function App() {
   const [sidebarUserOrOwner, setSidebarUserOrOwner] = useState(true);
   const [selectedRoomNumbers, setSelectedRoomNumbers] = useState()
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filters, setFilters] = useState({
+    city: searchParams.get("city") || "",
+    rooms: searchParams.get("rooms") || "",
+    beds: searchParams.get("beds") || "",
+    bathrooms: searchParams.get("bathrooms") || "",
+    size: searchParams.get('size'),
+    price: searchParams.get('price') || "",
+  });
+
 
 
   function logout() {
@@ -39,17 +49,14 @@ function App() {
 
 
 
-  function fetchHouses(roomNumber = undefined) {
+  function fetchHouses(parametriDellaQuery = {}) {
     console.log("Chiamata API con parametri:", {
-      city: searchedCity, numberOfRooms: roomNumber
+      city: searchedCity,
     });
 
 
     axios.get('http://localhost:3000/api/boolbnb', {
-      params: {
-        city: searchedCity,
-        numberOfRooms: roomNumber
-      }
+      params: parametriDellaQuery
     })
       .then(res => {
         console.log(searchedCity, "debug prova")
@@ -66,19 +73,19 @@ function App() {
 
   return (
     <>
-      <GlobalContext.Provider value={{ houses, setHouses, searchedCity, setSearchedCity, owner, setOwner, fetchHouses, sidebarUserOrOwner, setSidebarUserOrOwner, logout, setSelectedRoomNumbers }}>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<MainLayout />}>
-              <Route path="/" element={<MainPage />} />
-              <Route path="/:slug" element={<ShowPage />} />
-              <Route path='/owners' element={<OwnersPage />} />
-              <Route path='/owners/:id' element={<OwnerShowpage />} />
-              <Route path='/owners/:id/add-property' element={<AddProperty />} />
-              <Route path='*' element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+      <GlobalContext.Provider value={{ houses, setHouses, searchedCity, setSearchedCity, owner, setOwner, fetchHouses, sidebarUserOrOwner, setSidebarUserOrOwner, logout, setSelectedRoomNumbers, searchParams, setSearchParams, filters, setFilters }}>
+
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/:slug" element={<ShowPage />} />
+            <Route path='/owners' element={<OwnersPage />} />
+            <Route path='/owners/:id' element={<OwnerShowpage />} />
+            <Route path='/owners/:id/add-property' element={<AddProperty />} />
+            <Route path='*' element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+
       </GlobalContext.Provider>
 
     </>

@@ -4,9 +4,13 @@ import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 import style from './Filters.module.css';
 import { useContext } from 'react';
 import GlobalContext from '../../context/GlobalContext';
+import { useSearchParams, useLocation } from "react-router-dom";
 
 export default function Filters() {
-    const { setSelectedRoomNumbers, selectedRoomNumbers, fetchHouses } = useContext(GlobalContext)
+
+    const location = useLocation();
+
+    const { setSelectedRoomNumbers, selectedRoomNumbers, fetchHouses, filters, setFilters, setSearchParams } = useContext(GlobalContext)
     const [filterActive, setFilterActive] = useState(false);
     const [activeFilters, setActiveFilters] = useState({
         rooms: false,
@@ -16,7 +20,28 @@ export default function Filters() {
         price: false
     });
 
+    //
+    //const [searchParams, setSearchParams] = useSearchParams();
+    // const [filters, setFilters] = useState({
+    //     city: searchParams.get("city") || "",
+    //     rooms: searchParams.get("rooms") || "",
+    //     beds: searchParams.get("beds") || "",
+    //     bathrooms: searchParams.get("bathrooms") || "",
+    //     size: searchParams.get('size'),
+    //     price: searchParams.get('price') || "",
+    // });
 
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        const newFilters = { ...filters, [name]: value };
+        setFilters(newFilters);
+        setSearchParams(newFilters); // Modifica l'URL senza ricaricare la pagina
+        const newRoomNumber = newFilters.rooms
+        setSelectedRoomNumbers(newRoomNumber); // Aggiorna il numero di stanze
+        // fetchHouses(newFilters)
+    };
+
+    //
     const toggleFilter = (filterName) => {
         setActiveFilters((prev) => ({
             ...prev,
@@ -25,10 +50,19 @@ export default function Filters() {
     };
 
     useEffect(() => {
-        if (selectedRoomNumbers !== undefined) {
-            fetchHouses(); // Chiamata solo se il numero di stanze è stato cambiato
+
+        const searchParams = new URLSearchParams(location.search);
+        const queryParams = {};
+
+        for (const [key, value] of searchParams.entries()) {
+            if (value && value !== "null") { // Ignora i parametri vuoti o "null"
+                queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
+            }
         }
-    }, [selectedRoomNumbers]);
+        console.log("Parametri della query:", queryParams);
+        fetchHouses(queryParams)
+
+    }, [location.search]);
 
     return (
         <>
@@ -49,7 +83,9 @@ export default function Filters() {
             {/* Contenitore dei filtri */}
             {filterActive && (
                 <div className={`${style.filters} p-3 text-white`}>
-                    {/* Filtro: Numero di stanze */}
+
+
+                    {/* Filtro: Numero di stanze  2*/}
                     <button className='d-flex justify-content-between align-items-baseline w-100' onClick={() => toggleFilter('rooms')}>
                         Numero di stanze
                         <FontAwesomeIcon
@@ -61,11 +97,7 @@ export default function Filters() {
                     {activeFilters.rooms && (
                         <div className={`${style.filter_options}`}>
                             {['1', '2', '3', '4', '5+'].map((option) => (
-                                <button key={option} onClick={() => {
-                                    const newRoomNumber = option === '5+' ? 5 : parseInt(option);
-                                    setSelectedRoomNumbers(newRoomNumber); // Aggiorna il numero di stanze
-                                    fetchHouses(newRoomNumber)
-                                }} className={`${style.filter_button}`}>
+                                <button key={option} name='rooms' value={option} onClick={handleFilterChange} className={`${style.filter_button}`}>
                                     {option}
                                 </button>
                             ))}

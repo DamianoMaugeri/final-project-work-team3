@@ -5,7 +5,7 @@ import { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function Logo() {
-    const { setSearchedCity, fetchHouses } = useContext(GlobalContext);
+    const { setSearchedCity, fetchHouses, filters, setFilters, setSearchParams } = useContext(GlobalContext);
     return (
         <div className={style.logoContainer}>
             <Link
@@ -13,6 +13,14 @@ export default function Logo() {
                 onClick={() => {
                     setSearchedCity("");
                     fetchHouses();
+                    setFilters({
+                        city: "",
+                        rooms: "",
+                        beds: "",
+                        bathrooms: "",
+                        size: "",
+                        price: "",
+                    })
                 }}
             >
                 <img className={style.logoImage} src={LogoBoolBnb} alt="Logo Boolbnb" />
