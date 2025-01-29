@@ -15,6 +15,7 @@ router.get('/', bnbUserController.index);
 
 // show: mostra la singola property
 router.get('/:id([0-9]+)', bnbUserController.show);
+router.get('/:slug', bnbUserController.showSlug);
 
 //update: aggiorna parzialmente properties (utilizzata per aggiornare il campo vote)
 router.patch('/:id([0-9]+)', bnbUserController.update);

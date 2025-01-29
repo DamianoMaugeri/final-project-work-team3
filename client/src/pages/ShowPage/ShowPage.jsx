@@ -2,7 +2,7 @@ import HouseShowCard from "../../components/House Show Card/HouseShowCard"
 import ReviewCard from "../../components/Review Card/ReviewCard"
 import ReviewForm from "../../components/ReviewForm/ReviewForm"
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import style from "./ShowPage.module.css"
 import Loader from "../../components/Loader/Loader"
@@ -11,18 +11,23 @@ import HeaderMain from "../../components/HeaderMain/HeaderMain"
 
 export default function ShowPage() {
 
-
+    const navigate = useNavigate();
     const [house, setHouse] = useState(null)
     const [reviewBoolean, setReviewBoolean] = useState("")
     const [emailBoolean, setEmailBoolean] = useState("")
-    const { id } = useParams()
+    const { slug } = useParams()
+    // const nuovoid = location.state.id
 
 
     function fetchHouse() {
-        axios.get(`http://localhost:3000/api/boolbnb/${id}`)
+
+        console.log(slug)
+        axios.get(`http://localhost:3000/api/boolbnb/${slug}`)
             .then(res => {
                 setHouse(res.data)
                 console.log('data', res.data)
+
+
             })
             .catch(err => {
                 console.error(err)
@@ -33,7 +38,7 @@ export default function ShowPage() {
 
     useEffect(() => {
         fetchHouse()
-    }, [id])
+    }, [slug])
 
 
     return (

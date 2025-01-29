@@ -56,6 +56,40 @@ function show(req, res) {
 }
 
 
+// funzione show che cerca con lo slug invece che l'id ( lo slug è il titolo della casa )
+function showSlug(req, res) {
+    const slug = req.params.slug;
+    // formattare di nuovo il titolo
+    const formattedSlug = slug.replace(/-/g, " ")
+    console.log('arrivo qui')
+
+    const sqlHouse = "SELECT * FROM properties WHERE title = ?";
+    const sqlReviews = "SELECT * FROM reviews AS rev JOIN rents AS r ON rev.rent_id=r.id JOIN users AS u ON r.user_id=u.id WHERE r.property_id= ?";
+    const sqlOwnerEmail = `SELECT o.email FROM properties as p JOIN owners as o ON p.owner_id = o.id WHERE p.id = ?`
+    connection.query(sqlHouse, [formattedSlug], (err, results) => {
+        if (err) return res.status(500).json({ error: "Database query failed" });
+        if (results.length === 0) return res.status(404).json({ errore: "House not found" });
+        const house = results[0]
+        const id = house.id;
+        connection.query(sqlReviews, [id], (err, results) => {
+            if (err) return res.status(500).json({ error: "Database query failed" });
+            house.reviews = results;
+
+            const formattedImage = house.image?.split(' ').join('_')
+            house.image = `http://localhost:3000/images/${formattedImage}`
+            connection.query(sqlOwnerEmail, [id], (err, resultsEmail) => {
+                if (err) return res.status(500).json({ error: "Database query failed" });
+                if (resultsEmail.length > 0) house.ownerEmail = resultsEmail[0].email
+                res.json(house)
+
+
+            })
+        })
+    })
+}
+
+
+
 
 function update(req, res) {
     const propertyId = req.params.id;
@@ -130,7 +164,7 @@ function postReview(req, res) {
 
 
 
-module.exports = { index, show, update, postReview };
+module.exports = { index, show, update, postReview, showSlug };
 
 
 

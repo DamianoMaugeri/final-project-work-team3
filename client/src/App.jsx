@@ -66,7 +66,7 @@ function App() {
           <Routes>
             <Route element={<MainLayout />}>
               <Route path="/" element={<MainPage />} />
-              <Route path="/:id" element={<ShowPage />} />
+              <Route path="/:slug" element={<ShowPage />} />
               <Route path='/owners' element={<OwnersPage />} />
               <Route path='/owners/:id' element={<OwnerShowpage />} />
               <Route path='/owners/:id/add-property' element={<AddProperty />} />
