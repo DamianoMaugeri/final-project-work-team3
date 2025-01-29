@@ -27,7 +27,7 @@ function App() {
   const [searchedCity, setSearchedCity] = useState('');
   const [owner, setOwner] = useState({});
   const [sidebarUserOrOwner, setSidebarUserOrOwner] = useState(true);
-
+  const [selectedRoomNumbers, setSelectedRoomNumbers] = useState()
 
 
 
@@ -40,10 +40,14 @@ function App() {
 
 
   function fetchHouses() {
-
+    console.log("Chiamata API con parametri:", {
+      city: searchedCity,
+      numberOfRooms: selectedRoomNumbers
+    });
     axios.get('http://localhost:3000/api/boolbnb', {
       params: {
-        city: searchedCity
+        city: searchedCity,
+        numberOfRooms: selectedRoomNumbers
       }
     })
       .then(res => {
@@ -61,7 +65,7 @@ function App() {
 
   return (
     <>
-      <GlobalContext.Provider value={{ houses, setHouses, searchedCity, setSearchedCity, owner, setOwner, fetchHouses, sidebarUserOrOwner, setSidebarUserOrOwner, logout }}>
+      <GlobalContext.Provider value={{ houses, setHouses, searchedCity, setSearchedCity, owner, setOwner, fetchHouses, sidebarUserOrOwner, setSidebarUserOrOwner, logout, setSelectedRoomNumbers }}>
         <BrowserRouter>
           <Routes>
             <Route element={<MainLayout />}>
