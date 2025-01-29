@@ -9,6 +9,16 @@ function index(req, res) {
         sql += " WHERE city LIKE ?"
         params.push(`%${req.query.city}%`)
     }
+    if (req.query.numberOfRooms) {
+        req.query.city ? sql += " AND number_of_rooms " : sql += " WHERE number_of_rooms ";
+        if (req.query.numberOfRooms === "5") {
+            sql += ">= ?"
+            params.push(5)
+        } else {
+            sql += "= ?"
+            params.push(parseInt(req.query.numberOfRooms, 10))
+        }
+    }
     sql += " ORDER BY vote DESC"
     connection.query(sql, params, (err, results) => {
         if (err) return res.status(500).json({ error: "Database query failed" });
