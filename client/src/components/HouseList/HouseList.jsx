@@ -26,7 +26,7 @@ export default function HouseList() {
 
     return (
 
-        houses.length > 0 ?
+        !houses ? (<Loader />) : houses.length > 0 ?
 
             (<div className="container">
                 <div className="row d-flex flex-wrap row-gap-5 ">
@@ -41,7 +41,7 @@ export default function HouseList() {
                     ))}
                 </div>
             </div>) :
-            (<Loader />)
+            (<h1 className="text-center">La ricerca non ha prodotto risultati</h1>)
 
 
 

@@ -23,7 +23,7 @@ function App() {
 
 
 
-  const [houses, setHouses] = useState([]);
+  const [houses, setHouses] = useState();
   const [searchedCity, setSearchedCity] = useState('');
   const [owner, setOwner] = useState({});
   const [sidebarUserOrOwner, setSidebarUserOrOwner] = useState(true);
