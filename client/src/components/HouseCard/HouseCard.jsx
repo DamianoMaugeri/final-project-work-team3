@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useMatch } from "react-router-dom";
 import HeartButton from "../Heart Button/HeartButton";
 import style from './HouseCard.module.css'
 import placeHolder from '../../assets/placeholder.png'
@@ -8,6 +8,8 @@ import placeHolder from '../../assets/placeholder.png'
 export default function HouseCard({ content }) {
 
     const { id, price_per_day, title, full_address, city, image, vote } = content
+
+    const isOwnerPage = useMatch("/owners/:id");
 
 
 
@@ -26,7 +28,7 @@ export default function HouseCard({ content }) {
                     alt="House"
                 />
                 {/* Cuoricino */}
-                <HeartButton vote={vote} id={id} />
+                {!isOwnerPage && <HeartButton vote={vote} id={id} />}
             </div>
 
             {/* contenuto della card */}
