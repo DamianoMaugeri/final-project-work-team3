@@ -49,9 +49,9 @@ export default function Filters() {
                         />
                     </button>
                     {activeFilters.rooms && (
-                        <div className={`${style.filterOptions}`}>
+                        <div className={`${style.filter_options}`}>
                             {['1', '2', '3', '4', '5+'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`}>
+                                <button key={option} className={`${style.filter_button}`}>
                                     {option}
                                 </button>
                             ))}
