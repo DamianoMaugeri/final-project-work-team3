@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 import style from './Filters.module.css';
+import { useContext } from 'react';
+import GlobalContext from '../../context/GlobalContext';
 
 export default function Filters() {
+    const { setSelectedRoomNumbers, selectedRoomNumbers, fetchHouses } = useContext(GlobalContext)
     const [filterActive, setFilterActive] = useState(false);
     const [activeFilters, setActiveFilters] = useState({
         rooms: false,
@@ -13,6 +16,7 @@ export default function Filters() {
         price: false
     });
 
+
     const toggleFilter = (filterName) => {
         setActiveFilters((prev) => ({
             ...prev,
@@ -20,18 +24,24 @@ export default function Filters() {
         }));
     };
 
+    useEffect(() => {
+        if (selectedRoomNumbers !== undefined) {
+            fetchHouses(); // Chiamata solo se il numero di stanze è stato cambiato
+        }
+    }, [selectedRoomNumbers]);
+
     return (
         <>
             {/* Tasto per attivare/disattivare tutti i filtri */}
             <button className={style.fil} onClick={() => {
-                setFilterActive(!filterActive)
+                setFilterActive(!filterActive);
                 setActiveFilters({
                     rooms: false,
                     beds: false,
                     bathrooms: false,
                     size: false,
                     price: false
-                })
+                });
             }}>
                 Filtri avanzati
             </button>
@@ -51,7 +61,10 @@ export default function Filters() {
                     {activeFilters.rooms && (
                         <div className={`${style.filter_options}`}>
                             {['1', '2', '3', '4', '5+'].map((option) => (
-                                <button key={option} className={`${style.filter_button}`}>
+                                <button key={option} onClick={() => {
+                                    const newRoomNumber = option === '5+' ? 5 : parseInt(option);
+                                    setSelectedRoomNumbers(newRoomNumber); // Aggiorna il numero di stanze
+                                }} className={`${style.filter_button}`}>
                                     {option}
                                 </button>
                             ))}
@@ -70,7 +83,9 @@ export default function Filters() {
                     {activeFilters.beds && (
                         <div className={`${style.filterOptions}`}>
                             {['2-3', '4-6'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`}>
+                                <button key={option} className={`${style.filterButton}`} onClick={() => {
+                                    // Aggiungi la logica per Posti letto
+                                }}>
                                     {option}
                                 </button>
                             ))}
@@ -89,7 +104,9 @@ export default function Filters() {
                     {activeFilters.bathrooms && (
                         <div className={`${style.filterOptions}`}>
                             {['1', '2', '3+'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`}>
+                                <button key={option} className={`${style.filterButton}`} onClick={() => {
+                                    // Aggiungi la logica per Bagni
+                                }}>
                                     {option}
                                 </button>
                             ))}
@@ -108,7 +125,9 @@ export default function Filters() {
                     {activeFilters.size && (
                         <div className={`${style.filterOptions}`}>
                             {['<50', '50', '100', '150', '200', '>200'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`}>
+                                <button key={option} className={`${style.filterButton}`} onClick={() => {
+                                    // Aggiungi la logica per Dimensioni
+                                }}>
                                     {option}
                                 </button>
                             ))}
@@ -130,7 +149,9 @@ export default function Filters() {
                     {activeFilters.price && (
                         <div className={`${style.filterOptions}`}>
                             {['<50', '50', '100', '150', '200', '>200'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`}>
+                                <button key={option} className={`${style.filterButton}`} onClick={() => {
+                                    // Aggiungi la logica per Prezzo
+                                }}>
                                     {option}
                                 </button>
                             ))}
