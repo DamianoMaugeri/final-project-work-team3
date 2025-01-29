@@ -141,7 +141,7 @@ export default function HouseForm({ id, onSuccess = () => { } }) {
 
                 </p>
                 <p className="col-md-6 col-sm-12" >
-                    <label htmlFor="size" className="form-label">TETRI QUADRI DELLA CASA *</label>
+                    <label htmlFor="size" className="form-label">METRI QUADRI *</label>
                     <input required type="text" className="form-control" placeholder="inserisci la metratura della casa" name="size" id="size" value={formData.size} onChange={handleForm} />
 
                 </p>
