@@ -41,7 +41,7 @@
 
 .toggleButton:hover {
     background-color: #444;
-    /* Cambiamento di colore più morbido */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
 }
 
 .toggleButton.open {

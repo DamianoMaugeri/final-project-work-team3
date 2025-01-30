@@ -115,7 +115,7 @@ export default function Filters() {
                     </button>
                     {activeFilters.beds && (
                         <div className={`${style.filter_options}`}>
-                            {['2 - 3', '4 - 6', '6+'].map((option) => (
+                            {['1', '2', '3', '4+'].map((option) => (
                                 <button key={option} name='beds' value={option} className={`${style.filter_button}`} onClick={handleFilterChange}>
                                     {option}
                                 </button>
