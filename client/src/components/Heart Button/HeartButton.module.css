@@ -8,7 +8,7 @@
 
 .tooltip {
      position: absolute;
-     top: -250px;
+     bottom: 210px;
      right: 20%;
      transform: translateX(50%);
      background-color: #28a745;

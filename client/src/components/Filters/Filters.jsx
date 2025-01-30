@@ -5,6 +5,7 @@ import style from './Filters.module.css';
 import { useContext } from 'react';
 import GlobalContext from '../../context/GlobalContext';
 import { useSearchParams, useLocation } from "react-router-dom";
+import SlideFilter from '../Filters util/SlideFilter';
 import DoubleRangeSlider from '../DoubleRange/DoubleRange';
 
 export default function Filters() {
@@ -46,10 +47,13 @@ export default function Filters() {
 
     //
     const toggleFilter = (filterName) => {
-        setActiveFilters((prev) => ({
-            ...prev,
-            [filterName]: !prev[filterName]
-        }));
+        setActiveFilters((prev) => {
+            const newState = Object.keys(prev).reduce((acc, key) => {
+                acc[key] = key === filterName ? !prev[key] : false; // Apre solo il filtro cliccato e chiude gli altri
+                return acc;
+            }, {});
+            return newState;
+        });
     };
 
     useEffect(() => {
@@ -89,7 +93,7 @@ export default function Filters() {
 
 
                     {/* Filtro: Numero di stanze  2*/}
-                    <button className='d-flex justify-content-between align-items-baseline w-100' onClick={() => toggleFilter('rooms')}>
+                    <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('rooms')}>
                         Numero di stanze
                         <FontAwesomeIcon
                             icon={faSortDown}
@@ -108,7 +112,7 @@ export default function Filters() {
                     )}
 
                     {/* Filtro: Posti letto */}
-                    <button className='d-flex justify-content-between align-items-baseline w-100' onClick={() => toggleFilter('beds')}>
+                    <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('beds')}>
                         Posti letto
                         <FontAwesomeIcon
                             icon={faSortDown}
@@ -118,7 +122,7 @@ export default function Filters() {
                     </button>
                     {activeFilters.beds && (
                         <div className={`${style.filter_options}`}>
-                            {['2 - 3', '4 - 6', '6+'].map((option) => (
+                            {['1', '2', '3', '4+'].map((option) => (
                                 <button key={option} name='beds' value={option} className={`${style.filter_button}`} onClick={handleFilterChange}>
                                     {option}
                                 </button>
@@ -127,7 +131,7 @@ export default function Filters() {
                     )}
 
                     {/* Filtro: Bagni */}
-                    <button className='d-flex justify-content-between align-items-baseline w-100' onClick={() => toggleFilter('bathrooms')}>
+                    <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('bathrooms')}>
                         Bagni
                         <FontAwesomeIcon
                             icon={faSortDown}
@@ -146,7 +150,7 @@ export default function Filters() {
                     )}
 
                     {/* Filtro: Dimensioni */}
-                    <button className='d-flex justify-content-between align-items-baseline w-100' onClick={() => toggleFilter('size')}>
+                    <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('size')}>
                         Dimensioni
                         <FontAwesomeIcon
                             icon={faSortDown}
@@ -156,12 +160,19 @@ export default function Filters() {
                     </button>
                     {activeFilters.size && (
                         <div className={`${style.filterOptions}`}>
-                            <DoubleRangeSlider min={40} max={1000} name='size' unit='mt. quadri' value={filters.size || [0, 1000]} onValueChange={handleFilterChange} />
+                            {['<50', '50', '100', '150', '200', '>200'].map((option) => (
+                                <button key={option} className={`${style.filterButton}`} name='size' value={option} onClick={handleFilterChange}>
+                                    {option}
+                                </button>
+                            ))}
+                            <div className="mt-2">
+                                <input type="range" min="0" max="200" className={`${style.filterRange}`} />
+                            </div>
                         </div>
                     )}
 
                     {/* Filtro: Prezzo giornaliero */}
-                    <button className='d-flex justify-content-between align-items-baseline w-100' onClick={() => toggleFilter('price')}>
+                    <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('price')}>
                         Prezzo giornaliero
                         <FontAwesomeIcon
                             icon={faSortDown}
@@ -171,9 +182,16 @@ export default function Filters() {
                     </button>
                     {activeFilters.price && (
                         <div className={`${style.filterOptions}`}>
-
-                            <DoubleRangeSlider min={0} max={1000} name='price' unit='€' value={filters.price || [0, 1000]} onValueChange={handleFilterChange} />
-
+                            {['<50', '50', '100', '150', '200', '>200'].map((option) => (
+                                <button key={option} className={`${style.filterButton}`} onClick={() => {
+                                    // Aggiungi la logica per Prezzo
+                                }}>
+                                    {option}
+                                </button>
+                            ))}
+                            <div className="mt-2">
+                                <input type="range" min="0" max="200" className={`${style.filterRange}`} />
+                            </div>
                         </div>
                     )}
                 </div>

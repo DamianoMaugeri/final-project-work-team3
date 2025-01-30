@@ -9,6 +9,10 @@
 
 }
 
+.fil_btn:hover {
+    background-color: #10242d75;
+}
+
 .filter_options {
     width: 100%;
     display: flex;
@@ -23,24 +27,26 @@
 
 .filter_button {
     padding: 2px 3px;
-    width: 40px;
+    width: 30px;
     aspect-ratio: 1/1;
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: white;
     color: black;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid whitesmoke;
-    /* Assicurati che non ci siano bordi */
+    border: none;
     box-sizing: border-box;
     white-space: nowrap;
+    transition: all 0.3s ease-in-out;
 }
 
 .filter_button:hover {
-    background-color: rgba(75, 75, 161, 0.51);
-    border: 1px solid whitesmoke;
+    background-color: #0aca34ad;
+    border: none;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
 }
 
 .fil {

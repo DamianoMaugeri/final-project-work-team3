@@ -4,13 +4,13 @@ import style from '../OwnerShowPage/OwnerShowPage.module.css'
 import { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import HeaderOwners from "../../components/headerOwners/HeaderOwners";
-
+import useLogout from "../../hook/useLogout";
 
 export default function AddProperty() {
 
+    const logout = useLogout()
 
-
-    const { owner, logout } = useContext(GlobalContext);
+    const { owner } = useContext(GlobalContext);
 
     const { first_name, last_name } = owner;
     const { id } = useParams();
