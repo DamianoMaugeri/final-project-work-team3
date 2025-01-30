@@ -19,7 +19,7 @@ export default function SideBar() {
                 className={`${style.toggleButton} ${isOpen ? style.open : ''}`}
                 onClick={toggleSidebar}
             >
-                <i className="fa-solid fa-bars" style={{ color: '#ffffff', zIndex: '999', display: 'block' }}></i>
+                <i className="fa-solid fa-bars" style={{ color: 'rgb(247 243 233)', zIndex: '999', display: 'block', fontSize: '1rem' }}></i>
             </button>
 
             {/* Sidebar che si espande e si chiude */}
