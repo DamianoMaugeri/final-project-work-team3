@@ -62,6 +62,7 @@
     /* Posizione quando la sidebar è aperta */
     transition: left 0.6s ease-in-out;
     /* Sincronizza con la sidebar */
+
 }
 
 .sidebar:hover {
