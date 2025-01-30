@@ -90,7 +90,7 @@ export default function Filters() {
 
 
                     {/* Filtro: Numero di stanze  2*/}
-                    <button className={`d-flex justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('rooms')}>
+                    <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('rooms')}>
                         Numero di stanze
                         <FontAwesomeIcon
                             icon={faSortDown}
@@ -109,7 +109,7 @@ export default function Filters() {
                     )}
 
                     {/* Filtro: Posti letto */}
-                    <button className={`d-flex justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('beds')}>
+                    <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('beds')}>
                         Posti letto
                         <FontAwesomeIcon
                             icon={faSortDown}
@@ -128,7 +128,7 @@ export default function Filters() {
                     )}
 
                     {/* Filtro: Bagni */}
-                    <button className={`d-flex justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('bathrooms')}>
+                    <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('bathrooms')}>
                         Bagni
                         <FontAwesomeIcon
                             icon={faSortDown}
@@ -147,7 +147,7 @@ export default function Filters() {
                     )}
 
                     {/* Filtro: Dimensioni */}
-                    <button className={`d-flex justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('size')}>
+                    <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('size')}>
                         Dimensioni
                         <FontAwesomeIcon
                             icon={faSortDown}
@@ -158,7 +158,7 @@ export default function Filters() {
                     {activeFilters.size && <SlideFilter />}
 
                     {/* Filtro: Prezzo giornaliero */}
-                    <button className={`d-flex justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('price')}>
+                    <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('price')}>
                         Prezzo giornaliero
                         <FontAwesomeIcon
                             icon={faSortDown}
