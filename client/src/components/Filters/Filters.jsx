@@ -43,10 +43,13 @@ export default function Filters() {
 
     //
     const toggleFilter = (filterName) => {
-        setActiveFilters((prev) => ({
-            ...prev,
-            [filterName]: !prev[filterName]
-        }));
+        setActiveFilters((prev) => {
+            const newState = Object.keys(prev).reduce((acc, key) => {
+                acc[key] = key === filterName ? !prev[key] : false; // Apre solo il filtro cliccato e chiude gli altri
+                return acc;
+            }, {});
+            return newState;
+        });
     };
 
     useEffect(() => {
