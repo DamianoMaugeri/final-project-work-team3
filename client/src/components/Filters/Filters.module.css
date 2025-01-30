@@ -22,8 +22,8 @@
 }
 
 .filter_button {
-    padding: 2px;
-    width: 25px;
+    padding: 2px 3px;
+    width: 40px;
     aspect-ratio: 1/1;
     border-radius: 3px;
     background-color: white;
@@ -35,6 +35,7 @@
     border: 1px solid whitesmoke;
     /* Assicurati che non ci siano bordi */
     box-sizing: border-box;
+    white-space: nowrap;
 }
 
 .filter_button:hover {

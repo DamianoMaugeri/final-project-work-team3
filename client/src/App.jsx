@@ -50,11 +50,9 @@ function App() {
 
 
   function fetchHouses(parametriDellaQuery = {}) {
-    console.log("Chiamata API con parametri:", {
-      city: searchedCity,
-    });
 
 
+    console.log('chiamata axios')
     axios.get('http://localhost:3000/api/boolbnb', {
       params: parametriDellaQuery
     })

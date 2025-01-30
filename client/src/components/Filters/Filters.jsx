@@ -59,7 +59,7 @@ export default function Filters() {
                 queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
             }
         }
-        console.log("Parametri della query:", queryParams);
+        // console.log("Parametri della query:", queryParams);
         fetchHouses(queryParams)
 
     }, [location.search]);
@@ -114,11 +114,9 @@ export default function Filters() {
                         />
                     </button>
                     {activeFilters.beds && (
-                        <div className={`${style.filterOptions}`}>
-                            {['2-3', '4-6'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`} onClick={() => {
-                                    // Aggiungi la logica per Posti letto
-                                }}>
+                        <div className={`${style.filter_options}`}>
+                            {['2 - 3', '4 - 6', '6+'].map((option) => (
+                                <button key={option} name='beds' value={option} className={`${style.filter_button}`} onClick={handleFilterChange}>
                                     {option}
                                 </button>
                             ))}
@@ -135,11 +133,9 @@ export default function Filters() {
                         />
                     </button>
                     {activeFilters.bathrooms && (
-                        <div className={`${style.filterOptions}`}>
+                        <div className={`${style.filter_options}`}>
                             {['1', '2', '3+'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`} onClick={() => {
-                                    // Aggiungi la logica per Bagni
-                                }}>
+                                <button key={option} className={`${style.filter_button}`} name='bathrooms' value={option} onClick={handleFilterChange}>
                                     {option}
                                 </button>
                             ))}
@@ -158,9 +154,7 @@ export default function Filters() {
                     {activeFilters.size && (
                         <div className={`${style.filterOptions}`}>
                             {['<50', '50', '100', '150', '200', '>200'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`} onClick={() => {
-                                    // Aggiungi la logica per Dimensioni
-                                }}>
+                                <button key={option} className={`${style.filterButton}`} name='size' value={option} onClick={handleFilterChange}>
                                     {option}
                                 </button>
                             ))}
