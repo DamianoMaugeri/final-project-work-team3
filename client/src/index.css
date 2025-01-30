@@ -62,3 +62,58 @@ button {
   background-color: #06fc3bad;
   transform: scale(1.05);
 }
+
+.slider-container {
+  position: relative;
+  width: 200px;
+  height: 50px;
+}
+
+.track {
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  background: #ddd;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.range {
+  position: absolute;
+  height: 5px;
+  background: #6ba749;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+input[type="range"] {
+  position: absolute;
+  width: 100%;
+  -webkit-appearance: none;
+  background: transparent;
+  pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  pointer-events: auto;
+  background: #15ff00;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  z-index: 3;
+  transform: translateY(80%);
+}
+
+input[type="range"].min {
+  z-index: 4;
+}
+
+input[type="range"].max {
+  z-index: 3;
+}

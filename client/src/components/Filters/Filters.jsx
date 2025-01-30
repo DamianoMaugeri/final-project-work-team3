@@ -5,6 +5,7 @@ import style from './Filters.module.css';
 import { useContext } from 'react';
 import GlobalContext from '../../context/GlobalContext';
 import { useSearchParams, useLocation } from "react-router-dom";
+import DoubleRangeSlider from '../DoubleRange/DoubleRange';
 
 export default function Filters() {
 
@@ -28,7 +29,8 @@ export default function Filters() {
     //     beds: searchParams.get("beds") || "",
     //     bathrooms: searchParams.get("bathrooms") || "",
     //     size: searchParams.get('size'),
-    //     price: searchParams.get('price') || "",
+    //     minPrice: searchParams.get('minPrice') || "",
+    //     maxPrice: searchParams.get('maxPrice') || "",
     // });
 
     const handleFilterChange = (e) => {
@@ -38,6 +40,7 @@ export default function Filters() {
         setSearchParams(newFilters); // Modifica l'URL senza ricaricare la pagina
         const newRoomNumber = newFilters.rooms
         setSelectedRoomNumbers(newRoomNumber); // Aggiorna il numero di stanze
+        console.log('funzione per i filtri')
         // fetchHouses(newFilters)
     };
 
@@ -153,14 +156,7 @@ export default function Filters() {
                     </button>
                     {activeFilters.size && (
                         <div className={`${style.filterOptions}`}>
-                            {['<50', '50', '100', '150', '200', '>200'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`} name='size' value={option} onClick={handleFilterChange}>
-                                    {option}
-                                </button>
-                            ))}
-                            <div className="mt-2">
-                                <input type="range" min="0" max="200" className={`${style.filterRange}`} />
-                            </div>
+                            <DoubleRangeSlider min={40} max={1000} name='size' unit='mt. quadri' value={filters.size || [0, 1000]} onValueChange={handleFilterChange} />
                         </div>
                     )}
 
@@ -175,16 +171,9 @@ export default function Filters() {
                     </button>
                     {activeFilters.price && (
                         <div className={`${style.filterOptions}`}>
-                            {['<50', '50', '100', '150', '200', '>200'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`} onClick={() => {
-                                    // Aggiungi la logica per Prezzo
-                                }}>
-                                    {option}
-                                </button>
-                            ))}
-                            <div className="mt-2">
-                                <input type="range" min="0" max="200" className={`${style.filterRange}`} />
-                            </div>
+
+                            <DoubleRangeSlider min={0} max={1000} name='price' unit='€' value={filters.price || [0, 1000]} onValueChange={handleFilterChange} />
+
                         </div>
                     )}
                 </div>

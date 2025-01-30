@@ -37,6 +37,7 @@ function App() {
     bathrooms: searchParams.get("bathrooms") || "",
     size: searchParams.get('size'),
     price: searchParams.get('price') || "",
+
   });
 
 

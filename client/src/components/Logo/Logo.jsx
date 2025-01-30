@@ -19,7 +19,7 @@ export default function Logo() {
                         beds: "",
                         bathrooms: "",
                         size: "",
-                        price: "",
+                        price: ""
                     })
                 }}
             >

@@ -5,16 +5,16 @@ const connection = require("../data/db");
 function index(req, res) {
     let sql = "SELECT * FROM properties"
     const params = [];
+    // città
     if (req.query.city) {
         sql += " WHERE city LIKE ?"
         params.push(`%${req.query.city}%`)
     }
-    console.log(req.query.rooms)
+
+    // rooms
     if (req.query.rooms) {
-        console.log(req.query.rooms)
 
-
-        req.query.city ? sql += " AND number_of_rooms " : sql += " WHERE number_of_rooms ";
+        sql === "SELECT * FROM properties" ? sql += " WHERE number_of_rooms " : sql += " AND number_of_rooms ";
         if (req.query.rooms === "5+") {
             sql += ">= ?"
             params.push(5)
@@ -23,7 +23,43 @@ function index(req, res) {
             params.push(parseInt(req.query.rooms, 10))
         }
     }
+    // beds
+    if (req.query.beds) {
+
+        sql === "SELECT * FROM properties" ? sql += " WHERE number_of_beds " : sql += " AND number_of_beds ";
+        if (req.query.beds === "6+") {    // bisogna gestire gli intervalli 
+            sql += "> ?"
+            params.push(6)
+        } else if (req.query.beds === "2 - 3") {
+            sql += ">= 2 AND number_of_beds <= 3 "
+            //params.push(parseInt(req.query.rooms, 10))          non c'è rischio di sql injecion
+        } else if (req.query.beds === "4 - 6") {
+            sql += ">= 4 AND number_of_beds <= 6"
+        } else {
+            console.log('gestisci questo ') // qui bisogna gestire chi prova a mettere valori diversi da quelli previsti 
+        }
+    }
+
+    if (req.query.bathrooms) {
+
+        sql === "SELECT * FROM properties" ? sql += " WHERE number_of_bathrooms " : sql += " AND number_of_bathrooms ";
+        if (req.query.bathrooms === "3+") {
+            sql += ">= 3"
+
+        } else if (req.query.bathrooms === '2') {
+            sql += "= 2"
+        } else if (req.query.bathrooms === '1') {
+            sql += "=1"
+        } else {
+            console.log('gestisci questo ') // qui bisogna gestire chi prova a mettere valori diversi da quelli previsti 
+        }
+    }
+
+
+
     sql += " ORDER BY vote DESC"
+
+    console.log(sql)
     connection.query(sql, params, (err, results) => {
         if (err) return res.status(500).json({ error: "Database query failed" });
 
