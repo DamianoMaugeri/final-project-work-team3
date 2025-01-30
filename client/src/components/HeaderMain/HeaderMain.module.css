@@ -6,11 +6,13 @@
     border-radius: 8px;
     color: white;
     text-decoration: none !important;
+    transition: all 0.3s ease-in-out;
 }
 
 .customMenuButton:hover {
     background-color: #0aca34 !important;
     border-color: #0aca34 !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
 }
 
 .header {
@@ -25,4 +27,5 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    padding: 3rem 2rem;
 }
