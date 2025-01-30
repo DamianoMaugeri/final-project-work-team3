@@ -9,6 +9,10 @@
 
 }
 
+.fil_btn:hover {
+    background-color: #10242d75;
+}
+
 .filter_options {
     width: 100%;
     display: flex;
