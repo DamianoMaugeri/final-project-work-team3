@@ -22,6 +22,7 @@ export default function Filters() {
         price: false
     });
 
+
     //
     //const [searchParams, setSearchParams] = useSearchParams();
     // const [filters, setFilters] = useState({
@@ -45,6 +46,9 @@ export default function Filters() {
         // fetchHouses(newFilters)
     };
 
+
+
+
     //
     const toggleFilter = (filterName) => {
         setActiveFilters((prev) => {
@@ -56,18 +60,42 @@ export default function Filters() {
         });
     };
 
-    useEffect(() => {
+    // useEffect(() => {
 
+    //     const searchParams = new URLSearchParams(location.search);
+    //     const queryParams = {};
+
+    //     for (const [key, value] of searchParams.entries()) {
+    //         if (value && value !== "null") { // Ignora i parametri vuoti o "null"
+    //             queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
+    //         }
+    //     }
+    //     // console.log("Parametri della query:", queryParams);
+    //     fetchHouses(queryParams)
+
+    // }, [location.search]);
+
+    useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const queryParams = {};
 
-        for (const [key, value] of searchParams.entries()) {
-            if (value && value !== "null") { // Ignora i parametri vuoti o "null"
-                queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
+        for (const key of searchParams.keys()) {
+            const values = searchParams.getAll(key); // Ottieni tutti i valori della chiave
+
+            if (values.length > 1) {
+                // Se ci sono più valori, salva come array
+                queryParams[key] = values.map(value => (isNaN(value) ? value : Number(value)));
+            } else {
+                // Altrimenti, salva il singolo valore normalmente
+                const value = values[0];
+                if (value && value !== "null") {
+                    queryParams[key] = isNaN(value) ? value : Number(value);
+                }
             }
         }
-        // console.log("Parametri della query:", queryParams);
-        fetchHouses(queryParams)
+
+        console.log("Parametri della query:", queryParams);
+        fetchHouses(queryParams);
 
     }, [location.search]);
 
@@ -182,16 +210,7 @@ export default function Filters() {
                     </button>
                     {activeFilters.price && (
                         <div className={`${style.filterOptions}`}>
-                            {['<50', '50', '100', '150', '200', '>200'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`} onClick={() => {
-                                    // Aggiungi la logica per Prezzo
-                                }}>
-                                    {option}
-                                </button>
-                            ))}
-                            <div className="mt-2">
-                                <input type="range" min="0" max="200" className={`${style.filterRange}`} />
-                            </div>
+                            <DoubleRangeSlider name='price' min={0} max={5000} value={filters.price || [500, 3000]} unit='€' onValueChange={handleFilterChange} />
                         </div>
                     )}
                 </div>
