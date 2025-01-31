@@ -5,8 +5,8 @@ import style from './Filters.module.css';
 import { useContext } from 'react';
 import GlobalContext from '../../context/GlobalContext';
 import { useSearchParams, useLocation } from "react-router-dom";
-import SlideFilter from '../Filters util/SlideFilter';
 import DoubleRangeSlider from '../DoubleRange/DoubleRange';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export default function Filters() {
 
@@ -21,35 +21,28 @@ export default function Filters() {
         size: false,
         price: false
     });
+    const [selectedSize, setSelectedSize] = useState([0, 500]);
+    const [selectedPrice, setSelectedPrice] = useState([0, 5000]);
 
+    const handleSizeChange = (e) => {
+        setSelectedSize(e.target.value);
+        debouncedHandleFilterChange(e);
+    };
 
-    //
-    //const [searchParams, setSearchParams] = useSearchParams();
-    // const [filters, setFilters] = useState({
-    //     city: searchParams.get("city") || "",
-    //     rooms: searchParams.get("rooms") || "",
-    //     beds: searchParams.get("beds") || "",
-    //     bathrooms: searchParams.get("bathrooms") || "",
-    //     size: searchParams.get('size'),
-    //     minPrice: searchParams.get('minPrice') || "",
-    //     maxPrice: searchParams.get('maxPrice') || "",
-    // });
+    const handlePriceChange = (e) => {
+        setSelectedPrice(e.target.value);
+        debouncedHandleFilterChange(e);
+    };
+
 
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
         const newFilters = { ...filters, [name]: value };
         setFilters(newFilters);
         setSearchParams(newFilters); // Modifica l'URL senza ricaricare la pagina
-        const newRoomNumber = newFilters.rooms
-        setSelectedRoomNumbers(newRoomNumber); // Aggiorna il numero di stanze
-        console.log('funzione per i filtri')
-        // fetchHouses(newFilters)
     };
+    const debouncedHandleFilterChange = useDebounce(handleFilterChange, 300);
 
-
-
-
-    //
     const toggleFilter = (filterName) => {
         setActiveFilters((prev) => {
             const newState = Object.keys(prev).reduce((acc, key) => {
@@ -59,21 +52,6 @@ export default function Filters() {
             return newState;
         });
     };
-
-    // useEffect(() => {
-
-    //     const searchParams = new URLSearchParams(location.search);
-    //     const queryParams = {};
-
-    //     for (const [key, value] of searchParams.entries()) {
-    //         if (value && value !== "null") { // Ignora i parametri vuoti o "null"
-    //             queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
-    //         }
-    //     }
-    //     // console.log("Parametri della query:", queryParams);
-    //     fetchHouses(queryParams)
-
-    // }, [location.search]);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -186,7 +164,7 @@ export default function Filters() {
                             style={{ color: "#ffffff" }}
                         />
                     </button>
-                    {activeFilters.size && <SlideFilter />}
+                    {activeFilters.size && <DoubleRangeSlider name="size" min={0} value={selectedSize} max={500} unit="m²" onValueChange={handleSizeChange} />}
 
                     {/* Filtro: Prezzo giornaliero */}
                     <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('price')}>
@@ -197,7 +175,7 @@ export default function Filters() {
                             style={{ color: "#ffffff" }}
                         />
                     </button>
-                    {activeFilters.price && <SlideFilter />}
+                    {activeFilters.price && <DoubleRangeSlider name="price" min={0} max={5000} value={selectedPrice} unit="€" onValueChange={handlePriceChange} />}
                 </div>
             )}
         </>
