@@ -38,7 +38,7 @@ function App() {
     beds: searchParams.get("beds") || "",
     bathrooms: searchParams.get("bathrooms") || "",
     size: searchParams.get('size'),
-    price: searchParams.get('price') || "",
+    price: searchParams.getAll('price') || "",
 
   });
 
@@ -55,7 +55,7 @@ function App() {
   function fetchHouses(parametriDellaQuery = {}) {
 
 
-    console.log('chiamata axios')
+    console.log('chiamata axios', parametriDellaQuery)
     axios.get('http://localhost:3000/api/boolbnb', {
       params: parametriDellaQuery
     })

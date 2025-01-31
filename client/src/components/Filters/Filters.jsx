@@ -22,6 +22,7 @@ export default function Filters() {
         price: false
     });
 
+
     //
     //const [searchParams, setSearchParams] = useSearchParams();
     // const [filters, setFilters] = useState({
@@ -45,6 +46,9 @@ export default function Filters() {
         // fetchHouses(newFilters)
     };
 
+
+
+
     //
     const toggleFilter = (filterName) => {
         setActiveFilters((prev) => {
@@ -56,18 +60,42 @@ export default function Filters() {
         });
     };
 
-    useEffect(() => {
+    // useEffect(() => {
 
+    //     const searchParams = new URLSearchParams(location.search);
+    //     const queryParams = {};
+
+    //     for (const [key, value] of searchParams.entries()) {
+    //         if (value && value !== "null") { // Ignora i parametri vuoti o "null"
+    //             queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
+    //         }
+    //     }
+    //     // console.log("Parametri della query:", queryParams);
+    //     fetchHouses(queryParams)
+
+    // }, [location.search]);
+
+    useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const queryParams = {};
 
-        for (const [key, value] of searchParams.entries()) {
-            if (value && value !== "null") { // Ignora i parametri vuoti o "null"
-                queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
+        for (const key of searchParams.keys()) {
+            const values = searchParams.getAll(key); // Ottieni tutti i valori della chiave
+
+            if (values.length > 1) {
+                // Se ci sono più valori, salva come array
+                queryParams[key] = values.map(value => (isNaN(value) ? value : Number(value)));
+            } else {
+                // Altrimenti, salva il singolo valore normalmente
+                const value = values[0];
+                if (value && value !== "null") {
+                    queryParams[key] = isNaN(value) ? value : Number(value);
+                }
             }
         }
-        // console.log("Parametri della query:", queryParams);
-        fetchHouses(queryParams)
+
+        console.log("Parametri della query:", queryParams);
+        fetchHouses(queryParams);
 
     }, [location.search]);
 
