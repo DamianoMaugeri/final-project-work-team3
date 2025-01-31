@@ -9,6 +9,8 @@ const emailController = require('../controllers/emailController.js');
 const authenticateToken = require('../middlewares/authenticateToken.js');
 const { generateToken } = require('../utils/authService.js');
 
+const Inbox = ('../controllers/bnbOwnerController.js')
+
 
 
 // rotte => OWNER
@@ -46,6 +48,7 @@ router.post('/', authenticateToken, bnbOwnerController.create);
 router.post('/email-send', emailController.emailSend)
 
 
-
+// index messagi tra user e proprietario
+router.get('/inbox', bnbOwnerController.inbox);
 
 module.exports = router
