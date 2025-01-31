@@ -107,7 +107,12 @@ function create(req, res) {
     });
 }
 
+function inbox(req, res) {
+
+    console.log('My Inbox')
+    res.json('My inbox')
+
+}
 
 
-
-module.exports = { propertiesByOwner, create }
+module.exports = { propertiesByOwner, create, inbox }
