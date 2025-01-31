@@ -15,7 +15,7 @@ export default function HouseCard({ content }) {
 
     return (
 
-        <div className="card h-100" >
+        <div className={`card h-100 ${style.hover}`} >
             {/* immagine */}
             <div className="position-relative">
                 <img

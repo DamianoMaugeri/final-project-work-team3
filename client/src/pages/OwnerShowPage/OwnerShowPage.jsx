@@ -66,7 +66,7 @@ export default function OwnerShowpage() {
                         <div className="col">
                             <h3 className="mb-3">I tuoi immobili:</h3>
                             {propertiesOwned?.length > 0 ? (
-                                <div className="d-flex flex-wrap gap-3">
+                                <div className="row g-3">
                                     {propertiesOwned.map((property, i) => (
                                         <div key={i} className="col-12 col-md-6 col-lg-4">
                                             <HouseCard content={property} />

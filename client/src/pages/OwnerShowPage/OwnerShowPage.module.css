@@ -8,11 +8,12 @@
     color: white !important;
     padding: 15px 15px !important;
     border-radius: 10px !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
 }
 
 .page {
     background-color: #F7F3E9;
     overflow: auto;
     margin: 0 auto;
-    padding-top: 80px;
+    padding: 70px;
 }

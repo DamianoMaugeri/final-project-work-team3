@@ -67,6 +67,7 @@ export default function ShowPage() {
 
                     {!reviewBoolean && emailBoolean && <EmailForm email={house.ownerEmail} />}
 
+                    <hr />
                     <ReviewCard reviews={house.reviews} />
                 </>
             ) :

@@ -186,18 +186,7 @@ export default function Filters() {
                             style={{ color: "#ffffff" }}
                         />
                     </button>
-                    {activeFilters.size && (
-                        <div className={`${style.filterOptions}`}>
-                            {['<50', '50', '100', '150', '200', '>200'].map((option) => (
-                                <button key={option} className={`${style.filterButton}`} name='size' value={option} onClick={handleFilterChange}>
-                                    {option}
-                                </button>
-                            ))}
-                            <div className="mt-2">
-                                <input type="range" min="0" max="200" className={`${style.filterRange}`} />
-                            </div>
-                        </div>
-                    )}
+                    {activeFilters.size && <SlideFilter />}
 
                     {/* Filtro: Prezzo giornaliero */}
                     <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('price')}>
@@ -208,11 +197,7 @@ export default function Filters() {
                             style={{ color: "#ffffff" }}
                         />
                     </button>
-                    {activeFilters.price && (
-                        <div className={`${style.filterOptions}`}>
-                            <DoubleRangeSlider name='price' min={0} max={5000} value={filters.price || [500, 3000]} unit='€' onValueChange={handleFilterChange} />
-                        </div>
-                    )}
+                    {activeFilters.price && <SlideFilter />}
                 </div>
             )}
         </>
