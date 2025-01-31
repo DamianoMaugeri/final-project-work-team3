@@ -10,6 +10,8 @@ import ShowPage from './pages/ShowPage/ShowPage';
 import OwnersPage from './pages/OwnersPage/OwnersPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import OwnerShowpage from './pages/OwnerShowPage/OwnerShowPage';
+import MessagesPage from './pages/MessagesPage/MessagesPage';
+import OwnersDataPage from './pages/OwnersDataPage/OwnersDataPage'
 import axios from 'axios';
 import AddProperty from './pages/addpropertyPage/AddProperty';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -81,6 +83,8 @@ function App() {
             <Route path='/owners' element={<OwnersPage />} />
             <Route path='/owners/:id' element={<OwnerShowpage />} />
             <Route path='/owners/:id/add-property' element={<AddProperty />} />
+            <Route path='/owners/:id/messages' element={<MessagesPage />} />
+            <Route path='/owners/:id/owners-data' element={<OwnersDataPage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Route>
         </Routes>
