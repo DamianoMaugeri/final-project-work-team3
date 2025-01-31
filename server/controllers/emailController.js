@@ -14,7 +14,11 @@ const transporter = nodemailer.createTransport({
 function emailSend(req, res) {
     const { from, to, subject, text, html } = req.body;
 
-    console.log('ciao')
+    if (!from || !to || !subject || !text) {
+        return res.status(400).json({
+            message: 'Devi fornire almeno mittente, destinatario, oggetto e testo dell\'email',
+        });
+    }
 
     const mailOptions = {
         from,    // email del mittente
@@ -24,13 +28,44 @@ function emailSend(req, res) {
         //html,       // Corpo dell'email in formato HTML nel caso in cui c'è bisogno di inviare email particolari che non comprendono solo il testo 
     };
 
+    const autoMailOptions = {
+        from: "BooleanBnBServizioclienti@gmail.com",    // email del sito 
+        to: mailOptions.from,      //  email del mittenente al quale inviare la conferma
+        subject: 'Email Ricevuta ',           // Oggetto
+        text: 'Il propietario del sito ha ricevuto la tua email e ti risponderà al più presto',
+
+    }
+
+
+
     transporter
         .sendMail(mailOptions)
         .then((info) => {
-            res.status(200).json({
-                message: 'Email inviata con successo!',
-                info,
+
+            transporter.sendMail(autoMailOptions).then((info) => {
+
+
+                // se l'email è stata inviata con successo salva il messaggio nel db per poterlo visualizzare nella sezione messaggi di ogni propietario 
+                // bisogna creare una query che recupera owner_id dalla tabella Owner , user id dalla tabella user e inserisce il messaggio nella tabella messages
+                // con i campi owner_id, user_id, message, 
+
+
+
+
+
+                res.status(200).json({
+                    message: 'Email inviata con successo!',
+                    info,
+                });
+            }).catch((error) => {
+                console.error('Errore durante l\'invio dell\'email:', error);
+                res.status(500).json({
+                    message: 'Errore durante l\'invio dell\'email',
+                    error,
+                });
             });
+
+
         })
         .catch((error) => {
             console.error('Errore durante l\'invio dell\'email:', error);
