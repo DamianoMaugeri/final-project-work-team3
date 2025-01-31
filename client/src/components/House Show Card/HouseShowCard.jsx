@@ -20,18 +20,32 @@ export default function HouseShowCard({ houseEl }) {
                                         }} alt={title} className={style.sizeImg}
                                     />
                                 </div>
-                                <div className="col fw-bold fs-4">
+                                <div className="col fs-4">
                                     <div>
-                                        <h2 className="card-title mb-4">{title}</h2>
-                                        <h5 className="card-text">Dettagli dell'immobile:</h5>
+                                        <h2 className="card-title mb-4 fst-italic fs-1">{title}</h2>
+                                        <h5 className="card-text fw-light fs-4">Dettagli dell'immobile:</h5>
                                         <ul>
-                                            <li className="card-text">Valutazione: {vote} </li>
-                                            <li className="card-text" >Indirizzo: {full_address}</li>
-                                            <li className="card-text">Stanze: {number_of_rooms}</li>
-                                            <li className="card-text">Posti letto: {number_of_beds}</li>
-                                            <li className="card-text">Bagni: {number_of_bathrooms}</li>
-                                            <li className="card-text">Dimensione: {size} mq</li>
-                                            <li className="card-text">Città: {city}</li>
+                                            <li className="card-text ">Valutazione:
+                                                <span className='fst-italic fw-light'>  {vote}</span>
+                                            </li>
+                                            <li className="card-text" >Indirizzo:
+                                                <span className='fst-italic fw-light'>  {full_address}</span>
+                                            </li>
+                                            <li className="card-text">Stanze:
+                                                <span className='fst-italic fw-light'>  {number_of_rooms}</span>
+                                            </li>
+                                            <li className="card-text">Posti letto:
+                                                <span className='fst-italic fw-light'>  {number_of_beds}</span>
+                                            </li>
+                                            <li className="card-text">Bagni:
+                                                <span className='fst-italic fw-light'>  {number_of_bathrooms}</span>
+                                            </li>
+                                            <li className="card-text">Dimensione:
+                                                <span className='fst-italic fw-light'>  {size} mq</span>
+                                            </li>
+                                            <li className="card-text">Città:
+                                                <span className='fst-italic fw-light'>  {city}</span>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
