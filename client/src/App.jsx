@@ -29,7 +29,11 @@ function App() {
   const [searchedCity, setSearchedCity] = useState('');
   const [owner, setOwner] = useState({});
   const [sidebarUserOrOwner, setSidebarUserOrOwner] = useState(true);
-  const [selectedRoomNumbers, setSelectedRoomNumbers] = useState()
+  const [selectedRoomNumbers, setSelectedRoomNumbers] = useState(null)
+  const [selectedBeds, setSelectedBeds] = useState(null);
+  const [selectedBathrooms, setSelectedBathrooms] = useState(null);
+
+
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState({
@@ -37,10 +41,12 @@ function App() {
     rooms: searchParams.get("rooms") || "",
     beds: searchParams.get("beds") || "",
     bathrooms: searchParams.get("bathrooms") || "",
-    size: searchParams.get('size'),
+    size: searchParams.getAll('size') || "",
     price: searchParams.getAll('price') || "",
-
   });
+  const [selectedSize, setSelectedSize] = useState([0, 3000]);
+  const [selectedPrice, setSelectedPrice] = useState([0, 5000]);
+
 
 
 
@@ -74,7 +80,16 @@ function App() {
 
   return (
     <>
-      <GlobalContext.Provider value={{ houses, setHouses, searchedCity, setSearchedCity, owner, setOwner, fetchHouses, sidebarUserOrOwner, setSidebarUserOrOwner, logout, setSelectedRoomNumbers, searchParams, setSearchParams, filters, setFilters }}>
+      <GlobalContext.Provider value={{
+        houses, setHouses, searchedCity, setSearchedCity,
+        owner, setOwner, fetchHouses, sidebarUserOrOwner,
+        setSidebarUserOrOwner, logout, setSelectedRoomNumbers,
+        searchParams, setSearchParams, filters, setFilters,
+        selectedSize, setSelectedSize, selectedPrice,
+        setSelectedPrice, selectedRoomNumbers,
+        selectedBeds, setSelectedBeds,
+        selectedBathrooms, setSelectedBathrooms
+      }}>
 
         <Routes>
           <Route element={<MainLayout />}>

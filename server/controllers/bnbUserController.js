@@ -5,6 +5,8 @@ const connection = require("../data/db");
 function index(req, res) {
     let sql = "SELECT * FROM properties"
     const params = [];
+
+    console.log(req.query.city, req.query.rooms, req.query.beds, req.query.bathrooms, req.query.size, req.query.price)
     // città
     if (req.query.city) {
         sql += " WHERE city LIKE ?"
@@ -27,16 +29,19 @@ function index(req, res) {
     if (req.query.beds) {
 
         sql === "SELECT * FROM properties" ? sql += " WHERE number_of_beds " : sql += " AND number_of_beds ";
-        if (req.query.beds === "6+") {    // bisogna gestire gli intervalli 
+        if (req.query.beds === "4+") {    // bisogna gestire gli intervalli 
             sql += "> ?"
-            params.push(6)
-        } else if (req.query.beds === "2 - 3") {
-            sql += ">= 2 AND number_of_beds <= 3 "
+            params.push(4)
+        } else if (req.query.beds === "1") {
+            sql += "= 1 "
             //params.push(parseInt(req.query.rooms, 10))          non c'è rischio di sql injecion
-        } else if (req.query.beds === "4 - 6") {
-            sql += ">= 4 AND number_of_beds <= 6"
+        } else if (req.query.beds === "2") {
+            sql += "= 2"
+        } else if (req.query.beds === "3") {
+            sql += "= 3 "
+            //params.push(parseInt(req.query.rooms, 10))          non c'è rischio di sql injecion
         } else {
-            console.log('gestisci questo ') // qui bisogna gestire chi prova a mettere valori diversi da quelli previsti 
+            console.log('gestisci questo 1 ') // qui bisogna gestire chi prova a mettere valori diversi da quelli previsti 
         }
     }
 
@@ -51,9 +56,49 @@ function index(req, res) {
         } else if (req.query.bathrooms === '1') {
             sql += "=1"
         } else {
-            console.log('gestisci questo ') // qui bisogna gestire chi prova a mettere valori diversi da quelli previsti 
+            console.log('gestisci questo 2') // qui bisogna gestire chi prova a mettere valori diversi da quelli previsti 
         }
     }
+
+    if (req.query.size && Array.isArray(req.query.size) && req.query.size.length === 2) {
+
+        sql === "SELECT * FROM properties" ? sql += " WHERE size " : sql += " AND size ";
+
+        const min = parseInt(req.query.size[0], 10)
+        const max = parseInt(req.query.size[1], 10)
+
+        if (!isNaN(min) && !isNaN(max) && min >= 0 && min < max) {
+
+            sql += `BETWEEN ? AND ?`
+            params.push(min, max)
+
+        } else {
+            console.log('gestisci questo 3 ') // qui bisogna gestire chi prova a mettere valori diversi da quelli previsti 
+        }
+
+
+
+    }
+    if (req.query.price && Array.isArray(req.query.price) && req.query.price.length === 2) {
+
+        sql === "SELECT * FROM properties" ? sql += " WHERE price_per_day " : sql += " AND price_per_day ";
+
+        const min = parseInt(req.query.price[0], 10)
+        const max = parseInt(req.query.price[1], 10)
+
+        if (!isNaN(min) && !isNaN(max) && min >= 0 && min < max) {
+
+            sql += `BETWEEN ? AND ?`
+            params.push(min, max)
+
+        } else {
+            console.log('gestisci questo 4') // qui bisogna gestire chi prova a mettere valori diversi da quelli previsti 
+        }
+
+
+
+    }
+
 
 
 

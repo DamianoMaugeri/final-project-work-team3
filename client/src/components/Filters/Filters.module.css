@@ -42,6 +42,23 @@
     transition: all 0.3s ease-in-out;
 }
 
+.filter_active_button {
+    padding: 2px 3px;
+    width: 30px;
+    aspect-ratio: 1/1;
+    border-radius: 5px;
+    background-color: #0aca34ad;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    box-sizing: border-box;
+    white-space: nowrap;
+    transition: all 0.3s ease-in-out;
+}
+
 .filter_button:hover {
     background-color: #0aca34ad;
     border: none;

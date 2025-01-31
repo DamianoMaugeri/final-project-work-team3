@@ -23,13 +23,26 @@ export default function SearchBar() {
         const searchParams = new URLSearchParams(location.search);
         const queryParams = {};
 
-        for (const [key, value] of searchParams.entries()) {
-            if (value && value !== "null") { // Ignora i parametri vuoti o "null"
-                queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
+        // for (const [key, value] of searchParams.entries()) {
+        //     if (value && value !== "null") { // Ignora i parametri vuoti o "null"
+        //         queryParams[key] = isNaN(value) ? value : Number(value); // Converte numeri
+        //     }
+        // }
+
+        for (const key of searchParams.keys()) {
+            const values = searchParams.getAll(key); // Ottieni tutti i valori della chiave
+
+            if (values.length > 1) {
+                queryParams[key] = values.map(value => (isNaN(value) ? value : Number(value)));
+            } else {
+                const value = values[0];
+                if (value && value !== "null") {
+                    queryParams[key] = isNaN(value) ? value : Number(value);
+                }
             }
         }
-        console.log("Parametri della query:", queryParams);
-        fetchHouses(queryParams)
+        //console.log("Parametri della query:", queryParams);
+        //fetchHouses(queryParams)
 
     }, [location.search]);
 

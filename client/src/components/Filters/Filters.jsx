@@ -12,7 +12,13 @@ export default function Filters() {
 
     const location = useLocation();
 
-    const { setSelectedRoomNumbers, selectedRoomNumbers, fetchHouses, filters, setFilters, setSearchParams } = useContext(GlobalContext)
+    const { setSelectedRoomNumbers, selectedRoomNumbers,
+        fetchHouses, filters, setFilters, setSearchParams,
+        selectedPrice, setSelectedPrice, selectedSize,
+        setSelectedSize, selectedBathrooms,
+        setSelectedBathrooms, selectedBeds, setSelectedBeds, } = useContext(GlobalContext)
+
+
     const [filterActive, setFilterActive] = useState(false);
     const [activeFilters, setActiveFilters] = useState({
         rooms: false,
@@ -21,25 +27,33 @@ export default function Filters() {
         size: false,
         price: false
     });
-    const [selectedSize, setSelectedSize] = useState([0, 500]);
-    const [selectedPrice, setSelectedPrice] = useState([0, 5000]);
+
 
     const handleSizeChange = (e) => {
-        setSelectedSize(e.target.value);
+        const value = Array.isArray(e.target.value) ? e.target.value : [e.target.value];
+        setSelectedSize(value);
         debouncedHandleFilterChange(e);
     };
 
     const handlePriceChange = (e) => {
-        setSelectedPrice(e.target.value);
+        const value = Array.isArray(e.target.value) ? e.target.value : [e.target.value];
+        setSelectedPrice(value);
         debouncedHandleFilterChange(e);
     };
 
 
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
-        const newFilters = { ...filters, [name]: value };
+        const newFilters = { ...filters, [name]: Array.isArray(value) ? value : [value] };
         setFilters(newFilters);
         setSearchParams(newFilters); // Modifica l'URL senza ricaricare la pagina
+        if (name === 'rooms') {
+            setSelectedRoomNumbers(value);
+        } else if (name === 'beds') {
+            setSelectedBeds(value);
+        } else if (name === 'bathrooms') {
+            setSelectedBathrooms(value);
+        }
     };
     const debouncedHandleFilterChange = useDebounce(handleFilterChange, 300);
 
@@ -72,8 +86,8 @@ export default function Filters() {
             }
         }
 
-        console.log("Parametri della query:", queryParams);
-        fetchHouses(queryParams);
+        //console.log("Parametri della query:", queryParams);
+        // fetchHouses(queryParams);
 
     }, [location.search]);
 
@@ -110,7 +124,7 @@ export default function Filters() {
                     {activeFilters.rooms && (
                         <div className={`${style.filter_options}`}>
                             {['1', '2', '3', '4', '5+'].map((option) => (
-                                <button key={option} name='rooms' value={option} onClick={handleFilterChange} className={`${style.filter_button}`}>
+                                <button key={option} name='rooms' value={option} onClick={handleFilterChange} className={option === selectedRoomNumbers ? `${style.filter_active_button}` : `${style.filter_button}`}>
                                     {option}
                                 </button>
                             ))}
@@ -129,7 +143,7 @@ export default function Filters() {
                     {activeFilters.beds && (
                         <div className={`${style.filter_options}`}>
                             {['1', '2', '3', '4+'].map((option) => (
-                                <button key={option} name='beds' value={option} className={`${style.filter_button}`} onClick={handleFilterChange}>
+                                <button key={option} name='beds' value={option} className={option === selectedBeds ? `${style.filter_active_button}` : `${style.filter_button}`} onClick={handleFilterChange}>
                                     {option}
                                 </button>
                             ))}
@@ -148,7 +162,7 @@ export default function Filters() {
                     {activeFilters.bathrooms && (
                         <div className={`${style.filter_options}`}>
                             {['1', '2', '3+'].map((option) => (
-                                <button key={option} className={`${style.filter_button}`} name='bathrooms' value={option} onClick={handleFilterChange}>
+                                <button key={option} className={option === selectedBathrooms ? `${style.filter_active_button}` : `${style.filter_button}`} name='bathrooms' value={option} onClick={handleFilterChange}>
                                     {option}
                                 </button>
                             ))}
@@ -164,7 +178,7 @@ export default function Filters() {
                             style={{ color: "#ffffff" }}
                         />
                     </button>
-                    {activeFilters.size && <DoubleRangeSlider name="size" min={0} value={selectedSize} max={500} unit="m²" onValueChange={handleSizeChange} />}
+                    {activeFilters.size && <DoubleRangeSlider name="size" min={0} value={selectedSize} max={3000} unit="m²" onValueChange={handleSizeChange} />}
 
                     {/* Filtro: Prezzo giornaliero */}
                     <button className={`d-flex px-2 justify-content-between align-items-baseline w-100 ${style.fil_btn}`} onClick={() => toggleFilter('price')}>
