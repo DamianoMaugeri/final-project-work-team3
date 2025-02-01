@@ -1,6 +1,6 @@
 
 const nodemailer = require('nodemailer');
-
+const connection = require("../data/db");
 //  configurazione
 const transporter = nodemailer.createTransport({
     host: 'smtp.mailtrap.io', // Host SMTP di Mailtrap
@@ -43,18 +43,38 @@ function emailSend(req, res) {
         .then((info) => {
 
             transporter.sendMail(autoMailOptions).then((info) => {
+                //recupero user_id
+                const sqlUserId = "select id from users where email = ?"
+                //recupero owner_id
+                const sqlOwnerId = "select id from owners where email = ?"
+                //inserisco il messaggio con user ed owner id corrispondenti
+                const sqlInsertMessage = "INSERT INTO messages (user_id, owner_id, text) VALUES (?, ?, ?)"
 
+                connection.query(sqlUserId, [from], (err, resultsUserId) => {
+                    if (err) return res.status(500).json({ error: 'Database query failed' });
 
-                // se l'email è stata inviata con successo salva il messaggio nel db per poterlo visualizzare nella sezione messaggi di ogni propietario 
-                // bisogna creare una query che recupera owner_id dalla tabella Owner , user id dalla tabella user e inserisce il messaggio nella tabella messages
-                // con i campi owner_id, user_id, message, 
+                    if (resultsUserId.length === 0) {
+                        return res.status(404).json({ error: 'Nessun utente trovato con questa email' });
+                    }
+                    const userId = resultsUserId[0].id;
+                    console.log(userId, "user id");
 
+                    connection.query(sqlOwnerId, [to], (err, resultsOwnerId) => {
+                        if (err) return res.status(500).json({ error: 'Database query failed' });
 
+                        if (resultsUserId.length === 0) {
+                            return res.status(404).json({ error: 'Nessun proprietario trovato con questa email' });
+                        }
+                        const ownerId = resultsOwnerId[0].id;
+                        console.log(ownerId, "owner id");
 
-
-
-                res.status(200).json({
-                    message: 'Email inviata con successo!',
+                        connection.query(sqlInsertMessage, [userId, ownerId, text], (err, resultInsert) => {
+                            if (err) return res.status(500).json({ error: 'Database insert query failed' });
+                        })
+                    })
+                })
+                res.status(201).json({
+                    message: 'Email inserita correttamente nel database ed inviata con successo!!',
                     info,
                 });
             }).catch((error) => {
