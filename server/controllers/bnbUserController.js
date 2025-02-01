@@ -30,7 +30,7 @@ function index(req, res) {
 
         sql === "SELECT * FROM properties" ? sql += " WHERE number_of_beds " : sql += " AND number_of_beds ";
         if (req.query.beds === "4+") {    // bisogna gestire gli intervalli 
-            sql += "> ?"
+            sql += ">= ?"
             params.push(4)
         } else if (req.query.beds === "1") {
             sql += "= 1 "
