@@ -1,17 +1,24 @@
-import { useState } from "react";
-import style from './MessagesPage.module.css'
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import style from './MessagesPage.module.css';
+import axios from "axios";
+
 
 export default function MessagesPage() {
     const [search, setSearch] = useState("");
-
-
-    //prova
-    const users = [
-        { id: 1, name: "Marco Esposito" },
-        { id: 2, name: "Sofia Ferrari" },
-        { id: 3, name: "Elisa Ricci" },
-        { id: 4, name: "Lorenzo Conti" }
-    ];
+    const [users, setUsers] = useState([])
+    const { id } = useParams();
+    function fetchUsers() {
+        axios.get(`http://localhost:3000/api/boolbnb/get-users/${id}`)
+            .then(res => {
+                console.log(res.data)
+                setUsers(res.data)
+            })
+            .catch(err => console.error(err))
+    }
+    useEffect(() => {
+        fetchUsers();
+    }, [id]);
 
     return (
         <div className="container p-4">
@@ -41,9 +48,9 @@ export default function MessagesPage() {
                     <div className="card shadow-sm rounded">
                         <div className={`card-header fw-bold ${style.bgSoftBlue} text-white`}>Utenti</div>
                         <ul className="list-group list-group-flush">
-                            {users.map((user) => (
-                                <li key={user.id} className={`list-group-item py-3 ${style.user}`} role="button">
-                                    {user.name}
+                            {users.length > 0 && users.map((user) => (
+                                <li key={user.email} className={`list-group-item py-3 ${style.user}`} role="button">
+                                    {user.first_name} {user.last_name}
                                 </li>
                             ))}
                         </ul>

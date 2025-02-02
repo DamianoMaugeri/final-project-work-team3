@@ -108,11 +108,28 @@ function create(req, res) {
 }
 
 function inbox(req, res) {
+    console.log("📩 Funzione inbox chiamata con:", req.query);
+    const userEmail = req.query.email;
+    const ownerId = req.query.id;
+    const sql = "select * from messages as m join users as u on m.user_id=u.id where u.email= ? and m.owner_id= ? order by m.created_at asc"
 
-    console.log('My Inbox')
-    res.json('My inbox')
+    connection.query(sql, [userEmail, ownerId], (err, results) => {
+        if (err) return res.status(500).json({ error: 'Database query failed' });
+        res.json(results);
+    })
+}
+
+function getUsersByOwner(req, res) {
+    const ownerId = req.params.id;
+    const sql = "select distinct(email), first_name, last_name from messages as m join users as u on m.user_id=u.id where m.owner_id= ?"
+
+    connection.query(sql, [ownerId], (err, results) => {
+        if (err) return res.status(500).json({ error: 'Database query failed 1' });
+        console.log(results)
+        res.json(results)
+    })
 
 }
 
 
-module.exports = { propertiesByOwner, create, inbox }
+module.exports = { propertiesByOwner, create, inbox, getUsersByOwner }

@@ -26,6 +26,10 @@ app.get('/', (req, res) => {
 
 // rotte
 app.use('/auth', authRouter);
+app.use((req, res, next) => {
+    console.log(`Richiesta ricevuta: ${req.method} ${req.originalUrl}`);
+    next();
+});
 app.use('/api/boolbnb', bnbRouter);
 
 
