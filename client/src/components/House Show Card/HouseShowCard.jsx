@@ -11,7 +11,7 @@ export default function HouseShowCard({ houseEl }) {
                 <section className="container mt-4">
                     <div className={`card ${style.customCard}`}>
                         <div className="card-body">
-                            <div className="row ">
+                            <div className={`row ${style.dir_col}`}>
                                 <div className={`col  ${style.col}`}>
                                     <img src={image}
                                         onError={(e) => {

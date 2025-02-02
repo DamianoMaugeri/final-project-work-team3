@@ -17,3 +17,9 @@
     object-fit: cover;
     object-position: center;
 }
+
+@media (max-width:600px) {
+    .dir_col {
+        flex-direction: column;
+    }
+}
