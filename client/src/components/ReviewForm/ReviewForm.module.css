@@ -1,32 +1,39 @@
 .formContainer {
-    width: 100%;
-    
+  width: 100%;
+
 }
 
 .customForm {
-    background-color: #10242d;
-    border-radius: 10px;
-    width: 40% !important;
-    padding: 0 35px !important;
-    margin-bottom: 5rem;
+  background-color: #10242d;
+  border-radius: 10px;
+  width: 40% !important;
+  padding: 0 35px !important;
+  margin-bottom: 5rem;
 }
 
 .customButton {
-    background-color: #1e3a8a; 
-    color: #ffffff; 
-    padding: 10px 20px; 
-    border: none; 
-    border-radius: 8px; 
-    font-size: 16px; 
-    cursor: pointer; 
-    transition: all 0.3s ease;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.customButton:hover {
+  background-color: #374151;
+  transform: scale(1.05);
+}
+
+.customButton:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 400px) {
+  .customForm {
+    padding: 0 3px !important;
+    width: 60% !important;
   }
-  
-  .customButton:hover {
-    background-color: #374151; 
-    transform: scale(1.05); 
-  }
-  
-  .customButton:active {
-    transform: scale(0.95);
-  }
+}
