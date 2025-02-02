@@ -9,7 +9,7 @@ export default function StarsVote({ vote }) {
 
     return (
         <div className={`d-flex align-items-center ${styles.voteContainer}`}>
-            <strong className="me-2 text-white fw-bold">Valutazione</strong>
+            <strong className={`me-2 text-white fw-bold ${styles.d_none}`}>Valutazione</strong>
             <div className={`d-flex ${styles.stars}`}>
                 {/* Stelle colorate */}
                 {Array.from({ length: stars }).map((_, index) => (

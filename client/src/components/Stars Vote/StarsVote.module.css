@@ -15,3 +15,9 @@
     color: inherit;
 
 }
+
+@media (max-width:380px) {
+    .d_none {
+        display: none;
+    }
+}
