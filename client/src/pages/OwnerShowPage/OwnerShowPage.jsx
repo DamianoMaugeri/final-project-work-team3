@@ -60,7 +60,7 @@ export default function OwnerShowpage() {
     return (
         <section className={`flex-grow-1 ${style.page}`}>
             <HeaderOwners ownerId={id} onLogout={logout} firstName={first_name} lastName={last_name} />
-            <div className={`card m-4 ${style.customCard}`}>
+            <div className={`card  ${style.customCard}`}>
                 <div className="card-body">
                     <div className="row">
                         <div className="col">
