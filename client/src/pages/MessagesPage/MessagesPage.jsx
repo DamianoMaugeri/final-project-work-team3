@@ -19,13 +19,6 @@ export default function MessagesPage() {
     useEffect(() => {
         fetchUsers();
     }, [id]);
-    //prova
-    const users1 = [
-        { id: 1, name: "Marco Esposito" },
-        { id: 2, name: "Sofia Ferrari" },
-        { id: 3, name: "Elisa Ricci" },
-        { id: 4, name: "Lorenzo Conti" }
-    ];
 
     return (
         <div className="container p-4">
