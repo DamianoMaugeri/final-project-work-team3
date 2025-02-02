@@ -34,6 +34,10 @@ router.get('/:slug', bnbUserController.showSlug);
 //update: aggiorna parzialmente properties (utilizzata per aggiornare il campo vote)
 router.patch('/:id([0-9]+)', bnbUserController.update);
 
+
+//postRent: permette di inserire una rent solo se l'utente ha è prensente nel db (controllo fatto tramite email dell'user)
+router.post('/:id([0-9]+)/rents', bnbUserController.postRent);
+
 //postReview: permette di inserire una review solo se l'utente ha una prenotazione e se non ha già lasciato una review (controllo fatto tramite email dell'user)
 router.post('/:id([0-9]+)/reviews', bnbUserController.postReview);
 

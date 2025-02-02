@@ -8,6 +8,7 @@ import style from "./ShowPage.module.css"
 import Loader from "../../components/Loader/Loader"
 import EmailForm from "../../components/emailForm/emailForm"
 import HeaderMain from "../../components/HeaderMain/HeaderMain"
+import RentForm from "../../components/RentForm/RentForm"
 
 export default function ShowPage() {
 
@@ -63,9 +64,11 @@ export default function ShowPage() {
                         }}>Contatta il proprietario</button>
                     </div>
                     {/* form recensioni */}
-                    {!emailBoolean && reviewBoolean && <ReviewForm />}
+                    {!emailBoolean && reviewBoolean && <ReviewForm id={house.id} />}
 
                     {!reviewBoolean && emailBoolean && <EmailForm email={house.ownerEmail} />}
+
+                    <RentForm id={house.id} />
 
                     <hr />
                     <ReviewCard reviews={house.reviews} />

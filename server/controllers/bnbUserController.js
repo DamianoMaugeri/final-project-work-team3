@@ -254,11 +254,61 @@ function postReview(req, res) {
 
 }
 
+function postRent(req, res) {
+    const id = req.params.id;
+    const { email, start, end } = req.body
+
+    const sqlFirstControlUserEmail = "SELECT id FROM users WHERE email= ?"
+
+    connection.query(sqlFirstControlUserEmail, [email], (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({ error: "Database query failed 0" });
+        }
+        if (results.length === 0) {
+            return res.status(422).json({
+                "error": "The provided email does not match any user."
+            })
+        }
+        const userId = results[0].id;
+        const sqlSecondControlRent = "SELECT * FROM rents WHERE user_id= ? AND property_id= ?"
+
+        connection.query(sqlSecondControlRent, [userId, id], (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({ error: "Database query failed 1" });
+            }
+
+            if (results.length > 0) {
+                return res.status(409).json({
+                    "error": "You have already submitted a reservation for this property."
+                })
+            }
+
+
+
+            const sqlInsertRent = "INSERT INTO rents (rent_start, rent_end, user_id, property_id) VALUES (?, ?, ?, ?)"
+
+            connection.query(sqlInsertRent, [start, end, userId, id], (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({ error: "Database query failed 2" });
+
+                }
+                res.status(201).json({
+                    message: "Reservation added successfully",
+                    rentId: results.insertId
+                })
+            })
+        })
+    })
+}
 
 
 
 
-module.exports = { index, show, update, postReview, showSlug };
+
+module.exports = { index, show, update, postReview, showSlug, postRent };
 
 
 
