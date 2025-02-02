@@ -9,7 +9,6 @@ const emailController = require('../controllers/emailController.js');
 const authenticateToken = require('../middlewares/authenticateToken.js');
 const { generateToken } = require('../utils/authService.js');
 
-const Inbox = ('../controllers/bnbOwnerController.js')
 
 
 
@@ -21,6 +20,10 @@ router.get('/owner', authenticateToken, bnbOwnerController.propertiesByOwner);
 // permette agli owner di creare una nuova proprietà
 router.post('/owner/:id([0-9]+)', bnbOwnerController.create);
 
+// chiamata per ottenere tutti gli user che hanno una conversazione con uno specifico owner
+router.get('/get-users/:id([0-9]+)', bnbOwnerController.getUsersByOwner);
+// index messagi tra user e proprietario
+router.get('/inbox', bnbOwnerController.inbox);
 
 // rotte => USER
 
@@ -45,10 +48,7 @@ router.post('/', authenticateToken, bnbOwnerController.create);
 
 
 // endpoint che gestisce l'invio di una email
-router.post('/email-send', emailController.emailSend)
+router.post('/email-send', emailController.emailSend);
 
-
-// index messagi tra user e proprietario
-router.get('/inbox', bnbOwnerController.inbox);
 
 module.exports = router
