@@ -104,6 +104,14 @@ function index(req, res) {
 
     sql += " ORDER BY vote DESC"
 
+    // Paginazione
+    /*const page = parseInt(req.query.page, 10) || 1; // Default page 1
+    const limit = parseInt(req.query.limit, 10) || 20; // Default 20 risultati per pagina
+    const offset = (page - 1) * limit;
+
+    sql += " LIMIT ? OFFSET ?";
+    params.push(limit, offset);*/
+
     console.log(sql)
     connection.query(sql, params, (err, results) => {
         if (err) return res.status(500).json({ error: "Database query failed" });
@@ -114,7 +122,17 @@ function index(req, res) {
             result.image = `http://localhost:3000/images/${formattedImage}`
         })
 
+        /*connection.query("SELECT COUNT(*) AS total FROM properties", (err, countResults) => {
+            if (err) return res.status(500).json({ error: "Database count query failed" });
 
+            const totalResults = countResults[0].total;
+            const totalPages = Math.ceil(totalResults / limit);
+
+            res.json({ houses: results, totalPages });
+        });
+    });*/
+
+        //quando implementiamo va tolta res.json
         res.json(results);
     });
 
