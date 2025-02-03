@@ -12,7 +12,7 @@ const initialFormData = {
     full_address: "",
     city: "",
     image: "",
-    house_type: "",
+    house_type: "appartamento",
     price_per_day: ''
 }
 
