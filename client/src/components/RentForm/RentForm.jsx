@@ -107,7 +107,7 @@ export default function RentForm({ id, onSuccess = () => { } }) {
 
     return (
         <section className={style.formContainer}>
-            <div className="text-center fw-bold fs-4 mt-5">Prenota questa casa!</div>
+            <div className="text-center fw-bold fs-4 mt-5">Prenota questo immobile:</div>
             <form className={`container mt-4 ${style.customForm}`} onSubmit={storeRent}>
 
                 <p>
