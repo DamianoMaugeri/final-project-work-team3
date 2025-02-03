@@ -1,14 +1,19 @@
 .formContainer {
   width: 100%;
+  /* prova */
+  /* display: flex; */
+  justify-content: center;
 
 }
 
 .customForm {
   background-color: #10242d;
   border-radius: 10px;
-  width: 40% !important;
   padding: 0 35px !important;
   margin-bottom: 5rem;
+  /* prova */
+  max-width: 600px !important;
+  width: 90%;
 }
 
 .customButton {
@@ -31,9 +36,19 @@
   transform: scale(0.95);
 }
 
+
+/* prova */
+@media (max-width: 768px) {
+  .customForm {
+    width: 80%;
+    padding: 15px;
+  }
+}
+
 @media (max-width: 400px) {
   .customForm {
     padding: 0 3px !important;
     width: 60% !important;
+    margin: 1.5rem auto !important;
   }
 }
