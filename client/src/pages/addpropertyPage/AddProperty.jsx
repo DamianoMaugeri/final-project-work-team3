@@ -10,11 +10,12 @@ export default function AddProperty() {
 
     const logout = useLogout()
 
-    const { owner } = useContext(GlobalContext);
-
+    const { owner, setHeaderTitle } = useContext(GlobalContext);
     const { first_name, last_name } = owner;
     const { id } = useParams();
 
+
+    setHeaderTitle(true);
     console.log(first_name, last_name)
 
 

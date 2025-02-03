@@ -11,7 +11,7 @@ import useLogout from "../../hook/useLogout";
 
 
 export default function OwnerShowpage() {
-    const { owner, setOwner, setSidebarUserOrOwner } = useContext(GlobalContext);
+    const { owner, setOwner, setSidebarUserOrOwner, setHeaderTitle } = useContext(GlobalContext);
 
     const logout = useLogout()
 
@@ -35,6 +35,7 @@ export default function OwnerShowpage() {
                 console.log(res.data);
                 setOwner(res.data); // Imposta l'owner nello stato
                 setSidebarUserOrOwner(false);
+                setHeaderTitle(true);
             })
             .catch(err => {
                 console.error(err);

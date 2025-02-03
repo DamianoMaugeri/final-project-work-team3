@@ -14,7 +14,7 @@ export default function OwnersPage() {
     const [isLogged, setIsLogged] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const { setSidebarUserOrOwner } = useContext(GlobalContext);
-    const { owner, setOwner } = useContext(GlobalContext);
+    const { owner, setOwner, setHeaderTitle } = useContext(GlobalContext);
     const navigate = useNavigate();
 
     function handleForm(e) {
@@ -46,6 +46,7 @@ export default function OwnersPage() {
                 setIsLogged(true);
                 navigate(`/owners/${res.data.owner.id}`);
                 setSidebarUserOrOwner(false);
+                setHeaderTitle(true);
             })
             .catch(err => {
                 setErrorMessage('Email o password non validi.');
