@@ -121,7 +121,72 @@ function confirmEmail(to, subject, text) {
 }
 
 
+function responseOwner(req, res) {
+    const { from, to, subject, text, html } = req.body;
+
+    if (!from || !to || !subject || !text) {
+        return res.status(400).json({
+            message: 'Devi fornire almeno mittente, destinatario, oggetto e testo dell\'email',
+        });
+    }
+
+    const mailOptions = {
+        from,    // email del mittente
+        to,      //  email del destinatario destinatario
+        subject,           // Oggetto
+        text,        // Corpo dell'email in formato testo
+        //html,       // Corpo dell'email in formato HTML nel caso in cui c'è bisogno di inviare email particolari che non comprendono solo il testo 
+    };
+
+
+    transporter.sendMail(mailOptions).then((info) => {
+        //recupero user_id
+        const sqlUserId = "select id from users where email = ?"
+        //recupero owner_id
+        const sqlOwnerId = "select id from owners where email = ?"
+        //inserisco il messaggio con user ed owner id corrispondenti
+        const sqlInsertMessage = "INSERT INTO messages (user_id, owner_id, text, send_by_user) VALUES (?, ?, ?, ?)"
+
+        connection.query(sqlUserId, [to], (err, resultsUserId) => {
+            if (err) return res.status(500).json({ error: 'Database query failed' });
+
+            if (resultsUserId.length === 0) {
+                return res.status(404).json({ error: 'Nessun utente trovato con questa email' });
+            }
+            const userId = resultsUserId[0].id;
+            console.log(userId, "user id");
+
+            connection.query(sqlOwnerId, [from], (err, resultsOwnerId) => {
+                if (err) return res.status(500).json({ error: 'Database query failed' });
+
+                if (resultsUserId.length === 0) {
+                    return res.status(404).json({ error: 'Nessun proprietario trovato con questa email' });
+                }
+                const ownerId = resultsOwnerId[0].id;
+                console.log(ownerId, "owner id");
+
+                connection.query(sqlInsertMessage, [userId, ownerId, text, false], (err, resultInsert) => {
+                    if (err) return res.status(500).json({ error: 'Database insert query failed' });
+                })
+            })
+        })
+        res.status(201).json({
+            message: 'Email inserita correttamente nel database ed inviata con successo!!',
+            info,
+        });
+    }).catch((error) => {
+        console.error('Errore durante l\'invio dell\'email:', error);
+        res.status(500).json({
+            message: 'Errore durante l\'invio dell\'email',
+            error,
+        });
+    });
+
+
+}
 
 
 
-module.exports = { emailSend, confirmEmail }
+
+
+module.exports = { emailSend, confirmEmail, responseOwner }

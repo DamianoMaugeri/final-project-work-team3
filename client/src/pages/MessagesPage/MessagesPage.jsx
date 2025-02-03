@@ -11,13 +11,24 @@ export default function MessagesPage() {
     const [userEmail, setUserEmail] = useState("");
     const [messages, setMessages] = useState([]);
     const { id } = useParams();
+    const [text, setText] = useState("");
     function fetchUsers() {
         axios.get(`http://localhost:3000/api/boolbnb/get-users/${id}`)
             .then(res => {
-                console.log(res.data)
+                console.log(res.data, "prima fetch")
                 setUsers(res.data)
             })
             .catch(err => console.error(err))
+    }
+
+    function fetchOwner() {
+        axios.get(`http://localhost:3000/api/boolbnb/owner/${id}`)
+            .then(res => {
+
+                console.log(res.data)
+                ownerMessage(res.data, text)
+            })
+            .catch(err => console.error(err));
     }
 
     function fetchMessages(email) {
@@ -28,13 +39,34 @@ export default function MessagesPage() {
             }
         })
             .then(res => {
-                console.log(res.data);
+                console.log(res.data, "seconda fetch");
                 setMessages(res.data);
             })
             .catch(err => console.error(err));
     }
+
+    function ownerMessage(from, text) {
+        //     const data = {
+        //         from: ,
+        //         to: ,
+        //         text: ,
+        //         subject:
+        //     }
+        axios.post('http://localhost:3000/api/boolbnb/email-owner-response', {
+            from,
+            to: userEmail,
+            subject: "risposta del proprietario",
+            text,
+        })
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => console.error(err));
+    }
+
     useEffect(() => {
         fetchUsers();
+
     }, [id]);
 
     return (
@@ -71,6 +103,7 @@ export default function MessagesPage() {
                             {users.length > 0 && users.map((user) => (
                                 <li key={user.email} onClick={() => {
                                     fetchMessages(user.email)
+                                    setUserEmail(user.email)
                                 }} className={`list-group-item py-3 ${style.user}`} role="button">
                                     {user.first_name} {user.last_name}
                                 </li>
@@ -84,8 +117,9 @@ export default function MessagesPage() {
                     <div className="card shadow-sm rounded">
                         <div className={`card-header fw-bold ${style.bgSoftBlue} text-white`}>Chat</div>
                         <div className="card-body d-flex flex-column" style={{ height: "400px", overflowY: "auto" }}>
-                            {messages.length > 0 ? (messages.map((message) => (
-                                <div className="my-2"><h1 className="fs-6 fw-lighter"><span className="fs-6 fw-bold">{message.first_name} {message.last_name}:</span> {message.text}</h1></div>))) : (
+                            {messages.length > 0 ? (messages.map((message, i) => (
+
+                                <div key={i} className="my-2"><h1 className={`fs-6 fw-lighter ${message.send_by_user ? "" : "text-end"}`}><span className="fs-6 fw-bold">{message.first_name} {message.last_name}:</span> {message.text}</h1></div>))) : (
 
                                 <div className="text-muted text-center">Seleziona un utente per visualizzare la conversazione... </div>
                             )
@@ -95,8 +129,15 @@ export default function MessagesPage() {
                         </div>
                         <div className="card-footer">
                             <form className="d-flex">
-                                <input type="text" placeholder="Scrivi un messaggio..." className="form-control me-2" />
-                                <button className="btn btn-primary">Send</button>
+                                <input value={text} onChange={(e) => {
+                                    setText(e.target.value)
+                                }} name="text" type="text" placeholder="Scrivi un messaggio..." className="form-control me-2" />
+                                <button onClick={(e) => {
+                                    e.preventDefault();
+                                    fetchOwner();
+
+
+                                }} className="btn btn-primary">Send</button>
                             </form>
                         </div>
                     </div>

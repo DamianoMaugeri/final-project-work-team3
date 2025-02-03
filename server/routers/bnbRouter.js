@@ -20,6 +20,9 @@ router.get('/owner', authenticateToken, bnbOwnerController.propertiesByOwner);
 // permette agli owner di creare una nuova proprietà
 router.post('/owner/:id([0-9]+)', bnbOwnerController.create);
 
+
+router.get('/owner/:id([0-9]+)', bnbOwnerController.showOwner);
+
 // chiamata per ottenere tutti gli user che hanno una conversazione con uno specifico owner
 router.get('/get-users/:id([0-9]+)', bnbOwnerController.getUsersByOwner);
 // index messagi tra user e proprietario
@@ -51,8 +54,10 @@ router.post('/', authenticateToken, bnbOwnerController.create);
 
 
 
-// endpoint che gestisce l'invio di una email
+// endpoint che gestisce l'invio di una email da parte dell'utente
 router.post('/email-send', emailController.emailSend);
+// endpoint che gestisce l'invio di una email da parte dell'owner
+router.post('/email-owner-response', emailController.responseOwner);
 
 
 module.exports = router

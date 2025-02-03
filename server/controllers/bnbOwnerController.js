@@ -131,5 +131,16 @@ function getUsersByOwner(req, res) {
 
 }
 
+function showOwner(req, res) {
+    const id = req.params.id;
+    const sql = "select email from owners where id = ?"
 
-module.exports = { propertiesByOwner, create, inbox, getUsersByOwner }
+    connection.query(sql, [id], (err, results) => {
+        if (err) return res.status(500).json({ error: 'Database query failed' });
+        console.log(results[0].email)
+        res.json(results[0].email)
+    })
+}
+
+
+module.exports = { propertiesByOwner, create, inbox, getUsersByOwner, showOwner }
