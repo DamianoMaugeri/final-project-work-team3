@@ -110,7 +110,7 @@ function confirmEmail(to, subject, text) {
     transporter
         .sendMail(mailOptions)
         .then((info) => {
-            console.log('Email di conferma inviata con successo:', info);
+            console.log('Email di conferma inviata con successo');
         }).catch((error) => {
             console.error('Errore durante l\'invio dell\'email:', error);
             res.status(500).json({
