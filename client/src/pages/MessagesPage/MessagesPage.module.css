@@ -12,6 +12,10 @@
 }
 
 .user:hover {
-    background-color: #f0f0f0; 
-    transform: scale(1.02); 
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+}
+
+.pt {
+    padding-top: 6.5rem !important;
 }
