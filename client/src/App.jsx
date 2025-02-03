@@ -32,6 +32,7 @@ function App() {
   const [selectedRoomNumbers, setSelectedRoomNumbers] = useState(null)
   const [selectedBeds, setSelectedBeds] = useState(null);
   const [selectedBathrooms, setSelectedBathrooms] = useState(null);
+  const [headerTitle, setHeaderTitle] = useState(true);
 
 
 
@@ -88,7 +89,8 @@ function App() {
         selectedSize, setSelectedSize, selectedPrice,
         setSelectedPrice, selectedRoomNumbers,
         selectedBeds, setSelectedBeds,
-        selectedBathrooms, setSelectedBathrooms
+        selectedBathrooms, setSelectedBathrooms,
+        headerTitle, setHeaderTitle
       }}>
 
         <Routes>

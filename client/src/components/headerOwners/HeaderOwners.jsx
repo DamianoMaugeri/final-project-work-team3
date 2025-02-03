@@ -7,7 +7,7 @@ import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 import GlobalContext from "../../context/GlobalContext";
 
 export default function HeaderOwners({ ownerId, onLogout, firstName, lastName }) {
-    const { setSidebarUserOrOwner } = useContext(GlobalContext);
+    const { setSidebarUserOrOwner, headerTitle } = useContext(GlobalContext);
     const [showPopover, setShowPopover] = useState(false);
     const menuButtonRef = useRef(null);
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ export default function HeaderOwners({ ownerId, onLogout, firstName, lastName })
 
     return (
         <header className={`d-flex justify-content-around align-items-center rounded-0 ${style.header}`}>
-            <h3 className={style.custom_margin_left}>Benvenuto, {firstName} {lastName}</h3>
+            <h3 className={style.custom_margin_left}>{headerTitle ? (`Benvenuto, ${firstName} ${lastName}`) : "Area messaggi"}</h3>
 
 
             <OverlayTrigger
