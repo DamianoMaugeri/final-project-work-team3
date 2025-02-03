@@ -76,18 +76,18 @@ export default function EmailForm({ email }) {
             <form className={`container mt-4 ${style.customForm}`} onSubmit={sendEmail}>
 
                 <p>
-                    <label htmlFor="from" className="form-label">EMAIL *</label>
+                    <label htmlFor="from" className="form-label text-light mt-1">EMAIL *</label>
                     <input required type="email" className="form-control" placeholder="inserisci la tua email" name="from" id="from" value={formData.from} onChange={handleForm} />
 
                 </p>
                 <p>
-                    <label htmlFor="subject" className="form-label">OGGETTO *</label>
+                    <label htmlFor="subject" className="form-label text-light">OGGETTO *</label>
                     <input required type="text" className="form-control" placeholder="inserisci l' oggetto della mail " name="subject" id="subject" value={formData.subject} onChange={handleForm} />
 
                 </p>
 
-                <p className='form-control'>
-                    <label htmlFor="text" className="form-label" >TESTO</label>
+                <p>
+                    <label htmlFor="text" className="form-label text-light" >TESTO</label>
                     <textarea rows="4" name="text" id="text" placeholder='scrivi qui il contenuto della tua mail' className="form-control" value={formData.text} onChange={handleForm}></textarea>
                 </p>
 
