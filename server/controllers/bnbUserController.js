@@ -1,4 +1,7 @@
 const connection = require("../data/db");
+const { confirmEmail } = require('./emailController');
+
+
 
 
 
@@ -313,6 +316,12 @@ function postRent(req, res) {
                     return res.status(500).json({ error: "Database query failed 2" });
 
                 }
+                confirmEmail(email, "prenotazione confermata", "la tua prenotazione è stata confermata con successo ", (err, info) => {
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).json({ error: "errore nell' invio della mail" });
+                    }
+                })
                 res.status(201).json({
                     message: "Reservation added successfully",
                     rentId: results.insertId

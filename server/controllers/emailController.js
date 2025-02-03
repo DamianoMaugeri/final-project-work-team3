@@ -1,6 +1,7 @@
 
 const nodemailer = require('nodemailer');
 const connection = require("../data/db");
+const { text } = require('express');
 //  configurazione
 const transporter = nodemailer.createTransport({
     host: 'smtp.mailtrap.io', // Host SMTP di Mailtrap
@@ -97,7 +98,30 @@ function emailSend(req, res) {
 };
 
 
+function confirmEmail(to, subject, text) {
+
+    const mailOptions = {
+        from: "BooleanBnBServizioclienti@gmail.com",    // email del sito 
+        to,      //  email del mittenente al quale inviare la conferma
+        subject,           // Oggetto
+        text,
+    }
+
+    transporter
+        .sendMail(mailOptions)
+        .then((info) => {
+            console.log('Email di conferma inviata con successo:', info);
+        }).catch((error) => {
+            console.error('Errore durante l\'invio dell\'email:', error);
+            res.status(500).json({
+                message: 'Errore durante l\'invio dell\'email',
+                error,
+            });
+        });
+}
 
 
 
-module.exports = { emailSend }
+
+
+module.exports = { emailSend, confirmEmail }
