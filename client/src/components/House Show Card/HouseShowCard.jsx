@@ -1,9 +1,10 @@
-import style from './HouseShowCard.module.css'
-import placeHolder from '../../assets/placeholder.png'
+import style from './HouseShowCard.module.css';
+import placeHolder from '../../assets/placeholder.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faMapMarkerAlt, faDoorOpen, faBed, faBath, faRulerCombined, faCity, faHeart } from '@fortawesome/free-solid-svg-icons';
+
 export default function HouseShowCard({ houseEl }) {
-
-
-    const { title, vote, number_of_rooms, number_of_beds, number_of_bathrooms, size, city, full_address, image } = houseEl
+    const { title, vote, number_of_rooms, number_of_beds, number_of_bathrooms, size, city, full_address, image } = houseEl;
 
     return (
         houseEl ?
@@ -25,25 +26,32 @@ export default function HouseShowCard({ houseEl }) {
                                         <h2 className="card-title mb-4 fst-italic fs-1">{title}</h2>
                                         <h5 className="card-text fw-light fs-4">Dettagli dell'immobile:</h5>
                                         <ul>
-                                            <li className="card-text ">Valutazione:
+                                            <li className="card-text">
+                                                <FontAwesomeIcon icon={faHeart} /> Valutazione:
                                                 <span className='fst-italic fw-light'>  {vote}</span>
                                             </li>
-                                            <li className="card-text" >Indirizzo:
+                                            <li className="card-text">
+                                                <FontAwesomeIcon icon={faMapMarkerAlt} /> Indirizzo:
                                                 <span className='fst-italic fw-light'>  {full_address}</span>
                                             </li>
-                                            <li className="card-text">Stanze:
+                                            <li className="card-text">
+                                                <FontAwesomeIcon icon={faDoorOpen} /> Stanze:
                                                 <span className='fst-italic fw-light'>  {number_of_rooms}</span>
                                             </li>
-                                            <li className="card-text">Posti letto:
+                                            <li className="card-text">
+                                                <FontAwesomeIcon icon={faBed} /> Posti letto:
                                                 <span className='fst-italic fw-light'>  {number_of_beds}</span>
                                             </li>
-                                            <li className="card-text">Bagni:
+                                            <li className="card-text">
+                                                <FontAwesomeIcon icon={faBath} /> Bagni:
                                                 <span className='fst-italic fw-light'>  {number_of_bathrooms}</span>
                                             </li>
-                                            <li className="card-text">Dimensione:
+                                            <li className="card-text">
+                                                <FontAwesomeIcon icon={faRulerCombined} /> Dimensione:
                                                 <span className='fst-italic fw-light'>  {size} mq</span>
                                             </li>
-                                            <li className="card-text">Città:
+                                            <li className="card-text">
+                                                <FontAwesomeIcon icon={faCity} /> Città:
                                                 <span className='fst-italic fw-light'>  {city}</span>
                                             </li>
                                         </ul>
@@ -55,5 +63,5 @@ export default function HouseShowCard({ houseEl }) {
                 </section>
             </> :
             <div>Nessun resultato</div>
-    )
+    );
 }

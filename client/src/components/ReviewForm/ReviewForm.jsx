@@ -73,18 +73,18 @@ export default function ReviewForm({ id, onSuccess = () => { } }) {
             <form className={`container mt-4 ${style.customForm}`} onSubmit={storeReview}>
 
                 <p>
-                    <label htmlFor="email" className="form-label">EMAIL *</label>
+                    <label htmlFor="email" className="form-label text-light mt-1">EMAIL *</label>
                     <input required type="email" className="form-control" placeholder="inserisci l'email" name="email" id="email" value={formData.email} onChange={handleForm} />
 
                 </p>
 
-                <p className='form-control'>
-                    <label htmlFor="text" className="form-label" >Recensione</label>
+                <p >
+                    <label htmlFor="text" className="form-labe text-light" >Recensione</label>
                     <textarea rows="4" name="text" id="text" placeholder='Scrivi la tua recensione' className="form-control" value={formData.text} onChange={handleForm}></textarea>
                 </p>
 
-                <p className='form-control'>
-                    <label htmlFor="vote" className="form-label" >Voto *</label>
+                <p >
+                    <label htmlFor="vote" className="form-label text-light" >Voto *</label>
                     <select required name="vote" id="vote" className="form-control" value={formData.vote} onChange={handleForm}>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -101,8 +101,7 @@ export default function ReviewForm({ id, onSuccess = () => { } }) {
 
 
 
-                <div className="text-white fw-bold">
-                    {isFormValid === false && <div>i dati non sono validi</div>}
+                <div className={`text-white fw-bold`}>
                     <button className={`submit-button text-white fw-bold mb-4 mt-4 ${style.customButton}`}>Invia</button>
                 </div>
 
