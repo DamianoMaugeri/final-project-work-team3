@@ -62,7 +62,7 @@ export default function HeaderOwners({ ownerId, onLogout, firstName, lastName })
                     onClick={() => setSidebarUserOrOwner(false)}
                     className={style.customMenuButton}
                 >
-                    <FontAwesomeIcon icon={faCircleUser} style={{ color: "#ffffff" }} /> Area proprietari
+                    <FontAwesomeIcon icon={faCircleUser} style={{ color: "#ffffff" }} /> Menu
                 </Button>
             </OverlayTrigger>
         </header>

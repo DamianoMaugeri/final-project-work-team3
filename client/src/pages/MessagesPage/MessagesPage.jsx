@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import style from './MessagesPage.module.css';
 import axios from "axios";
+import HeaderOwners from "../../components/headerOwners/HeaderOwners"
 
 
 export default function MessagesPage() {
@@ -37,9 +38,10 @@ export default function MessagesPage() {
     }, [id]);
 
     return (
-        <div className="container p-4">
+        <div className="container p-4 mt-4">
+            <HeaderOwners />
             {/* Header */}
-            <header className={`d-flex justify-content-between align-items-center ${style.bgBlue} p-3 shadow rounded`}>
+            {/* <header className={`d-flex justify-content-between align-items-center ${style.bgBlue} p-3 shadow rounded`}>
                 <div className="fs-4 fw-bold text-white">📩 Inbox</div>
 
                 <form className="d-flex w-50">
@@ -55,7 +57,7 @@ export default function MessagesPage() {
 
 
                 <div className="fs-4 fw-bold text-white">🏡</div>
-            </header>
+            </header> */}
 
             {/* Main Content */}
             <div className="row mt-4">
