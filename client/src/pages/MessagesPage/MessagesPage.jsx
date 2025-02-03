@@ -2,11 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import style from './MessagesPage.module.css';
 import axios from "axios";
-<<<<<<< HEAD
 import HeaderOwners from "../../components/headerOwners/HeaderOwners"
-=======
-import HeaderOwners from "../../components/headerOwners/HeaderOwners";
->>>>>>> 374fa0b2de6cc1eb628c9b35efa104e9bf416d35
 
 
 export default function MessagesPage() {
