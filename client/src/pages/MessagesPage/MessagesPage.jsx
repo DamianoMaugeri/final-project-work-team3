@@ -59,6 +59,8 @@ export default function MessagesPage() {
                 <div className="fs-4 fw-bold text-white">🏡</div>
             </header> */}
 
+
+
             {/* Main Content */}
             <div className="row mt-4">
                 {/* lista utenti */}
@@ -90,51 +92,17 @@ export default function MessagesPage() {
 
                             }
 
-                            {/* Main Content */}
-                            <div className="row mt-4">
-                                {/* lista utenti */}
-                                <div className="col-md-4">
-                                    <div className="card shadow-sm rounded">
-                                        <div className={`card-header fw-bold ${style.bgSoftBlue} text-white`}>Utenti interessati</div>
-                                        <ul className="list-group list-group-flush">
-                                            {users.length > 0 && users.map((user) => (
-                                                <li key={user.email} onClick={() => {
-                                                    fetchMessages(user.email)
-                                                }} className={`list-group-item py-3 ${style.user}`} role="button">
-                                                    {user.first_name} {user.last_name}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                {/* Messagi */}
-                                <div className="col-md-8">
-                                    <div className="card shadow-sm rounded">
-                                        <div className={`card-header fw-bold ${style.bgSoftBlue} text-white`}>Chat</div>
-                                        <div className="card-body d-flex flex-column" style={{ height: "400px", overflowY: "auto" }}>
-                                            {messages.length > 0 ? (messages.map((message) => (
-                                                <div className="my-2"><h1 className="fs-6 fw-lighter"><span className="fs-6 fw-bold">{message.first_name} {message.last_name}:</span> {message.text}</h1></div>))) : (
-
-                                                <div className="text-muted text-center">Seleziona un utente per visualizzare la conversazione... </div>
-                                            )
-
-                                            }
-
-                                        </div>
-                                        <div className="card-footer">
-                                            <form className="d-flex">
-                                                <input type="text" placeholder="Scrivi un messaggio..." className="form-control me-2" />
-                                                <button className="btn btn-primary">Send</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+                        <div className="card-footer">
+                            <form className="d-flex">
+                                <input type="text" placeholder="Scrivi un messaggio..." className="form-control me-2" />
+                                <button className="btn btn-primary">Send</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     )
 }
