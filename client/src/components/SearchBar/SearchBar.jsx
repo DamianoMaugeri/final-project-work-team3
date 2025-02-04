@@ -49,7 +49,7 @@ export default function SearchBar() {
 
 
     return (
-        <div className={`container mt-5 mb-5 ${style.padding_top}`}>
+        <div className={`container  mb-5 ${style.padding_top}`}>
             <div className="input-group">
                 <input
                     type="text"

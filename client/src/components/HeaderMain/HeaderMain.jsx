@@ -7,7 +7,9 @@ export default function HeaderMain() {
     return (
         <div className={style.header}>
             <Logo />
-            <NavLink className={style.customMenuButton} to='/owners' ><FontAwesomeIcon icon={faCircleUser} style={{ color: "#ffffff" }} /> Area proprietari</NavLink>
+            <div>
+                <NavLink className={style.customMenuButton} to='/owners' ><FontAwesomeIcon icon={faCircleUser} style={{ color: "#ffffff" }} /> Area proprietari</NavLink>
+            </div>
         </div >
     )
 }
