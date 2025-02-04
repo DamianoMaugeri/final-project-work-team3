@@ -125,7 +125,7 @@ export default function MessagesPage() {
                         <div className="card-body d-flex flex-column" style={{ height: "400px", overflowY: "auto" }}>
                             {messages.length > 0 ? (messages.map((message, i) => (
 
-                                <div key={i} className="my-2"><h1 className={`fs-6 fw-lighter ${message.send_by_user ? "" : "text-end"}`}><span className="fs-6 fw-bold">{message.send_by_user ? (`${message.first_name} ${message.last_name}:`) : "owner:"}</span> {message.text}</h1></div>))) : (
+                                <div key={i} className="my-2"><h1 className={`fs-6 fw-lighter ${message.send_by_user ? "" : "text-end"}`}><span className="fs-6 fw-bold">{message.send_by_user ? (`${message.first_name} ${message.last_name}:`) : "Tu:"}</span> {message.text}</h1></div>))) : (
 
                                 <div className="text-muted text-center">Seleziona un utente per visualizzare la conversazione... </div>
                             )
